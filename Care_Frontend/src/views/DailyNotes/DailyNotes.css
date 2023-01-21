@@ -1,0 +1,63 @@
+.inputshadow {
+    background: #fff;
+    color: #525865;
+    border-radius: 4px;
+    border: 1px solid #d1d1d1;
+    box-shadow: inset 0px 1px 8px rgba(0, 0, 0, 0.2);
+    font-family: inherit;
+    font-size: 1em;
+    line-height: 1.45;
+    outline: none;
+    -webkit-transition: .18s ease-out;
+    -moz-transition: .18s ease-out;
+    -o-transition: .18s ease-out;
+    transition: .18s ease-out;
+    height: 30px;
+  }
+
+  .inputshadowselect{
+    background: #fff;
+    color: #525865;
+    border-radius: 4px;
+    border: 1px solid #d1d1d1;
+    box-shadow: inset 0px 1px 8px rgba(0, 0, 0, 0.2);
+    font-family: inherit;
+    font-size: 1em;
+    line-height: 1.45;
+    outline: none;
+    
+    -webkit-transition: .18s ease-out;
+    -moz-transition: .18s ease-out;
+    -o-transition: .18s ease-out;
+    transition: .18s ease-out;
+    height: 30px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .box {
+      flex-direction: column;
+    }
+  }
+
+
+  .table tr{
+    cursor: pointer;
+}
+
+.table tr:hover{
+    background-color: dimgray;
+}
+
+.table-responsive{
+    max-height: 250px !important;
+}
+
+.titlemodel{
+    border-radius: 5px;
+    border: 0.5px solid dimgray;
+    padding: 2px;
+}
+
+.tablehead{
+    background-color: #75CBD4;
+}
