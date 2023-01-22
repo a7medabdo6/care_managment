@@ -17,6 +17,8 @@ import { ReportsModule } from './reports/reports.module';
 import { Report } from './reports/entities/report.entity';
 import { CategoryModule } from './category/category.module';
 import { WorkerModule } from './worker/worker.module';
+import { ServiceUserModule } from './service-user/service-user.module';
+import { ServiceUser } from './service-user/entities/service-user.entity';
 
 @Module({
   imports: [
@@ -38,12 +40,13 @@ import { WorkerModule } from './worker/worker.module';
       username: 'root2',
       password: '',
       database: 'care',
-      entities: [User, Report, Worker],
+      entities: [User, Report, Worker,ServiceUser],
       synchronize: true,
     }),
     UsersModule,
     // ReportsModule,
     WorkerModule,
+    ServiceUserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
