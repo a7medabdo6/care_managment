@@ -3,12 +3,14 @@ import React, { useState, useEffect } from 'react';
 import validate from 'validate.js';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
 import { Button, TextField } from '@material-ui/core';
 
 import useRouter from 'utils/useRouter';
 import { login } from 'actions';
+import { useLoginApi } from 'Hook/Auth/Login';
+import { Link } from 'react-router-dom';
 
 const schema = {
   email: {
@@ -80,10 +82,33 @@ const LoginForm = props => {
     }));
   };
 
+  const formdata ={
+    
+      "email": formState.values.email,
+      "password" : formState.values.password
+    
+    
+  }
+
+  const {isLoading,mutate:SubmitLogin,isError,error,refetch} =  useLoginApi()
+
+  const {userData} = useSelector(state => state.UserInfo)
+useEffect(() => {
+  console.log(userData);
+
+
+  
+}, [userData])
+
   const handleSubmit = async event => {
     event.preventDefault();
+    SubmitLogin(formdata)
     // dispatch(login());
-    router.history.push('/');
+
+    // if(localStorage.getItem("user")){
+    //   router.history.push('/');
+
+    // }
   };
 
   const hasError = field =>
@@ -130,6 +155,16 @@ const LoginForm = props => {
       >
         Sign in
       </Button>
+      
+      <div className='d-flex justify-content-center align-items-center'>
+        <p>Have a account ?</p>
+        <Link to="/auth/register">
+        <h6>Sign Up</h6>
+        </Link>
+      </div>
+      
+     
+  
     </form>
   );
 };

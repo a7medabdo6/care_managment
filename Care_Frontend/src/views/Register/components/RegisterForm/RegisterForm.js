@@ -14,20 +14,21 @@ import {
 } from '@material-ui/core';
 
 import useRouter from 'utils/useRouter';
+import { useSignUpApi } from 'Hook/Auth/SignUpHook';
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+import notify from 'Hook/useNotifaction';
+import { useSelector } from 'react-redux';
 
-const schema = {
-  firstName: {
+
+  const schema = {
+  Name: {
     presence: { allowEmpty: false, message: 'is required' },
     length: {
       maximum: 32
     }
   },
-  lastName: {
-    presence: { allowEmpty: false, message: 'is required' },
-    length: {
-      maximum: 32
-    }
-  },
+ 
   email: {
     presence: { allowEmpty: false, message: 'is required' },
     email: true,
@@ -113,13 +114,41 @@ const RegisterForm = props => {
     }));
   };
 
-  const handleSubmit = async event => {
-    event.preventDefault();
-    history.push('/');
-  };
+
+  const formdata ={
+    
+    "email": formState.values.email,
+    "password": formState.values.password,
+    "username": formState.values.Name,
+    "role": 1
+  
+}
+
+const {isLoading,mutate:SubmitSignUp,isError,error,refetch} =  useSignUpApi()
+
+
+const {userSigbUpData} = useSelector(state => state.UserSignUp)
+
+
 
   const hasError = field =>
     formState.touched[field] && formState.errors[field] ? true : false;
+
+      // const notify = () => toast("Wow so easy!");
+
+
+    const handleSubmit = async event => {
+      event.preventDefault();
+      SubmitSignUp(formdata)
+      if(userSigbUpData)
+console.log(userSigbUpData.id);
+      // if(userSigbUpData.id){
+      //   notify("The account has been created","success")      
+
+      // }
+
+      // history.push('/');
+    };
 
   return (
     <form
@@ -129,27 +158,17 @@ const RegisterForm = props => {
     >
       <div className={classes.fields}>
         <TextField
-          error={hasError('firstName')}
+          error={hasError('Name')}
           helperText={
-            hasError('firstName') ? formState.errors.firstName[0] : null
+            hasError('Name') ? formState.errors.Name[0] : null
           }
-          label="First name"
-          name="firstName"
+          label="Name"
+          name="Name"
           onChange={handleChange}
-          value={formState.values.firstName || ''}
+          value={formState.values.Name || ''}
           variant="outlined"
         />
-        <TextField
-          error={hasError('lastName')}
-          helperText={
-            hasError('lastName') ? formState.errors.lastName[0] : null
-          }
-          label="Last name"
-          name="lastName"
-          onChange={handleChange}
-          value={formState.values.lastName || ''}
-          variant="outlined"
-        />
+        
         <TextField
           error={hasError('email')}
           fullWidth
@@ -203,6 +222,7 @@ const RegisterForm = props => {
           )}
         </div>
       </div>
+      {console.log(formState.errors)}
       <Button
         className={classes.submitButton}
         color="secondary"
@@ -213,7 +233,10 @@ const RegisterForm = props => {
       >
         Create account
       </Button>
+      <ToastContainer></ToastContainer>
+
     </form>
+    
   );
 };
 

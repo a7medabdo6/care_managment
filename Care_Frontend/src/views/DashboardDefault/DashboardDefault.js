@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 
@@ -16,6 +16,7 @@ import {
   
 } from './components';
 import CardBox from "./components/CardBox/CardBox"
+import { useSelector } from 'react-redux';
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3)
@@ -37,7 +38,13 @@ const Date = <i class="fas fa-calendar"></i>
 const Review = <i class="far fa-file-pdf"></i>
 const DashboardDefault = () => {
   const classes = useStyles();
-
+  const {userData} = useSelector(state => state.UserInfo)
+  useEffect(() => {
+    console.log(userData);
+  
+  
+    
+  }, [userData]) 
   return (
     <Page
       className={classes.root}

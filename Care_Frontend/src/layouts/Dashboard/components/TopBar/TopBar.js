@@ -125,8 +125,11 @@ const TopBar = props => {
   }, []);
 
   const handleLogout = () => {
-    history.push('/auth/login');
+    // history.push('/auth/login');
+    localStorage.removeItem("user")
     // dispatch(logout());
+    window.location.replace('/');
+
   };
 
   const handlePricingOpen = () => {
