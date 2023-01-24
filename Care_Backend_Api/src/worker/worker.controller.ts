@@ -29,6 +29,7 @@ import { extname } from 'path';
 import { WorkerDto } from './dto/worker.dto';
 import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { UsersService } from 'src/users/users.service';
+import { CurrentUser } from 'src/decorators/current-user.decorator';
 @Controller('worker')
 @UseInterceptors(CurrentUserInterceptor)
 @UseGuards(AuthGuard)
@@ -39,15 +40,7 @@ export class WorkerController {
     private readonly usersService: UsersService,
   ) {}
 
-  // @Post()
-  // create(@Body() createWorkerDto: CreateWorkerDto) {
-  //   return this.workerService.create(createWorkerDto);
-  // }
-
-  // @Get()
-  // findAll() {
-  //   return this.workerService.findAll();
-  // }
+  
   @Post('create')
   @UseInterceptors(
     FileFieldsInterceptor(
@@ -79,25 +72,13 @@ export class WorkerController {
       Application?: Express.Multer.File[];
     },
     @Req() req: any,
+    @CurrentUser() user: any
   ) {  
     const isEmpty = Object.keys(files).length === 0;
     if (isEmpty || !files || req.fileValidationError) {
       throw new BadRequestException(req.fileValidationError);
     }
-    let training = '';
-    // for (let index = 0; index < files.length; index++) {
-    //   console.log('photos', files[index].filename);
-
-    //   training = training.concat(files[index].filename, ',');
-    // }
-    let Application = 'test';
-    // for (let index = 0; index < files.length; index++) {
-    //   console.log('photos', files[index].filename);
-
-    //   Application = Application.concat(files[index].filename, ',');
-    // }
-    console.log(files, 'test');
-    const User = await this.usersService.findOneByEmail('admin@admin.com');
+    const User = await this.usersService.findOneByEmail(user.email);
     const product = await this.workerService.create(
       {
         ...body,

@@ -16,6 +16,9 @@ export class UserDto {
 
   @Expose()
   createBy: number;
+  @Expose()
+  Token: string;
+
 
   @Transform(({ obj }) => obj.worker)
   @Expose()

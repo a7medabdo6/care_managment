@@ -26,8 +26,8 @@ import { User } from './entities/user.entity';
 import { CurrentUserInterceptor } from '../users/interceptors/current-user.interceptor';
 import { AuthGuard } from 'src/guards/auth.guard';
 @Controller('users')
-@Serialize(UserDto)
-@UseInterceptors(CurrentUserInterceptor)
+ @Serialize(UserDto)
+
 export class UsersController {
   constructor(
     private readonly usersService: UsersService,
@@ -50,6 +50,7 @@ export class UsersController {
     return {user};
   }
   @Get('/my-profile')
+  @UseInterceptors(CurrentUserInterceptor)
   @UseGuards(AuthGuard)
   async profile(@CurrentUser() user: any) {
     const userdata = await this.usersService.findOneByEmail(user.email);
@@ -58,7 +59,6 @@ export class UsersController {
   @Post('/signin')
   async signin(@Body() createUserDto: any, @Session() session: any) {
     const user = await this.authService.signin(createUserDto);
-    session.userId = user.id;
     return user;
   }
   @Post('/signout')
