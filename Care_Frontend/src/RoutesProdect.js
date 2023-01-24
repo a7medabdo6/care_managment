@@ -12,30 +12,12 @@ import OverviewView from './views/Overview';
 import PresentationView from './views/Presentation';
 
 const routes = [
-  // {
-  //   path: '/',
-  //   exact: true,
-  //   component: () => <Redirect to="/dashboards/default" />
-  // },
   {
-    path: '*',
-    component: AuthLayout,
-    routes: [
-      {
-        path: '/auth/login',
-        exact: true,
-        component: lazy(() => import('views/Login'))
-      },
-      {
-        path: '/auth/register',
-        exact: true,
-        component: lazy(() => import('views/Register'))
-      },
-      {
-        component: () => <Redirect to="/auth/login" />
-      }
-    ]
+    path: '/',
+    exact: true,
+    component: () => <Redirect to="/dashboards/default" />
   },
+  
   {
     path: '/errors',
     component: ErrorLayout,

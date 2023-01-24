@@ -33,7 +33,7 @@ export class AuthService {
     const { email, password } = createUserDto;
     const user = await this.usersService.findOneByEmail(email);
     if (!user) {
-      throw new NotFoundException('user Not Fpund');
+      throw new NotFoundException('user Not Fpund'); 
     }
     const [salt, stroreHash] = user.password.split('.');
     console.log(salt);

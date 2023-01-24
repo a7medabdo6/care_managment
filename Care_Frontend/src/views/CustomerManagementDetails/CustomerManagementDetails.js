@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import { Tabs, Tab, Divider, colors } from '@material-ui/core';
 
 import { Page } from 'components';
-import { Header, Summary, Invoices, Logs } from './components';
+import { Header, Summary, Invoices, } from './components';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,7 +34,7 @@ const CustomerManagementDetails = props => {
   const tabs = [
     { value: 'summary', label: 'Summary' },
     { value: 'invoices', label: 'Invoices' },
-    { value: 'logs', label: 'Logs' }
+    
   ];
 
   if (!tab) {
@@ -70,7 +70,7 @@ const CustomerManagementDetails = props => {
       <div className={classes.content}>
         {tab === 'summary' && <Summary />}
         {tab === 'invoices' && <Invoices />}
-        {tab === 'logs' && <Logs />}
+        
       </div>
     </Page>
   );

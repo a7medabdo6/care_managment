@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import MomentUtils from '@date-io/moment';
@@ -11,6 +11,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import theme from './theme';
 import { configureStore } from './store';
 import routes from './routes';
+
+import RoutesProdect from "./RoutesProdect"
 import {
   ScrollReset,
   GoogleAnalytics,
@@ -22,24 +24,35 @@ import './mixins/validate';
 import './mixins/prismjs';
 import './mock';
 import './assets/scss/index.css';
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query'
+const queryClient = new QueryClient()
 
 const history = createBrowserHistory();
-const store = configureStore();
 
 const App = () => {
+  const [checkRoutes, setcheckRoutes] = useState(false)
+  // if(localStorage.getItem("user")){
+  //   setcheckRoutes(true)
+  // }
   return (
-    <StoreProvider store={store}>
+    <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <MuiPickersUtilsProvider utils={MomentUtils}>
           <Router history={history}>
             <ScrollReset />
             <GoogleAnalytics />
             <CookiesNotification />
-            {renderRoutes(routes)}
+            {localStorage.getItem("user") ?renderRoutes(RoutesProdect) :renderRoutes(routes)}
           </Router>
         </MuiPickersUtilsProvider>
       </ThemeProvider>
-    </StoreProvider>
+    </QueryClientProvider>
   );
 };
 

@@ -44,10 +44,10 @@ export class WorkerController {
   //   return this.workerService.create(createWorkerDto);
   // }
 
-  @Get()
-  findAll() {
-    return this.workerService.findAll();
-  }
+  // @Get()
+  // findAll() {
+  //   return this.workerService.findAll();
+  // }
   @Post('create')
   @UseInterceptors(
     FileFieldsInterceptor(
@@ -79,7 +79,7 @@ export class WorkerController {
       Application?: Express.Multer.File[];
     },
     @Req() req: any,
-  ) {
+  ) {  
     const isEmpty = Object.keys(files).length === 0;
     if (isEmpty || !files || req.fileValidationError) {
       throw new BadRequestException(req.fileValidationError);
@@ -113,13 +113,13 @@ export class WorkerController {
     return this.workerService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateWorkerDto: UpdateWorkerDto) {
-    return this.workerService.update(+id, updateWorkerDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateWorkerDto: UpdateWorkerDto) {
+  //   return this.workerService.update(+id, updateWorkerDto);
+  // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.workerService.remove(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.workerService.remove(+id);
+  // }
 }

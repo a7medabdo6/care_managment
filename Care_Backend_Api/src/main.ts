@@ -32,6 +32,7 @@ async function bootstrap() {
       whitelist: true,
     }),
   );
+  app.enableCors();
   app.use(
     cookieSession({
       keys: ['secret'],

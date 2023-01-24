@@ -39,10 +39,10 @@ export class UsersController {
   whoami(@CurrentUser() user: unknown) {
     return user;
   }
-  @Get('/trans')
-  async getHello(@I18n() i18n: I18nContext) {
-    return await i18n.t('test.HELLO');
-  }
+  // @Get('/trans')
+  // async getHello(@I18n() i18n: I18nContext) {
+  //   return await i18n.t('test.HELLO');
+  // }
   @Post('/signup')
   async signup(@Body() createUserDto: CreateUserDto, @Session() session: any) {
     const user = await this.authService.signup(createUserDto);
