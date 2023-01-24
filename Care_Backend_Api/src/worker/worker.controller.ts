@@ -34,7 +34,10 @@ import { UsersService } from 'src/users/users.service';
 @UseGuards(AuthGuard)
 @Serialize(WorkerDto)
 export class WorkerController {
-  constructor(private readonly workerService: WorkerService,private readonly userService: UsersService) {}
+  constructor(
+    private readonly workerService: WorkerService,
+    private readonly usersService: UsersService,
+  ) {}
 
   // @Post()
   // create(@Body() createWorkerDto: CreateWorkerDto) {
@@ -94,13 +97,15 @@ export class WorkerController {
     //   Application = Application.concat(files[index].filename, ',');
     // }
     console.log(files, 'test');
-    const product = await this.workerService.create({
-      ...body,
-      training: files?.training?.[0]?.filename,
-      Application: files?.Application?.[0]?.filename,
-    });
-    const user = await this.userService.updateAfterProfile(+body.user,+product.id);
-    return user
+    const User = await this.usersService.findOneByEmail('admin@admin.com');
+    const product = await this.workerService.create(
+      {
+        ...body,
+        training: files?.training?.[0]?.filename,
+        Application: files?.Application?.[0]?.filename,
+      },
+      User,
+    );
     throw new HttpException('CREATED', HttpStatus.CREATED);
   }
   @Get(':id')

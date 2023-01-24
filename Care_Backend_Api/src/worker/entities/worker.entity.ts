@@ -41,5 +41,5 @@ export class Worker {
   Application: string;
 
   @OneToOne(() => User, (user) => user.worker) // specify inverse side as a second parameter
-    user: User
+  user: User;
 }
