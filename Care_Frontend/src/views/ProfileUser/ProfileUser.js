@@ -1,17 +1,28 @@
+import { useGetProfileApi } from "Hook/Profile-Hook/Get-profile-Details-Hook";
 import React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 
 const ProfileUser =()=>{
+  const {data}=useGetProfileApi()
 
-  let data ={}
-  if(localStorage.getItem("user")){
-    
-    data = JSON.parse(localStorage.getItem("user"))
+  const {ProfileDetails} =useSelector(state => state.GetProfileSlice)
+  console.log(ProfileDetails,"ProfileDetails?");
+
 
   
-   console.log(data);
+  useEffect(() => {
+    
+    console.log(ProfileDetails,"ProfileDetails?");
+
+    return () => {
+      
+    }
+  }, [ProfileDetails])
+  
+  if(!ProfileDetails || !ProfileDetails.worker){
+return <div>looading</div>
   }
   return (
     <div>
@@ -36,7 +47,7 @@ const ProfileUser =()=>{
             {/* <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
               class="rounded-circle img-fluid" style={{width: "150px"}}/> */}
 
-<img src={`http://localhost:5000/public/${data.worker.training}`} alt="avatar"
+<img src={`http://localhost:5000/public/${ ProfileDetails?.worker.training}`} alt="avatar"
               class="rounded-circle img-fluid" style={{width: "150px"}}/>
             <h5 class="my-3">John Smith</h5>
             <p class="text-muted mb-1">Full Stack Developer</p>
@@ -59,7 +70,7 @@ const ProfileUser =()=>{
                 <p class="mb-0">Full Name</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{data.username}</p>
+                <p class="text-muted mb-0">{ProfileDetails.username}</p>
               </div>
             </div>
             <hr/>
@@ -68,7 +79,7 @@ const ProfileUser =()=>{
                 <p class="mb-0">Ni_Number</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{data.worker.Ni_Number}</p>
+                <p class="text-muted mb-0">{ProfileDetails.worker.Ni_Number}</p>
               </div>
             </div>
             <hr/>
@@ -77,7 +88,7 @@ const ProfileUser =()=>{
                 <p class="mb-0">Phone</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{data.worker.phone}</p>
+                <p class="text-muted mb-0">{ProfileDetails.worker.phone}</p>
               </div>
             </div>
             <hr/>
@@ -86,7 +97,7 @@ const ProfileUser =()=>{
                 <p class="mb-0">next_of_kin</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{data.worker.next_of_kin}</p>
+                <p class="text-muted mb-0">{ProfileDetails.worker.next_of_kin}</p>
               </div>
             </div>
             <hr/>
@@ -95,7 +106,7 @@ const ProfileUser =()=>{
                 <p class="mb-0">Address</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{data.worker.Adress}</p>
+                <p class="text-muted mb-0">{ProfileDetails.worker.Adress}</p>
               </div>
             </div>
             <hr/>
@@ -104,7 +115,7 @@ const ProfileUser =()=>{
                 <p class="mb-0">Sex</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{data.worker.sex}</p>
+                <p class="text-muted mb-0">{ProfileDetails.worker.sex}</p>
               </div>
             </div>
           </div>

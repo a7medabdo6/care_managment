@@ -22,6 +22,7 @@ export const useLoginApi = data => {
         console.log(result);
          dispatch(UserInfo(result.data));
         localStorage.setItem('user', JSON.stringify(result.data));
+        localStorage.setItem('token', result.data.Token);
         // localStorage.setItem('token', JSON.stringify(result.data.token));
         window.location.replace('/');
         // router.history.push('/');
