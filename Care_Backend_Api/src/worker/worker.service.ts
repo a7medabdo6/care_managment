@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UsersService } from 'src/users/users.service';
 import { Repository } from 'typeorm';
 import { CreateWorkerDto } from './dto/create-worker.dto';
 import { UpdateWorkerDto } from './dto/update-worker.dto';
@@ -11,7 +12,9 @@ export class WorkerService {
 
   async create(createWorkerDto: CreateWorkerDto) {
     const Worker = await this.repo.create(createWorkerDto);
-    return this.repo.save(Worker);
+
+    const profile = await this.repo.save(Worker);
+ return profile
   }
 
   findAll() {

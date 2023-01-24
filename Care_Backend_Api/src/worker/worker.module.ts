@@ -5,9 +5,10 @@ import { CurrentUserInterceptor } from 'src/users/interceptors/current-user.inte
 import { UsersModule } from 'src/users/users.module';
 import { Worker } from './entities/worker.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsersService } from 'src/users/users.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Worker]), UsersModule],
+  imports: [TypeOrmModule.forFeature([Worker]), UsersModule,],
 
   controllers: [WorkerController],
   providers: [WorkerService, CurrentUserInterceptor],

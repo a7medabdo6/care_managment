@@ -28,12 +28,13 @@ import { FileFilter } from 'src/utils/file-validator';
 import { extname } from 'path';
 import { WorkerDto } from './dto/worker.dto';
 import { Serialize } from 'src/interceptors/serialize.interceptor';
+import { UsersService } from 'src/users/users.service';
 @Controller('worker')
 @UseInterceptors(CurrentUserInterceptor)
 @UseGuards(AuthGuard)
 @Serialize(WorkerDto)
 export class WorkerController {
-  constructor(private readonly workerService: WorkerService) {}
+  constructor(private readonly workerService: WorkerService,private readonly userService: UsersService) {}
 
   // @Post()
   // create(@Body() createWorkerDto: CreateWorkerDto) {
@@ -98,6 +99,8 @@ export class WorkerController {
       training: files?.training?.[0]?.filename,
       Application: files?.Application?.[0]?.filename,
     });
+    const user = await this.userService.updateAfterProfile(+body.user,+product.id);
+    return user
     throw new HttpException('CREATED', HttpStatus.CREATED);
   }
   @Get(':id')

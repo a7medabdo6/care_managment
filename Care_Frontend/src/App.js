@@ -12,7 +12,7 @@ import theme from './theme';
 import { configureStore } from './store';
 import routes from './routes';
 
-import RoutesProdect from "./RoutesProdect"
+import RoutesProdect from "./RoutesProtect"
 import {
   ScrollReset,
   GoogleAnalytics,

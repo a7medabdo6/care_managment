@@ -8,12 +8,14 @@ import { useInsertDataSignUp } from "Api_Requests/useInsertDataSignUp";
 import SignUpSlice, { UserSignUp } from "Redux_Slices/auth/SignUpSlice";
 
 import notify from 'Hook/useNotifaction';
+import { useInsertDataEditeProfile } from "Api_Requests/UseInsertDataEditeProfile";
+import { EditeProfileSliceInfo } from "Redux_Slices/Profile/EditeProfileSlice";
 
-export const useSignUpApi = data => {
+export const useEditeProfileApi = formData => {
     const dispatch = useDispatch();
     const router = useRouter();
 
-    return useMutation(useInsertDataSignUp, {
+    return useMutation(useInsertDataEditeProfile, {
       onSuccess: res => {
         const result = {
           status: res.status + '-' + res.statusText,
@@ -21,21 +23,21 @@ export const useSignUpApi = data => {
           data: res.data
         };
         console.log(result,"result");
-         dispatch(UserSignUp(result.data));
+         dispatch(EditeProfileSliceInfo(result.data));
         // localStorage.setItem('user', JSON.stringify(result.data));
         // localStorage.setItem('token', JSON.stringify(result.data.token));
         //  window.location.replace('/');
         // router.history.push('/');
 
-           notify("The account has been created","success")    
+           notify("The Profile Edite has been created","success")    
 
  setTimeout(() => {
-    router.history.push('/auth/login');
+    router.history.push('/');
  }, 2000);
   
       },
       onError: err => {
-        console.log(err.response.data.message);
+        // console.log(err.response.data.message);
         //   dispatch(errorAtLogin(err.response.data.detail));
         //  return err;
         notify(err.response.data.message,"error")      
