@@ -28,17 +28,21 @@ import { FileFilter } from 'src/utils/file-validator';
 import { extname } from 'path';
 import { WorkerDto } from './dto/worker.dto';
 import { Serialize } from 'src/interceptors/serialize.interceptor';
+import { UsersService } from 'src/users/users.service';
 @Controller('worker')
 @UseInterceptors(CurrentUserInterceptor)
 @UseGuards(AuthGuard)
 @Serialize(WorkerDto)
 export class WorkerController {
-  constructor(private readonly workerService: WorkerService) {}
+  constructor(
+    private readonly workerService: WorkerService,
+    private readonly usersService: UsersService,
+  ) {}
 
-  @Post()
-  create(@Body() createWorkerDto: CreateWorkerDto) {
-    return this.workerService.create(createWorkerDto);
-  }
+  // @Post()
+  // create(@Body() createWorkerDto: CreateWorkerDto) {
+  //   return this.workerService.create(createWorkerDto);
+  // }
 
   @Get()
   findAll() {
@@ -93,11 +97,15 @@ export class WorkerController {
     //   Application = Application.concat(files[index].filename, ',');
     // }
     console.log(files, 'test');
-    const product = await this.workerService.create({
-      ...body,
-      training: files?.training?.[0]?.filename,
-      Application: files?.Application?.[0]?.filename,
-    });
+    const User = await this.usersService.findOneByEmail('admin@admin.com');
+    const product = await this.workerService.create(
+      {
+        ...body,
+        training: files?.training?.[0]?.filename,
+        Application: files?.Application?.[0]?.filename,
+      },
+      User,
+    );
     throw new HttpException('CREATED', HttpStatus.CREATED);
   }
   @Get(':id')

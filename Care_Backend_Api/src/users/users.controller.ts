@@ -46,8 +46,14 @@ export class UsersController {
   @Post('/signup')
   async signup(@Body() createUserDto: CreateUserDto, @Session() session: any) {
     const user = await this.authService.signup(createUserDto);
-    session.userId = user.id;
-    return user;
+   // session.userId = user.id;
+    return {user};
+  }
+  @Get('/my-profile')
+  @UseGuards(AuthGuard)
+  async profile(@CurrentUser() user: any) {
+    const userdata = await this.usersService.findOneByEmail(user.email);
+    return userdata;
   }
   @Post('/signin')
   async signin(@Body() createUserDto: any, @Session() session: any) {

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { User } from 'src/users/entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateWorkerDto } from './dto/create-worker.dto';
 import { UpdateWorkerDto } from './dto/update-worker.dto';
@@ -9,8 +10,13 @@ import { Worker } from './entities/worker.entity';
 export class WorkerService {
   constructor(@InjectRepository(Worker) private repo: Repository<Worker>) {}
 
-  async create(createWorkerDto: CreateWorkerDto) {
+  async createBeforeUser(createWorkerDto: any) {
     const Worker = await this.repo.create(createWorkerDto);
+    return this.repo.save(Worker);
+  }
+  async create(createWorkerDto: CreateWorkerDto,User:User) {
+    const Worker = await this.repo.create(createWorkerDto);
+    Worker.user=User
     return this.repo.save(Worker);
   }
 
@@ -21,7 +27,6 @@ export class WorkerService {
   async findOne(id: number) {
     const Worker = await this.repo.findOne({
       where: { id },
-      relations: { user: true },
     });
     return Worker;
   }
