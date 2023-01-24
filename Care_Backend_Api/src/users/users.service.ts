@@ -17,8 +17,10 @@ export class UsersService {
     return this.repo.save(user);
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async findAll() {
+    const users = await this.repo.find({});
+
+    return users;
   }
 
   async findOne(id: number) {
@@ -48,14 +50,14 @@ export class UsersService {
     Object.assign(user, updateUser);
     return this.repo.save(user);
   }
-async updateAfterProfile(userId:number,workerId: number) {
-  const user = await this.findOne(userId);
-  if (!user) {
-    throw new NotFoundException('user not found');
+  async updateAfterProfile(userId: number, workerId: number) {
+    const user = await this.findOne(userId);
+    if (!user) {
+      throw new NotFoundException('user not found');
+    }
+    Object.assign(user, { workerId });
+    return this.repo.save(user);
   }
-  Object.assign(user, {workerId});
-  return this.repo.save(user);
-}
   async remove(id: number) {
     const user = await this.findOne(id);
     if (!user) {
