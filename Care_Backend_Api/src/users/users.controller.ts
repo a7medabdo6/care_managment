@@ -25,9 +25,9 @@ import { CurrentUser } from 'src/decorators/current-user.decorator';
 import { User } from './entities/user.entity';
 import { CurrentUserInterceptor } from '../users/interceptors/current-user.interceptor';
 import { AuthGuard } from 'src/guards/auth.guard';
+import { AdminGuard } from 'src/guards/admin.guard';
 @Controller('users')
- @Serialize(UserDto)
-
+@Serialize(UserDto)
 export class UsersController {
   constructor(
     private readonly usersService: UsersService,
@@ -46,8 +46,8 @@ export class UsersController {
   @Post('/signup')
   async signup(@Body() createUserDto: CreateUserDto, @Session() session: any) {
     const user = await this.authService.signup(createUserDto);
-   // session.userId = user.id;
-    return {user};
+    // session.userId = user.id;
+    return { user };
   }
   @Get('/my-profile')
   @UseInterceptors(CurrentUserInterceptor)
@@ -68,6 +68,7 @@ export class UsersController {
   }
   /*************************************************** */
   @Get()
+  @UseGuards(AdminGuard)
   findAll() {
     return this.usersService.findAll();
   }
