@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useRef, useEffect } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link, Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
@@ -172,6 +172,15 @@ const TopBar = props => {
     'Pages'
   ];
 
+  let data ={}
+  let valid = false
+    if(localStorage.getItem("user")){
+      valid =true
+      data = JSON.parse(localStorage.getItem("user"))
+  
+    
+     console.log(data.username);
+    }
   return (
     <AppBar {...rest} className={clsx(classes.root, className)} color="primary">
       <Toolbar>
@@ -231,13 +240,29 @@ const TopBar = props => {
               <NotificationsIcon />
             </Badge>
           </IconButton>
+          <Link to="/edite/profile">
+          <Button
+            className={classes.logoutButton}
+            color="inherit"
+            >
+            {valid ?  "Edite Profile" : null}
+            
+            
+          </Button>
+          </Link>
+
+          
+          
           <Button
             className={classes.logoutButton}
             color="inherit"
             onClick={handleLogout}>
             <InputIcon className={classes.logoutIcon} />
-            Sign out
+            
+             Sign out
+            
           </Button>
+       
         </Hidden>
         <Hidden lgUp>
           <IconButton color="inherit" onClick={onOpenNavBarMobile}>

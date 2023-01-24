@@ -39,6 +39,6 @@ export class CreateWorkerDto {
   @IsOptional()
   Application: string;
 
-  @IsString()
-  user: User;
+  // @IsString()
+  // user: User;
 }

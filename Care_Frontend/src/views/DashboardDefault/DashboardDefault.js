@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 
@@ -39,12 +39,13 @@ const Review = <i class="far fa-file-pdf"></i>
 const DashboardDefault = () => {
   const classes = useStyles();
   const {userData} = useSelector(state => state.UserInfo)
+
   useEffect(() => {
-    console.log(userData);
+    // console.log(name);
   
   
     
-  }, [userData]) 
+  }, []) 
   return (
     <Page
       className={classes.root}

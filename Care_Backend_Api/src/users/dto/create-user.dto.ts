@@ -23,5 +23,9 @@ export class CreateUserDto {
 
   @IsNumber()
   @IsOptional()
+  workerId: number;
+
+  @IsNumber()
+  @IsOptional()
   createBy: number;
 }

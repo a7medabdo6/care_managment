@@ -91,7 +91,11 @@ const routes = [
         exact: true,
         component: lazy(() => import('views/ProfileUser'))
       },
-
+      {
+        path: '/edite/profile',
+        exact: true,
+        component: lazy(() => import('views/EditeProfile'))
+      },
       {
         path: '/user/mail',
         exact: true,

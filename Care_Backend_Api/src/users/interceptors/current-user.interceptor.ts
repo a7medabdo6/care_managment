@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { UsersService } from '../users.service';
+const jwt =require("jsonwebtoken")
 
 @Injectable()
 export class CurrentUserInterceptor implements NestInterceptor {
@@ -16,8 +17,11 @@ export class CurrentUserInterceptor implements NestInterceptor {
   ): Promise<Observable<any>> {
     const req = context.switchToHttp().getRequest();
     const { userId } = req.session;
-    if (userId) {
-      const user = await this.usersService.findOne(userId);
+    var decoded = jwt.verify(req.headers['token'], 'jsonwebtokensecret');
+    
+    if (decoded) {
+      console.log(decoded,"decoded decoded")
+      const user = await this.usersService.findOne(decoded.user);
       req.currentUser = user;
     }
     return next.handle();

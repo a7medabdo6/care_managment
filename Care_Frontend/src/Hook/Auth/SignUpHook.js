@@ -2,7 +2,6 @@ import axios from "axios"
 import { useMutation, useQuery } from "react-query"
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { UserInfo } from "Redux_Slices/auth/Slice";
 
 import useRouter from 'utils/useRouter';
 import { useInsertDataSignUp } from "Api_Requests/useInsertDataSignUp";

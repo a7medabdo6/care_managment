@@ -12,7 +12,9 @@ export class WorkerService {
 
   async createBeforeUser(createWorkerDto: any) {
     const Worker = await this.repo.create(createWorkerDto);
-    return this.repo.save(Worker);
+
+    const profile = await this.repo.save(Worker);
+ return profile
   }
   async create(createWorkerDto: CreateWorkerDto,User:User) {
     const Worker = await this.repo.create(createWorkerDto);
