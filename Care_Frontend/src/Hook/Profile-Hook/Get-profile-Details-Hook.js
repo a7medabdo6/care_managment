@@ -9,16 +9,16 @@ import SignUpSlice, { UserSignUp } from "Redux_Slices/auth/SignUpSlice";
 
 import notify from 'Hook/useNotifaction';
 import { GetProfileSliceInfo } from "Redux_Slices/Profile/Get-profile-Slice";
-import { useGetDataToken } from "Api_Requests/UseGetData";
+import { UseGetProfileData } from "Api_Requests/UseGetProfileData";
 
 export const useGetProfileApi = formData => {
     const dispatch = useDispatch();
     const router = useRouter();
 
-    return useQuery("getprofile",useGetDataToken, {
+    return useQuery("getprofile",UseGetProfileData, {
       onSuccess: res => {
         
-        console.log(res,"resultresultresultresult")
+        
          dispatch(GetProfileSliceInfo(res));
         // localStorage.setItem('user', JSON.stringify(result.data));
         // localStorage.setItem('token', JSON.stringify(result.data.token));

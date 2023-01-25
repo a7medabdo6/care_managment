@@ -3,12 +3,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import SignUpSlice from "./Redux_Slices/auth/SignUpSlice"
 import EditeProfileData from "./Redux_Slices/Profile/EditeProfileSlice"
 import GetProfileSlice from "./Redux_Slices/Profile/Get-profile-Slice"
+import GreateProfileSlice from "./Redux_Slices/Profile/GreateProfileSlice"
 export const store = configureStore({
   reducer: {
     UserInfo: userSlice,
     UserSignUp:SignUpSlice,
     EditeProfileData :EditeProfileData,
     GetProfileSlice :GetProfileSlice,
+    GreateProfileSlice :GreateProfileSlice,
 
    }
 })

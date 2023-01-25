@@ -1,39 +1,13 @@
 import { useEditeProfileApi } from 'Hook/Profile-Hook/EditeProfileHook'
-import { useGetProfileApi } from 'Hook/Profile-Hook/Get-profile-Details-Hook'
+import { GreateProfileApi } from 'Hook/Profile-Hook/GreateProfileHook'
 import notify from 'Hook/useNotifaction'
 import React from 'react'
-import { useEffect } from 'react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
 import useRouter from 'utils/useRouter'
- import avatar from "../../images/avatar.png"
-const EditeProfile = () => {
-  const {data}=useGetProfileApi()
 
-  const {ProfileDetails} =useSelector(state => state.GetProfileSlice)
-  console.log(ProfileDetails);
-
-  const [image,setimage] = useState(`http://localhost:5000/public/${ProfileDetails?.worker?.training}`)
-  const onImageChange = (e) => {
-    if(e.target.files && e.target.files[0]){
-        setimage(URL.createObjectURL(e.target.files[0]))
-        
-
-    }
-
-}
-
-
-
- 
-  
-
-if(ProfileDetails){
-  console.log(ProfileDetails.worker.training);
-}
-
-
+const GreateProfile = () => {
 const [bod,setbod] = useState("")
 const [NI_Number,setNI_Number] = useState("")
 const [Adress,setAdress] = useState("")
@@ -106,17 +80,17 @@ const onchangetraining =(e)=>{
 
 }
 
-// let data ={}
-//     if(localStorage.getItem("user")){
+let data ={}
+    if(localStorage.getItem("user")){
       
-//       data = JSON.parse(localStorage.getItem("user"))
+      data = JSON.parse(localStorage.getItem("user"))
   
     
-//      console.log(data.id);
-//     }
+     console.log(data.id);
+    }
 
-const {isLoading,mutate:SubmitEditeProfile,isError,error,refetch} =  useEditeProfileApi()
-const {EditeProfileData} = useSelector(state => state.EditeProfileData)
+const {isLoading,mutate:SubmitEditeProfile,isError,error,refetch} =  GreateProfileApi()
+const {GreateProfileData} = useSelector(state => state.GreateProfileSlice)
 
 const handelSubmit = (e) => {
   e.preventDefault()
@@ -130,7 +104,7 @@ const handelSubmit = (e) => {
         const formData = new FormData();
         formData.append("Ni_Number" , NI_Number)
         formData.append("BOD" , bod)
-        // formData.append("user" , data.id)
+        formData.append("user" , data.id)
         formData.append("sex" , SEX)
         formData.append("Adress" , Adress)
         formData.append("next_of_kin_Contact" , NEXT_OF_KIN_CONTACT)
@@ -149,51 +123,51 @@ const handelSubmit = (e) => {
 }
 
 
+console.log(GreateProfileData);
   return (
-    <div>
+    <div className='text-center'>
       <div className='m-5'>
-        <h2 className='bold'>Edite Profile</h2>
+        <h2 className='bold'>Greate Profile</h2>
       </div>
-      <form className="row g-3 bg-white needs-validation container" novalidate>
+      <form className="row g-3 bg-white needs-validation m-5" novalidate>
     <div className="col-md-6">
       <label for="validationCustom01" className="form-label fw-bold">BOD</label>
-      <input type="text" onChange={onchangebod} className="form-control" id="validationCustom01" value={ProfileDetails?.worker?.BOD}  required/>
+      <input type="text" onChange={onchangebod} className="form-control" id="validationCustom01"  required/>
       <div className="valid-feedback">
         Looks good!
       </div>
     </div>
     <div className="col-md-6">
       <label for="validationCustom02" className="form-label fw-bold">NI_Number</label>
-      <input type="text" onChange={onchangeNI_Number} className="form-control" id="validationCustom02" value={ProfileDetails?.worker?.Ni_Number
-}  required/>
+      <input type="text" onChange={onchangeNI_Number} className="form-control" id="validationCustom02"  required/>
       <div className="valid-feedback">
         Looks good!
       </div>
     </div>
     <div className="col-md-6">
     <label for="validationCustom01" className="form-label fw-bold">Adress</label>
-      <input type="text" onChange={onchangeAdress} className="form-control" id="validationCustom01" value={ProfileDetails?.worker?.Adress}  required/>
+      <input type="text" onChange={onchangeAdress} className="form-control" id="validationCustom01"  required/>
       <div className="valid-feedback">
         Looks good!
       </div>
     </div>
     <div className="col-md-6">
     <label for="validationCustom01" className="form-label fw-bold">Phone</label>
-      <input type="text" onChange={onchangePhone} className="form-control" id="validationCustom01" value={ProfileDetails?.worker?.phone}  required/>
+      <input type="text" onChange={onchangePhone} className="form-control" id="validationCustom01"  required/>
       <div className="valid-feedback">
         Looks good!
       </div>
     </div>
     <div className="col-md-6">
     <label for="validationCustom01" className="form-label fw-bold">NEXT_OF_KIN</label>
-      <input type="text" onChange={onchangeNEXT_OF_KIN} className="form-control" id="validationCustom01" value={ProfileDetails?.worker?.next_of_kin}  required/>
+      <input type="text" onChange={onchangeNEXT_OF_KIN} className="form-control" id="validationCustom01"  required/>
       <div className="valid-feedback">
         Looks good!
       </div>
     </div>
     <div className="col-md-6">
     <label for="validationCustom01" className="form-label fw-bold">SEX</label>
-      <input type="text" onChange={onchangeSEX} className="form-control" id="validationCustom01" value={ProfileDetails?.worker?.sex} required/>
+      <input type="text" onChange={onchangeSEX} className="form-control" id="validationCustom01"  required/>
       <div className="valid-feedback">
         Looks good!
       </div>
@@ -201,7 +175,7 @@ const handelSubmit = (e) => {
 
     <div className="col-md-6">
     <label for="validationCustom01" className="form-label fw-bold">NEXT_OF_KIN_CONTACT</label>
-      <input type="text" onChange={onchangeNEXT_OF_KIN_CONTACT} className="form-control" id="validationCustom01" value={ProfileDetails?.worker?.next_of_kin_Contact} required/>
+      <input type="text" onChange={onchangeNEXT_OF_KIN_CONTACT} className="form-control" id="validationCustom01"  required/>
       <div className="valid-feedback">
         Looks good!
       </div>
@@ -218,41 +192,18 @@ const handelSubmit = (e) => {
       </div>
     </div>
 
-
-
-    <div>
-                    <label for ="upload-photo">
-                        <img 
-                        src={image}
-                        alt="hgffh"
-                        height="100px"
-                        width="100px"
-                        style={{cursor:"pointer"}}
-
-                        
-                        />
-                    </label>
-                    <input
-                    type="file"
-                    name = "photo"
-                    onChange={onImageChange}
-                    id="upload-photo"
-                    
-                    />
-                    </div>  
-
-    {/* <div className="col-md-12">
+    <div className="col-md-12">
     <label for="validationCustom01" className="form-label fw-bold">training</label>
-    <input className="form-control" onChange={onchangetraining} type="file" id="validationCustom01" value={ProfileDetails?.worker?.training}  required/>
+    <input className="form-control" onChange={onchangetraining} type="file" id="validationCustom01"  required/>
 
       
       <div className="valid-feedback">
         Looks good!
       </div>
-    </div> */}
+    </div>
     
     <div className="col-12">
-      <button className="btn btn-primary" type="submit" onClick={handelSubmit} >Update Info</button>
+      <button className="btn btn-primary" type="submit" onClick={handelSubmit} >Greate</button>
     </div>
   </form>
   <ToastContainer></ToastContainer>
@@ -261,4 +212,4 @@ const handelSubmit = (e) => {
   )
 }
 
-export default EditeProfile
+export default GreateProfile

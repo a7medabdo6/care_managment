@@ -2,24 +2,38 @@ import { useGetProfileApi } from "Hook/Profile-Hook/Get-profile-Details-Hook";
 import React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import {
+  AppBar,
+  Badge,
+  Button,
+  IconButton,
+  Toolbar,
+  Hidden,
+  Input,
+  colors,
+  Popper,
+  Paper,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  ClickAwayListener
+} from '@material-ui/core';
+import { Link, Link as RouterLink } from 'react-router-dom';
 
 
 const ProfileUser =()=>{
+
+ 
+
   const {data}=useGetProfileApi()
 
   const {ProfileDetails} =useSelector(state => state.GetProfileSlice)
-  console.log(ProfileDetails,"ProfileDetails?");
+  console.log(ProfileDetails);
 
 
   
-  useEffect(() => {
-    
-    console.log(ProfileDetails,"ProfileDetails?");
-
-    return () => {
-      
-    }
-  }, [ProfileDetails])
+ 
   
   if(!ProfileDetails || !ProfileDetails.worker){
 return <div>looading</div>
@@ -58,6 +72,10 @@ return <div>looading</div>
               <div className="mt-2" style={{width: "8px",height : "8px",backgroundColor:"green",border:"1px,solid,green",borderRadius:"50%"}}></div>
               <p>Active</p>
             </div>
+            <Link to="/edite/profile">
+            <button type="button" className="btn btn-primary">Edite Profile</button>
+
+          </Link>
           </div>
         </div>
    
@@ -98,6 +116,16 @@ return <div>looading</div>
               </div>
               <div class="col-sm-9">
                 <p class="text-muted mb-0">{ProfileDetails.worker.next_of_kin}</p>
+              </div>
+            </div>
+            <hr/>
+
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">next_of_kin_Contact</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{ProfileDetails.worker.next_of_kin_Contact}</p>
               </div>
             </div>
             <hr/>

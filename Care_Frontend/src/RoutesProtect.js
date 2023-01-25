@@ -13,6 +13,19 @@ import PresentationView from './views/Presentation';
 
 const routes = [
   {
+    path: '/user',
+    component: AuthLayout,
+    routes: [
+      {
+        path: '/user/CreateProfile',
+        exact: true,
+        component: lazy(() => import('views/GreateProfile'))
+      },
+    
+    
+    ]
+  },
+  {
     path: '/',
     exact: true,
     component: () => <Redirect to="/dashboards/default" />
@@ -65,7 +78,13 @@ const routes = [
         exact: true,
         component: lazy(() => import('views/ProfileUser'))
       },
+    
 
+      // {
+      //   path: '/user/CreateProfile',
+      //   exact: true,
+      //   component: lazy(() => import('views/GreateProfile'))
+      // },
 
 
       /******************************************************************************* */

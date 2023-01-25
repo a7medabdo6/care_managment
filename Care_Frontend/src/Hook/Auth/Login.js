@@ -24,7 +24,13 @@ export const useLoginApi = data => {
         localStorage.setItem('user', JSON.stringify(result.data));
         localStorage.setItem('token', result.data.Token);
         // localStorage.setItem('token', JSON.stringify(result.data.token));
-        window.location.replace('/');
+        if(result.data.worker === null){
+          window.location.replace('/user/CreateProfile');
+
+        }else{
+          window.location.replace('/');
+
+        }
         // router.history.push('/');
 
       

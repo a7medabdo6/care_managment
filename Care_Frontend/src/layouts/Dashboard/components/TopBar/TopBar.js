@@ -127,6 +127,8 @@ const TopBar = props => {
   const handleLogout = () => {
     // history.push('/auth/login');
     localStorage.removeItem("user")
+    localStorage.removeItem("token")
+
     // dispatch(logout());
     window.location.replace('/');
 
@@ -240,16 +242,7 @@ const TopBar = props => {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <Link to="/edite/profile">
-          <Button
-            className={classes.logoutButton}
-            color="inherit"
-            >
-            {valid ?  "Edite Profile" : null}
-            
-            
-          </Button>
-          </Link>
+          
 
           
           

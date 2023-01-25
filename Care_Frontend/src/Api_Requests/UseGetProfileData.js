@@ -7,7 +7,7 @@ const useGetData = async (url, parmas) => {
 
 
 
-const useGetDataToken = async (url, parmas) => {
+const UseGetProfileData = async (url, parmas) => {
     const config = {
         headers: { token: localStorage.getItem("token") }
     }
@@ -15,4 +15,4 @@ const useGetDataToken = async (url, parmas) => {
     return res.data;
 }
 
-export { useGetData, useGetDataToken };
+export { useGetData, UseGetProfileData };
