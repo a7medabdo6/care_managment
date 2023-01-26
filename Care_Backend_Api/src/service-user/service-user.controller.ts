@@ -1,9 +1,20 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { ServiceUserService } from './service-user.service';
 import { CreateServiceUserDto } from './dto/create-service-user.dto';
 import { UpdateServiceUserDto } from './dto/update-service-user.dto';
+import { AdminGuard } from 'src/guards/admin.guard';
 
 @Controller('service-user')
+@UseGuards(AdminGuard)
 export class ServiceUserController {
   constructor(private readonly serviceUserService: ServiceUserService) {}
 
@@ -23,7 +34,10 @@ export class ServiceUserController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateServiceUserDto: UpdateServiceUserDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateServiceUserDto: UpdateServiceUserDto,
+  ) {
     return this.serviceUserService.update(+id, updateServiceUserDto);
   }
 
