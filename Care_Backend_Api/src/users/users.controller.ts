@@ -74,6 +74,7 @@ export class UsersController {
   }
 
   @Get(':id')
+  @UseGuards(AdminGuard)
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id);
   }
@@ -84,6 +85,7 @@ export class UsersController {
   }
 
   @Delete(':id')
+  @UseGuards(AdminGuard)
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);
   }
