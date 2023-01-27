@@ -18,7 +18,7 @@ export class UsersService {
   }
 
   async findAll() {
-    const users = await this.repo.find({});
+    const users = await this.repo.find({where:{role:2},relations:{worker:true}});
 
     return users;
   }

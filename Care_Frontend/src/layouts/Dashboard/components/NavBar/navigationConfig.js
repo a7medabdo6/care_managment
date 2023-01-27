@@ -26,7 +26,8 @@ import ContactMailOutlinedIcon from '@material-ui/icons/ContactMailOutlined';
 import DetailsOutlinedIcon from '@material-ui/icons/DetailsOutlined';
 import MailOutlineOutlinedIcon from '@material-ui/icons/MailOutlineOutlined';
 import { Label } from 'components';
-
+ const userdata =JSON.parse(localStorage.getItem("user")) 
+ 
 export default [
   {
     title: 'Pages',
@@ -76,6 +77,8 @@ export default [
               href: '/service/user',
               icon: FormatListBulletedOutlinedIcon
             },
+           
+           
       
             {
               title: 'mail',
@@ -135,7 +138,20 @@ export default [
         children: [
           {
             title: 'Customers',
-            href: '/management/customers'
+            href: '/management/customers',
+            icon: FormatListBulletedOutlinedIcon
+
+          },
+          userdata?.role == 1 && {
+            title: 'All Workers',
+            href: '/workers',
+            icon: FormatListBulletedOutlinedIcon
+          },
+
+          userdata?.role == 1 && {
+            title: 'All ServiceUser',
+            href: '/AllServiceUser',
+            icon: FormatListBulletedOutlinedIcon
           },
           // {
           //   title: 'Customer Details',
@@ -155,6 +171,10 @@ export default [
           // }
         ]
       },
+
+
+      
+     
       // {
       //   title: 'Social Feed',
       //   href: '/social-feed',
