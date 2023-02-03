@@ -38,7 +38,7 @@ import { ServiceUser } from './service-user/entities/service-user.entity';
       host: 'db',
       port: 3306,
       username: 'root',
-      password: 'password',
+      password: '',
       database: 'care',
       entities: [User, Report, Worker, ServiceUser],
       synchronize: true,
