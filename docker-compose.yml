@@ -1,0 +1,64 @@
+version: '2'
+services:
+  nestjs-app:
+    build:
+      context: ./Care_Backend_Api
+      dockerfile: Dockerfile
+    container_name: nestjs_app_container
+    volumes:
+      - ./Care_Backend_Api/src:/App/src:ro
+    ports:
+      - '5000:5000'
+    depends_on:  # don't run untill mongoDb service will not start 
+            - db 
+  db:
+    image: mysql
+    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
+    # (this is just an example, not intended to be a production configuration)
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'care'
+      # So you don't have to use root, but you can if you like
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'password'
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - '3306:3306'
+    expose:
+      # Opens port 3306 on the container
+      - '3306'
+      # Where our data will be persisted
+    volumes:
+      - my-db:/var/lib/mysql
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+ 
+ 
+  # frontend:   
+  #       build:
+  #           context: ./Care_Frontend
+  #           dockerfile: Dockerfile
+  #       volumes: 
+  #           - ./Care_Frontend/src:/Frontend/src:ro    
+  #       #request will forward to same url, so we only need /api to distinguish that this request will forward to our backend           
+    
+  nginx:
+        build:
+            context: ./nginx
+            dockerfile: Dockerfile
+        ports: 
+            - 80:80
+        restart: always 
+        depends_on:  # don't run untill mongoDb service will not start 
+            - nestjs-app 
+            # - frontend
+    
+# Names our volume
+volumes:
+  my-db:
