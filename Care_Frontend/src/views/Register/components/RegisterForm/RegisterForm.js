@@ -120,7 +120,7 @@ const RegisterForm = props => {
     "email": formState.values.email,
     "password": formState.values.password,
     "username": formState.values.Name,
-    "role": 1
+    "role": 2
   
 }
 
