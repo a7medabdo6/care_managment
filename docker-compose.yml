@@ -57,9 +57,8 @@ services:
         build:
             context: ./
             dockerfile: Dockerfile.nginx
-        volumes:
-            - ./Care_Frontend/build:/usr/share/nginx/html:ro
-        image: a7medabdo6/care_managment
+        # volumes:
+        #     - ./Care_Frontend/build:/usr/share/nginx/html:ro
         ports: 
             - 80:80
         restart: always 
