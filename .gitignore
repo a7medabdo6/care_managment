@@ -9,7 +9,6 @@
 /Care_Frontend/coverage
 
 # production
-/Care_Frontend/build
 
 # misc
 .DS_Store
