@@ -4,8 +4,11 @@ WORKDIR /Frontend
 
 COPY package.json yarn.lock ./
 
-RUN npm install --frozen-lockfile --force 
+# RUN npm install --frozen-lockfile --force 
+
+
 
 COPY . .
 
-CMD ["npm", "start"]
+# Build the project and copy the files
+#RUN npm run build

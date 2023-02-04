@@ -45,14 +45,20 @@ services:
   #       build:
   #           context: ./Care_Frontend
   #           dockerfile: Dockerfile
+  #       container_name: React_app_container
+
   #       volumes: 
   #           - ./Care_Frontend/src:/Frontend/src:ro    
-  #       #request will forward to same url, so we only need /api to distinguish that this request will forward to our backend           
-    
+  #       ports:
+  #           - '3000:3000' 
+
+
   nginx:
         build:
-            context: ./nginx
-            dockerfile: Dockerfile
+            context: ./
+            dockerfile: Dockerfile.nginx
+        volumes:
+            - ./Care_Frontend/build:/usr/share/nginx/html:ro
         ports: 
             - 80:80
         restart: always 
