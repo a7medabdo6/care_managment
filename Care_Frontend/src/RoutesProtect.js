@@ -72,7 +72,11 @@ const routes = [
         exact: true,
         component: lazy(() => import('views/ServiceUser'))
       },
-
+      {
+        path: '/EditeServiceUser',
+        exact: true,
+        component: lazy(() => import('views/EditeServiceUser'))
+      },
       {
         path: '/Profile/user',
         exact: true,

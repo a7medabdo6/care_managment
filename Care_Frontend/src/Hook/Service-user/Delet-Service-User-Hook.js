@@ -32,6 +32,7 @@ export const useDeletServiceUserApi = (id) => {
         // router.history.push('/');
         QueryClient.invalidateQueries('GetAllServiceUser');
 
+        notify("The Service User  has been Deleted","success")    
 
 
   
@@ -40,7 +41,7 @@ export const useDeletServiceUserApi = (id) => {
         // console.log(err.response.data.message);
         //   dispatch(errorAtLogin(err.response.data.detail));
         //  return err;
-        notify(err.response.data.message,"error")      
+        notify(err?.response?.data?.message,"error")      
 
       }
     });

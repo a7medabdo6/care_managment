@@ -24,7 +24,7 @@ export class User {
   @Column()
   role: number;
 
-  @Column()
+  @Column({default:1})
   createBy: number;
 
   @OneToMany(() => Report, (report) => report.user)

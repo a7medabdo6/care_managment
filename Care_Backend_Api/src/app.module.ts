@@ -19,10 +19,13 @@ import { CategoryModule } from './category/category.module';
 import { WorkerModule } from './worker/worker.module';
 import { ServiceUserModule } from './service-user/service-user.module';
 import { ServiceUser } from './service-user/entities/service-user.entity';
+import { ConfigModule } from '@nestjs/config';
 import { PlanModule } from './plan/plan.module';
-
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: 'development.env',
+    }),
     I18nModule.forRoot({
       fallbackLanguage: 'en',
       loaderOptions: {
@@ -36,11 +39,11 @@ import { PlanModule } from './plan/plan.module';
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'db',
-      port: 3306,
-      username: 'root',
-      password: '',
-      database: 'care',
+      host: process.env.HOST,
+      port: +process.env.PORT,
+      username: process.env.USER_NAME,
+      password: process.env.PASSWORD,
+      database: process.env.DATABASE,
       entities: [User, Report, Worker, ServiceUser],
       synchronize: true,
     }),

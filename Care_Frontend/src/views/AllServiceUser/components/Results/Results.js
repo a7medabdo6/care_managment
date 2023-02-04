@@ -22,6 +22,7 @@ import {
   TableRow,
   Typography
 } from '@material-ui/core';
+import Modal from 'react-bootstrap/Modal';
 
 import getInitials from 'utils/getInitials';
 import { ReviewStars, GenericMoreButton, TableEditBar } from 'components';
@@ -31,6 +32,9 @@ import { GetProfileViewSliceInfo } from 'Redux_Slices/Profile/View-profile-Slice
 import useRouter from 'utils/useRouter';
 import { useEffect } from 'react';
 import { useDeletServiceUserApi } from 'Hook/Service-user/Delet-Service-User-Hook';
+import { ToastContainer } from 'react-toastify';
+import EditeServiceUser from 'views/EditeServiceUser';
+import { ShowEditeServiceUserSliceInfo } from 'Redux_Slices/Service-User/ShowEditeServiceUserSlice';
 
 
 const useStyles = makeStyles(theme => ({
@@ -58,8 +62,16 @@ const useStyles = makeStyles(theme => ({
 
 const Results = props => {
 
-  
+  const [showEdite, setshowEdite] = useState(false);
 
+  const handleCloseEdite = () => setshowEdite(false);
+  const handleShowEdite = () => setshowEdite(true);
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+ const [prameter,setprameter] =useState("")
   const router = useRouter();
 
 
@@ -83,6 +95,23 @@ const Results = props => {
 
   // }
 
+  const {ShowEditeServiceUserSliceInfoData} =useSelector(state => state.ShowEditeServiceUserSlice)
+console.log(ShowEditeServiceUserSliceInfoData);
+  const handelEdite =(data)=>{
+    
+
+  
+    const res = AllServiceUserData.filter((item,index) => index === data)
+    
+
+    console.log(res);
+    dispatch(ShowEditeServiceUserSliceInfo(res));
+    
+      // router.history.push('/ViewProfile');
+ 
+    // window.location.replace('/ViewProfile');
+
+  }
   const classes = useStyles();
 
   const [selectedCustomers, setSelectedCustomers] = useState([]);
@@ -130,13 +159,54 @@ const Results = props => {
   };
   const {isLoading,mutate:SubmitDeletServiceUser,isError,error,refetch} =  useDeletServiceUserApi()
   const {DeletServiceUserData} = useSelector(state => state.DeletServiceUserSlice)
+
+ 
    const handeldelet=(id)=>{
   
       SubmitDeletServiceUser(id)
+      handleClose()
    }
 
   return (
-    <div
+    <div>
+   <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title className='text-center justify-content-center d-flex align-items-center '> 
+          <div className=' titlemodel   text-center bg-info bg-gradient'>Alert</div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body className='d-flex justify-content-center align-items-center '>
+           
+           <h3>Are You Sure ?</h3>
+          
+             </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={()=>handeldelet(prameter)} >
+            Delet
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+      <Modal show={showEdite} onHide={handleCloseEdite}>
+        <Modal.Header closeButton>
+          <Modal.Title className='text-center justify-content-center d-flex align-items-center '> 
+          <div className=' titlemodel   text-center '>Edite ServiceUser</div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body className=''>
+           
+           <EditeServiceUser ShowEditeServiceUserSliceInfoData={ShowEditeServiceUserSliceInfoData} handleCloseEdite={handleCloseEdite}/>
+          
+             </Modal.Body>
+        <Modal.Footer>
+         
+        </Modal.Footer>
+      </Modal>
+      <div
       {...rest}
       className={clsx(classes.root, className)}
     >
@@ -236,16 +306,25 @@ const Results = props => {
                           View
                         </Button>
 
-
-                         <Button
-                         className='ms-1'
+                        <Button
                           color="primary"
+                          onClick={()=> {return(handelEdite(index),handleShowEdite()) }}
                           
+                          className='ms-1'
                           size="small"
-                          onClick={()=>handeldelet(customer.id)}
                           variant="outlined"
                         >
-                          <i className="fa-sharp fa-solid fa-trash p-1"></i>
+                          <i class="fa-solid fa-pen-to-square"></i>
+                        </Button>
+                         <Button
+                         className='ms-1'
+                          color="error"
+                          
+                          size="small"
+                          onClick={() => { return (handleShow(),setprameter(customer.id))}}
+                          variant="outlined"
+                        >
+                          <i className="fa-sharp fa-solid fa-trash p-1 text-danger" ></i>
                         </Button>
                       </TableCell>
                     </TableRow>
@@ -270,7 +349,13 @@ const Results = props => {
         </CardActions>
       </Card>
       <TableEditBar selected={selectedCustomers} />
+
+      <ToastContainer></ToastContainer>
+
     </div>
+
+    </div>
+    
   );
 };
 
