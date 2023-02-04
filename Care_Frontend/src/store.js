@@ -9,6 +9,8 @@ import ViewProfileSlice from "./Redux_Slices/Profile/View-profile-Slice"
 import CreateServiceUserSlice from "./Redux_Slices/Service-User/Create-Service-User"
 import GetAllServiceUserSlice from "./Redux_Slices/Service-User/Get-All-service-user-Slice"
 import DeletServiceUserSlice from "./Redux_Slices/Service-User/Delet-Service-user-Hook"
+import ShowEditeServiceUserSlice from "./Redux_Slices/Service-User/ShowEditeServiceUserSlice"
+import EditeServiceUserDataSlice from "./Redux_Slices/Service-User/Edite-Service-User-Slice"
 export const store = configureStore({
   reducer: {
     UserInfo: userSlice,
@@ -21,6 +23,8 @@ export const store = configureStore({
     CreateServiceUserSlice : CreateServiceUserSlice,
     GetAllServiceUserSlice :GetAllServiceUserSlice,
     DeletServiceUserSlice:DeletServiceUserSlice,
+    ShowEditeServiceUserSlice:ShowEditeServiceUserSlice,
+    EditeServiceUserDataSlice:EditeServiceUserDataSlice
 
    }
 })

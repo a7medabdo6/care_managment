@@ -14,25 +14,27 @@ import { GetAllServiceUserSliceInfo } from 'Redux_Slices/Service-User/Get-All-se
 import { UseGetAllServiceUserData } from 'Api_Requests/Service-user/Get-All-Service-UserData';
 import { UseDeletServiceUData } from 'Api_Requests/Service-user/Delet-One-Service-User';
 import { DeletServiceUserSliceInfo } from 'Redux_Slices/Service-User/Delet-Service-user-Hook';
+import { UseEditeServiceUserDataToken } from 'Api_Requests/Service-user/Edite-Service-User-Data';
+import { EditeServiceUserDataSliceInfo } from 'Redux_Slices/Service-User/Edite-Service-User-Slice';
 
 
 
-export const useDeletServiceUserApi = (id) => {
+export const useEditeServiceUserApi = (FormData) => {
     const dispatch = useDispatch();
     const router = useRouter();
     const QueryClient = useQueryClient();
-    return useMutation((id)=> (UseDeletServiceUData(id)), {
+    return useMutation((FormData)=> (UseEditeServiceUserDataToken(FormData)), {
       onSuccess: res => {
         
         
-         dispatch(DeletServiceUserSliceInfo(res));
+         dispatch(EditeServiceUserDataSliceInfo(res));
         // localStorage.setItem('user', JSON.stringify(result.data));
         // localStorage.setItem('token', JSON.stringify(result.data.token));
         //  window.location.replace('/');
         // router.history.push('/');
         QueryClient.invalidateQueries('GetAllServiceUser');
 
-        notify("The Service User  has been Deleted","success")    
+        notify("The Service User  has been Edite","success")    
 
 
   
