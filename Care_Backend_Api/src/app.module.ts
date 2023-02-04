@@ -19,6 +19,7 @@ import { CategoryModule } from './category/category.module';
 import { WorkerModule } from './worker/worker.module';
 import { ServiceUserModule } from './service-user/service-user.module';
 import { ServiceUser } from './service-user/entities/service-user.entity';
+import { PlanModule } from './plan/plan.module';
 
 @Module({
   imports: [
@@ -47,6 +48,7 @@ import { ServiceUser } from './service-user/entities/service-user.entity';
     // ReportsModule,
     WorkerModule,
     ServiceUserModule,
+    PlanModule,
   ],
   controllers: [AppController],
   providers: [AppService],
