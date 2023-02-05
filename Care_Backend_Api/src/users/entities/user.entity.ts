@@ -1,3 +1,4 @@
+import { Plan } from 'src/plan/entities/plan.entity';
 import { Report } from 'src/reports/entities/report.entity';
 import { Worker } from 'src/worker/entities/worker.entity';
 import {
@@ -24,7 +25,7 @@ export class User {
   @Column()
   role: number;
 
-  @Column({default:1})
+  @Column({ default: 1 })
   createBy: number;
 
   @OneToMany(() => Report, (report) => report.user)
@@ -33,4 +34,7 @@ export class User {
   @OneToOne(() => Worker, (worker) => worker.user) // specify inverse side as a second parameter
   @JoinColumn()
   worker: Worker;
+
+  @OneToMany(() => Plan, (plan) => plan.user)
+  plans: Plan[];
 }

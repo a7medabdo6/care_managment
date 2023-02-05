@@ -21,6 +21,9 @@ import { ServiceUserModule } from './service-user/service-user.module';
 import { ServiceUser } from './service-user/entities/service-user.entity';
 import { ConfigModule } from '@nestjs/config';
 import { PlanModule } from './plan/plan.module';
+import { Plan } from './plan/entities/plan.entity';
+import { RiskAssesmentModule } from './risk_assesment/risk_assesment.module';
+import { RiskAssesment } from './risk_assesment/entities/risk_assesment.entity';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -44,14 +47,15 @@ import { PlanModule } from './plan/plan.module';
       username: process.env.USER_NAME,
       password: process.env.PASSWORD,
       database: process.env.DATABASE,
-      entities: [User, Report, Worker, ServiceUser],
-      synchronize: true,
+      entities: [User, Report, Worker, ServiceUser, Plan, RiskAssesment],
+      synchronize: false,
     }),
     UsersModule,
     // ReportsModule,
     WorkerModule,
     ServiceUserModule,
     PlanModule,
+    RiskAssesmentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,3 +1,4 @@
+import { Plan } from 'src/plan/entities/plan.entity';
 import {
   Column,
   Entity,
@@ -62,4 +63,6 @@ export class ServiceUser {
 
   @Column()
   compliment_of_the_household: number;
+  @OneToMany(() => Plan, (plan) => plan.user)
+  plans: Plan[];
 }
