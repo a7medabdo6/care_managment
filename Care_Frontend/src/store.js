@@ -11,6 +11,12 @@ import GetAllServiceUserSlice from "./Redux_Slices/Service-User/Get-All-service-
 import DeletServiceUserSlice from "./Redux_Slices/Service-User/Delet-Service-user-Hook"
 import ShowEditeServiceUserSlice from "./Redux_Slices/Service-User/ShowEditeServiceUserSlice"
 import EditeServiceUserDataSlice from "./Redux_Slices/Service-User/Edite-Service-User-Slice"
+import GetRiskAssesmentSlice from "./Redux_Slices/RiskAssesment/Get-all-RISK-Slice"
+import CreateRiskAssesmentSlice from "./Redux_Slices/RiskAssesment/Create-RiskAssesment-Slice"
+import DeletRiskAssesmentSlice from "./Redux_Slices/RiskAssesment/Delet-RiskAssesment-Slice.js"
+import GetAllCAREplaneSlice from "./Redux_Slices/CarePlan/Get-CarePlane-Slice"
+import DeletCarePlanSlice from "./Redux_Slices/CarePlan/Delet-CarePlan-Slice"
+import CreateCarePlantSlice from "./Redux_Slices/CarePlan/Create-CarePlan-Slice"
 export const store = configureStore({
   reducer: {
     UserInfo: userSlice,
@@ -24,7 +30,13 @@ export const store = configureStore({
     GetAllServiceUserSlice :GetAllServiceUserSlice,
     DeletServiceUserSlice:DeletServiceUserSlice,
     ShowEditeServiceUserSlice:ShowEditeServiceUserSlice,
-    EditeServiceUserDataSlice:EditeServiceUserDataSlice
+    EditeServiceUserDataSlice:EditeServiceUserDataSlice,
+    GetRiskAssesmentSlice:GetRiskAssesmentSlice,
+    CreateRiskAssesmentSlice:CreateRiskAssesmentSlice,
+    DeletRiskAssesmentSlice:DeletRiskAssesmentSlice,
+    GetAllCAREplaneSlice:GetAllCAREplaneSlice,
+    DeletCarePlanSlice:DeletCarePlanSlice,
+    CreateCarePlantSlice:CreateCarePlantSlice
 
    }
 })

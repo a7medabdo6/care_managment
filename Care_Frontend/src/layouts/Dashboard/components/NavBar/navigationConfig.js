@@ -25,6 +25,7 @@ import ReportProblemOutlinedIcon from '@material-ui/icons/ReportProblemOutlined'
 import ContactMailOutlinedIcon from '@material-ui/icons/ContactMailOutlined';
 import DetailsOutlinedIcon from '@material-ui/icons/DetailsOutlined';
 import MailOutlineOutlinedIcon from '@material-ui/icons/MailOutlineOutlined';
+import CropLandscapeIcon from '@material-ui/icons/CropLandscape';
 import { Label } from 'components';
  const userdata =JSON.parse(localStorage.getItem("user")) 
  
@@ -63,6 +64,13 @@ export default [
               title: 'Daily Notes',
               href: '/DailyNotes',
               icon: EventNoteOutlinedIcon,
+             
+            },
+
+            {
+              title: 'Care Plan',
+              href: '/CarePlan',
+              icon: CropLandscapeIcon,
              
             },
       

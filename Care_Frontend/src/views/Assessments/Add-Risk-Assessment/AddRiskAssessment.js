@@ -3,7 +3,15 @@ import Button from 'react-bootstrap/Button';
 
 import "./AddRiskAssessment.css"
 import Multiselect from 'multiselect-react-dropdown';
+import { CreateRiskAssesmentApi } from "Hook/RiskAssesment/Create-Risk-Assesment-Hook";
+import { useSelector } from "react-redux";
 const AddRiskAssessment =()=>{
+
+
+    const {isLoading,mutate:SubmitCreateRiskAssesment,isError,error,refetch} =  CreateRiskAssesmentApi()
+    const {CreateRiskAssesmentrData} = useSelector(state => state.CreateRiskAssesmentSlice)
+console.log(CreateRiskAssesmentrData)
+
     const [options, setoptions] = useState([
         {name: 'Option 1️⃣', id: 1},{name: 'Option 2️⃣', id: 2}
     ]);

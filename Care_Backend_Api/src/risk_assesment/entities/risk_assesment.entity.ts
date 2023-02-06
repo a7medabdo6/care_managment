@@ -21,6 +21,9 @@ export class RiskAssesment {
 
   @Column()
   type: string;
+  
+  @Column()
+  level: string;
 
   @ManyToMany(() => Plan, (plan) => plan.riskAssesments, {
     onDelete: 'NO ACTION',
