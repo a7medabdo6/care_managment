@@ -60,6 +60,17 @@ export default [
               icon: ReportProblemOutlinedIcon,
              
             },
+
+            {
+              title: 'Social interests',
+              href: '/socialinterests',
+              icon: ReportProblemOutlinedIcon,
+             
+            },
+
+
+
+            
             {
               title: 'Daily Notes',
               href: '/DailyNotes',
