@@ -6,6 +6,7 @@ import {
   I18nModule,
   QueryResolver,
 } from 'nestjs-i18n';
+import { ScheduleModule } from '@nestjs/schedule';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -13,9 +14,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
 import { Worker } from './worker/entities/worker.entity';
-import { ReportsModule } from './reports/reports.module';
 import { Report } from './reports/entities/report.entity';
-import { CategoryModule } from './category/category.module';
 import { WorkerModule } from './worker/worker.module';
 import { ServiceUserModule } from './service-user/service-user.module';
 import { ServiceUser } from './service-user/entities/service-user.entity';
@@ -24,10 +23,18 @@ import { PlanModule } from './plan/plan.module';
 import { Plan } from './plan/entities/plan.entity';
 import { RiskAssesmentModule } from './risk_assesment/risk_assesment.module';
 import { RiskAssesment } from './risk_assesment/entities/risk_assesment.entity';
+import { SocialInterestsModule } from './social-interests/social-interests.module';
+import { SocialInterest } from './social-interests/entities/social-interest.entity';
+import { CronService } from './cron/cron.service';
+import { OralCareModule } from './oral-care/oral-care.module';
+import { PersonalCareModule } from './personal-care/personal-care.module';
+import { OralCare } from './oral-care/entities/oral-care.entity';
+import { PersonalCare } from './personal-care/entities/personal-care.entity';
 @Module({
   imports: [
+    ScheduleModule.forRoot(),
     ConfigModule.forRoot({
-      envFilePath: 'development.env',
+      envFilePath: 'production.env',
     }),
     I18nModule.forRoot({
       fallbackLanguage: 'en',
@@ -47,8 +54,18 @@ import { RiskAssesment } from './risk_assesment/entities/risk_assesment.entity';
       username: process.env.USER_NAME,
       password: process.env.PASSWORD,
       database: process.env.DATABASE,
-      entities: [User, Report, Worker, ServiceUser, Plan, RiskAssesment],
-      synchronize: false,
+      entities: [
+        User,
+        Report,
+        Worker,
+        ServiceUser,
+        Plan,
+        RiskAssesment,
+        SocialInterest,
+        OralCare,
+        PersonalCare
+      ],
+      synchronize: true,
     }),
     UsersModule,
     // ReportsModule,
@@ -56,8 +73,11 @@ import { RiskAssesment } from './risk_assesment/entities/risk_assesment.entity';
     ServiceUserModule,
     PlanModule,
     RiskAssesmentModule,
+    SocialInterestsModule,
+    OralCareModule,
+    PersonalCareModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, CronService],
 })
 export class AppModule {}

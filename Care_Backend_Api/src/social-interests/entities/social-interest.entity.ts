@@ -14,7 +14,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class RiskAssesment {
+export class SocialInterest {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -24,7 +24,12 @@ export class RiskAssesment {
   @Column()
   type: string;
 
-  @ManyToMany(() => Plan, (plan) => plan.riskAssesments, {
+  @Column({
+    default: false,
+  })
+  is_done: boolean;
+
+  @ManyToMany(() => Plan, (plan) => plan.socialInterests, {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
   })

@@ -4,7 +4,10 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { OralCare } from 'src/oral-care/entities/oral-care.entity';
 import { RiskAssesment } from 'src/risk_assesment/entities/risk_assesment.entity';
+import { ServiceUser } from 'src/service-user/entities/service-user.entity';
+import { SocialInterest } from 'src/social-interests/entities/social-interest.entity';
 import { User } from 'src/users/entities/user.entity';
 import { In, Repository } from 'typeorm';
 import { CreatePlanDto } from './dto/create-plan.dto';
@@ -18,11 +21,17 @@ export class PlanService {
   async create(
     createPlanDto: CreatePlanDto,
     User: User,
+    Client: ServiceUser,
     risks: RiskAssesment[],
+    socialInterests: SocialInterest[],
+    oralcare: OralCare[],
   ) {
     const plan = await this.repo.create(createPlanDto);
     plan.user = User;
+    plan.client = Client;
     plan.riskAssesments = risks;
+    plan.socialInterests = socialInterests;
+    plan.oral_care = oralcare;
     return this.repo.save(plan);
   }
 

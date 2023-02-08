@@ -3,18 +3,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  JoinTable,
   ManyToMany,
-  ManyToOne,
-  OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
-export class RiskAssesment {
+export class OralCare {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -22,9 +17,23 @@ export class RiskAssesment {
   name: string;
 
   @Column()
+  frequency: string;
+
+  @Column()
+  time: string;
+
+  @Column()
+  dirctions: string;
+
+  @Column()
   type: string;
 
-  @ManyToMany(() => Plan, (plan) => plan.riskAssesments, {
+  @Column({
+    default: false,
+  })
+  is_done: boolean;
+
+  @ManyToMany(() => Plan, (plan) => plan.oral_care, {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
   })

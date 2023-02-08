@@ -21,60 +21,66 @@ export class CreatePlanDto {
   @IsString()
   mobility: string;
 
-  @IsString()
+  @IsOptional()
   personal_care: string;
 
-  @IsString()
+  @IsOptional()
   continence_care: string;
 
-  @IsString()
+  @IsOptional()
   comunication: string;
 
-  @IsString()
-  oral_care: string;
-
-  @IsString()
+  @IsOptional()
   nutrition_and_hydration: string;
 
-  @IsString()
+  @IsOptional()
   skin_care: string;
 
-  @IsString()
-  social_intersts: string;
+  // @IsOptional()
+  // social_intersts: string;
 
-  @IsString()
+  @IsOptional()
   night_time_support: string;
 
-  @IsString()
+  @IsOptional()
   emotional_support: string;
 
-  @IsString()
+  @IsOptional()
   expressing_sexuality: string;
 
-  @IsString()
+  @IsOptional()
   health_care: string;
 
-  @IsString()
+  @IsOptional()
   medication_managment: string;
 
-  @IsString()
+  @IsOptional()
   mental_health: string;
 
-  @IsString()
+  @IsOptional()
   end_og_life_preference: string;
 
-  @IsString()
+  @IsOptional()
   breathing: string;
 
-  @IsString()
+  @IsOptional()
   frequency: string;
 
-  @IsString()
+  @IsOptional()
   spiritual_and_culture_wellbeing: string;
 
   @IsNumber()
   userId: number;
 
+  @IsNumber()
+  clientId: number;
+
   @IsArray()
   risks: [];
+
+  @IsArray()
+  socialInterests: [];
+
+  @IsArray()
+  oral_care: [];
 }

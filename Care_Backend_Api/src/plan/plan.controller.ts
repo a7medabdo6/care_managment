@@ -16,6 +16,10 @@ import { AuthGuard } from 'src/guards/auth.guard';
 import { CurrentUser } from 'src/decorators/current-user.decorator';
 import { UsersService } from 'src/users/users.service';
 import { RiskAssesmentService } from 'src/risk_assesment/risk_assesment.service';
+import { ServiceUserService } from 'src/service-user/service-user.service';
+import { SocialInterestsService } from 'src/social-interests/social-interests.service';
+import { OralCare } from 'src/oral-care/entities/oral-care.entity';
+import { OralCareService } from 'src/oral-care/oral-care.service';
 
 @Controller('plan')
 @UseInterceptors(CurrentUserInterceptor)
@@ -24,15 +28,33 @@ export class PlanController {
   constructor(
     private readonly planService: PlanService,
     private readonly usersService: UsersService,
+    private readonly clientService: ServiceUserService,
     private readonly risksService: RiskAssesmentService,
+    private readonly socialInterests: SocialInterestsService,
+    private readonly oralcareservice: OralCareService,
   ) {}
 
   @Post()
   async create(@Body() createPlanDto: CreatePlanDto, @CurrentUser() user: any) {
     const User = await this.usersService.findOne(createPlanDto.userId);
-    const risks = await this.risksService.findAllByIds(createPlanDto.risks);
+    const Client = await this.clientService.findOne(createPlanDto.clientId);
 
-    return this.planService.create(createPlanDto, User, risks);
+    const risks = await this.risksService.findAllByIds(createPlanDto.risks);
+    const oralcare = await this.oralcareservice.findAllByIds(
+      createPlanDto.oral_care,
+    );
+    const socialInterests = await this.socialInterests.findAllByIds(
+      createPlanDto.socialInterests,
+    );
+
+    return this.planService.create(
+      createPlanDto,
+      User,
+      Client,
+      risks,
+      socialInterests,
+      oralcare,
+    );
   }
 
   @Get()
