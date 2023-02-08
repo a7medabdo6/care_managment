@@ -13,7 +13,7 @@ export class CreateWorkerDto {
   @IsString()
   BOD: string;
 
-  @IsNumber()
+  @IsString()
   Ni_Number: string;
 
   @IsString()
