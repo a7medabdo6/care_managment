@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 
 import AddRiskAssessment from './Add-Risk-Assessment';
 import "./Assessments.css"
+import EditeRiskAssesment from './Edite-Risk-assesment/EditeRiskAssesment';
 const Assessments =()=>{
   const {data} =  useGetAllRiskAssesmentApi()
   const {AllRiskAssesmentData} = useSelector(state => state.GetRiskAssesmentSlice)
@@ -31,6 +32,16 @@ const [Id,setId] =useState()
     const handleShowDelet = () => {setshowDelet(true)};
 
 
+
+    const [showEdite, setshowEdite] = useState(false);
+
+    const handleCloseEdite = () => setshowEdite(false);
+    const handleShowEdite = () => setshowEdite(true);
+
+
+
+
+
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -41,8 +52,7 @@ const [Id,setId] =useState()
     const handleCloseaddrisk = () => setshowaddrisk(false);
     const handleShowaddrisk = () => {
         return(
-            setshowaddrisk(true),
-            handleClose()
+            setshowaddrisk(true)
         )
     }
     return(
@@ -52,49 +62,32 @@ const [Id,setId] =useState()
             <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title className='text-center '> 
-          <div className=' titlemodel   text-center bg-info bg-gradient'>Select Risk Assessment Type</div>
+          <div className=' titlemodel   text-center bg-info ' >Add Risk Assessment</div>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-           <div className='d-flex '>
-            <label className='me-3'>Type</label>
-            <select className="form-select form-select-sm  " aria-label=".form-select-sm example">
-                       <option className="bg-dark-subtle" selected>Open this select menu</option>
-                       <option value="1">One</option>
-                        <option value="2">Two</option>
-                       <option value="3">Three</option>
-                    </select>
-           </div>
+        <AddRiskAssessment handleClose={handleClose}/>
+
              </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button variant="primary" onClick={handleShowaddrisk} >
-            Next
-          </Button>
+       
         </Modal.Footer>
       </Modal>
 
 
 
 
-      <Modal show={showaddrisk} onHide={handleCloseaddrisk}>
+      <Modal show={showEdite} onHide={handleCloseEdite}>
         <Modal.Header closeButton>
           <Modal.Title className='text-center '> 
-          <div className=' titlemodel   text-center bg-info bg-gradient p-1'>Add Risk Assessment</div>
+          <div className=' titlemodel   text-center bg-info p-1'>Edite Risk Assessment</div>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-           <AddRiskAssessment/>
+          <EditeRiskAssesment Id={Id} handleCloseEdite={handleCloseEdite}/>
              </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseaddrisk}>
-            Cancel
-          </Button>
-          <Button variant="primary" >
-            Save
-          </Button>
+      
         </Modal.Footer>
       </Modal>
 
@@ -151,7 +144,7 @@ const [Id,setId] =useState()
           <td>Sam</td>
           <td>17 Oct 2022</td>
           <td >
-          <i className=" me-5 fa-regular fa-pen-to-square"></i>
+          <i className=" me-5 fa-regular fa-pen-to-square" onClick={()=>(handleShowEdite(),setId(item.id))}></i>
           <i onClick={()=>(handleShowDelet(),setId(item.id))} className="fas fa-trash-alt"></i>
           </td>
           
@@ -286,7 +279,7 @@ const [Id,setId] =useState()
         <div className="d-flex justify-content-between flex-row-reverse">
             <div className="d-flex">
                 <div className="p-3">
-                <button onClick={handleShow} type="button" className="btn btn-secondary bg-info bg-gradient">
+                <button onClick={handleShowaddrisk} type="button" className="btn btn-secondary bg-info bg-gradient">
                 <i className="fas fa-plus"></i>
                 </button>
 

@@ -1,16 +1,17 @@
 import React,{useState} from "react";
 import Button from 'react-bootstrap/Button';
 
-import "./AddRiskAssessment.css"
+import "./EditeRiskAssesment.css"
 import Multiselect from 'multiselect-react-dropdown';
 import { CreateRiskAssesmentApi } from "Hook/RiskAssesment/Create-Risk-Assesment-Hook";
 import { useSelector } from "react-redux";
-const AddRiskAssessment =({handleClose})=>{
+import { useEditeRiskAssesmrntApi } from "Hook/RiskAssesment/Edite-Risk-Assesment-Hook";
+const EditeRiskAssesment =({Id,handleCloseEdite})=>{
 
 
-    const {isLoading,mutate:SubmitCreateRiskAssesment,isError,error,refetch} =  CreateRiskAssesmentApi()
-    const {CreateRiskAssesmentrData} = useSelector(state => state.CreateRiskAssesmentSlice)
-console.log(CreateRiskAssesmentrData)
+    const {isLoading,mutate:SubmiteEditeRiskAsesment,isError,error,refetch} =  useEditeRiskAssesmrntApi()
+    const {EditeRiskAssesmentData} = useSelector(state => state.EditeRiskAssesmentDataSlice)
+console.log(EditeRiskAssesmentData)
 
 const [name,setname]=useState()
 const [level,setlevel]=useState()
@@ -33,14 +34,17 @@ const handelType=(e)=>{
 
 }
 const handelSave =()=>{
-    const data ={
-        "name": name,
+    const FormData ={
+        data:{
+            "name": name,
         "type": type,
         "level": level
+        },
+        id:Id
     }
-    SubmitCreateRiskAssesment(data)
+    SubmiteEditeRiskAsesment(FormData)
   
-    handleClose()
+    handleCloseEdite()
 
    
     
@@ -84,7 +88,7 @@ const handelSave =()=>{
 </div>
 
 
-<div className='d-flex justify-content-end p-3'>
+<div className='d-flex justify-content-end '>
     <button onClick={handelSave} className='p-2 saveBtn bg-info'>Save</button>
 </div>
 
@@ -100,4 +104,4 @@ const handelSave =()=>{
     )
 }
 
-export default AddRiskAssessment
+export default EditeRiskAssesment

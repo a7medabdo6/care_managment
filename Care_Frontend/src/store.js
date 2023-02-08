@@ -17,6 +17,8 @@ import DeletRiskAssesmentSlice from "./Redux_Slices/RiskAssesment/Delet-RiskAsse
 import GetAllCAREplaneSlice from "./Redux_Slices/CarePlan/Get-CarePlane-Slice"
 import DeletCarePlanSlice from "./Redux_Slices/CarePlan/Delet-CarePlan-Slice"
 import CreateCarePlantSlice from "./Redux_Slices/CarePlan/Create-CarePlan-Slice"
+import EditeCarePlanDataSlice from "./Redux_Slices/CarePlan/Edite-CarePlan-Hook-Slice"
+import EditeRiskAssesmentDataSlice from "./Redux_Slices/RiskAssesment/Edite-Risk-Assesment-Slice"
 export const store = configureStore({
   reducer: {
     UserInfo: userSlice,
@@ -36,7 +38,10 @@ export const store = configureStore({
     DeletRiskAssesmentSlice:DeletRiskAssesmentSlice,
     GetAllCAREplaneSlice:GetAllCAREplaneSlice,
     DeletCarePlanSlice:DeletCarePlanSlice,
-    CreateCarePlantSlice:CreateCarePlantSlice
+    CreateCarePlantSlice:CreateCarePlantSlice,
+    EditeCarePlanDataSlice:EditeCarePlanDataSlice,
+    EditeRiskAssesmentDataSlice:EditeRiskAssesmentDataSlice
+
 
    }
 })

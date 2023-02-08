@@ -144,13 +144,18 @@ const handel_clientId=(e)=>{
     }
 
     const handel_risks=(e)=>{
-        setrisks([e.target.value])
+
+      console.log(e.target.checked)
+      if(e.target.checked === true){
+        setrisks(risks.concat(e.target.value) )
+      }
+        
 
     }
     const {data}=useGetAllUserApi()
 
     const {AllUserData} =useSelector(state => state.GetAllUserSlice)
-    console.log(date);
+    console.log(risks);
 
     const handelSave =()=>{
         const data = {
@@ -780,19 +785,19 @@ const handel_clientId=(e)=>{
 {/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
 <form className='container p-1' style={{width:"100%"}}>
     <div className='checkboxstyle  checkshadow' style={{}}>
-    <input onChange={handel_risks} type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+    <input onChange={handel_risks} type="checkbox" id="vehicle1" name="vehicle1" value="Bike1"/>
   <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
     </div>
 
 
     <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+    <input  type="checkbox" onChange={handel_risks} id="vehicle1" name="vehicle1" value="Bike2"/>
   <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
     </div>
 
 
     <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+    <input  type="checkbox" onChange={handel_risks} id="vehicle1" name="vehicle1" value="Bike3"/>
   <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
     </div>
 
