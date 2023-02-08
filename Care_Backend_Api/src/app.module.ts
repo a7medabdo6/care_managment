@@ -34,7 +34,7 @@ import { PersonalCare } from './personal-care/entities/personal-care.entity';
   imports: [
     ScheduleModule.forRoot(),
     ConfigModule.forRoot({
-      envFilePath: 'development.env',
+      envFilePath: 'production.env',
     }),
     I18nModule.forRoot({
       fallbackLanguage: 'en',
