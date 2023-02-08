@@ -101,7 +101,7 @@ const [clientId,setclientId]=useState()
     const [personal_care,setpersonal_care]=useState()
     const [continence_care,setcontinence_care]=useState()
     const [comunication,setcomunication]=useState()
-    const [oral_care,setoral_care]=useState()
+    const [oral_care,setoral_care]=useState([])
     const [nutrition_and_hydration,setnutrition_and_hydration]=useState()
     const [skin_care,setskin_care]=useState()
     const [social_intersts,setsocial_intersts]=useState([])
@@ -155,7 +155,18 @@ const handel_clientId=(e)=>{
 
     }
     const handel_oral_care=(e)=>{
-        setoral_care(e.target.value)
+
+
+      if(e.target.checked === true){
+        let value =e.target.value
+        setoral_care((oldoralcare)=>[...oldoralcare,value] )
+        // risks.concat(e.target.value)
+      }else{
+        const newArr1=oral_care.filter((item)=>item!=e?.target?.value)
+        setoral_care(newArr1 )
+
+      }
+        
 
     }
     const handel_nutrition_and_hydration=(e)=>{
@@ -173,8 +184,8 @@ const handel_clientId=(e)=>{
         setsocial_intersts((oldsocial)=>[...oldsocial,value] )
         // risks.concat(e.target.value)
       }else{
-        const newArr=social_intersts.filter((item)=>item!=e?.target?.value)
-        setsocial_intersts(newArr )
+        const newArr2=social_intersts.filter((item)=>item!=e?.target?.value)
+        setsocial_intersts(newArr2 )
 
       }
         
@@ -259,7 +270,7 @@ const handel_clientId=(e)=>{
             "oral_care": oral_care,
             "nutrition_and_hydration": nutrition_and_hydration,
             "skin_care": skin_care,
-            "social_intersts": social_intersts,
+            "socialInterests": social_intersts,
             "night_time_support": night_time_support,
             "emotional_support": emotional_support,
             "expressing_sexuality": expressing_sexuality,
@@ -276,7 +287,8 @@ const handel_clientId=(e)=>{
         SubmitCreateCarePlant(data)
     }
 
-    console.log();
+    console.log(social_intersts);
+    console.log(oral_care);
     return(
 
         <div className='itembox '>
@@ -629,7 +641,7 @@ AllUserData?.map((item,index)=>{return (
 
 
 <div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox"  id="vehicle1" name="vehicle1" value="Bike2"/>
+<input  type="checkbox" onChange={handel_oral_care} id="vehicle1" name="vehicle1" value="Bike2"/>
 <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
 </div>
 

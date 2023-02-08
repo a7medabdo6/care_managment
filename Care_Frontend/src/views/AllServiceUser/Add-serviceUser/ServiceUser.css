@@ -1,0 +1,68 @@
+
+
+.inputshadow {
+    background: #fff;
+    color: #525865;
+    border-radius: 4px;
+    border: 1px solid #d1d1d1;
+    box-shadow: inset 0px 1px 8px rgba(0, 0, 0, 0.2);
+    font-family: inherit;
+    font-size: 1em;
+    line-height: 1.45;
+    outline: none;
+    padding: 0.6em 1.45em 0.7em;
+    -webkit-transition: .18s ease-out;
+    -moz-transition: .18s ease-out;
+    -o-transition: .18s ease-out;
+    transition: .18s ease-out;
+    height: 29px;
+  }
+  
+  .inputshadowGender{
+    background: #fff;
+    color: #525865;
+    border-radius: 4px;
+    border: 1px solid #d1d1d1;
+    box-shadow: inset 0px 1px 8px rgba(0, 0, 0, 0.2);
+    font-family: inherit;
+    font-size: 1em;
+    line-height: 1.45;
+    outline: none;
+    padding: 0em 1.45em -1.3em;
+    -webkit-transition: .18s ease-out;
+    -moz-transition: .18s ease-out;
+    -o-transition: .18s ease-out;
+    transition: .18s ease-out;
+    height: 29px;
+  }
+
+  .input-group{
+    height: 29 !important;
+  }
+
+  .spantxt{
+  height: 29px;
+  width: 145px;
+  }
+
+  /* .btnsave{
+    position: absolute;
+    right: 100px;
+    border: var(--bs-btn-border-width) solid black;
+    border-radius: var(--bs-btn-border-radius);
+    background-color: var(--bs-btn-bg);
+  } */
+
+  .bigBox{
+    margin-top: 20px;
+  }
+
+  .upload-photo{
+    display: none;
+  }
+
+  .upload-image{
+    margin-right: 10px;
+    margin-top: 20px;
+
+  }

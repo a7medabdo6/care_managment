@@ -172,7 +172,7 @@ console.log(ShowEditeServiceUserSliceInfoData);
    <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title className='text-center justify-content-center d-flex align-items-center '> 
-          <div className=' titlemodel   text-center bg-info bg-gradient'>Alert</div>
+          <div className=' titlemodel   text-center '>Alert</div>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className='d-flex justify-content-center align-items-center '>
@@ -324,7 +324,7 @@ console.log(ShowEditeServiceUserSliceInfoData);
                           onClick={() => { return (handleShow(),setprameter(customer.id))}}
                           variant="outlined"
                         >
-                          <i className="fa-sharp fa-solid fa-trash p-1 text-danger" ></i>
+                          <i className="fa-sharp fa-solid fa-trash p-1 text-danger " ></i>
                         </Button>
                       </TableCell>
                     </TableRow>

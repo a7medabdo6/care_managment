@@ -127,16 +127,12 @@ const onClickSave= (e)=>{
 "religion": religion,
 "compliment_of_the_household": compliment_of_the_household
     }
-    if(initials === "" || lcds === "" || age_ate_refferal === "" || home_address === "" || school_address === "" || sex === "" ||  start_date === "" 
-    || end_date === "" || qurdian === "" || qurdian_contact === "" || relationship === "" || support_worker === "" || assesment_date === "" || disability === "" 
-    || ethnicity === "" || religion === "" || compliment_of_the_household === ""){
-        notify("Please complete the fields","warn")    
-
-      }else{
+    
+   
         SubmitCreateServiceUser(data)
         
         
-      }
+      
 
     
 // console.log(compliment_of_the_household);
@@ -146,7 +142,7 @@ const onClickSave= (e)=>{
         <div className='border m-5'>
                 
 
-        <div className='box mx-5'>
+        {/* <div className='box mx-5'>
 <div class="input-group ms-5 mb-3">
 <span className="input-group-text spantxt mt-5 me-3" id="basic-addon1">Photo</span>
 <div>
@@ -169,7 +165,7 @@ const onClickSave= (e)=>{
             />
         </div>
 </div>
-</div>
+</div> */}
 
 
 <div className='box mt-5'>
