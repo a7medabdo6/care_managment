@@ -13,4 +13,9 @@ export class CreateRiskAssesmentDto {
 
   @IsString()
   type: string;
+
+
+  @IsString()
+  level: string;
+
 }

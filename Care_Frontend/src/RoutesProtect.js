@@ -95,6 +95,23 @@ const routes = [
         component: lazy(() => import('views/AllWorkers'))
       },
 
+      {
+        path: '/addCarePlan',
+        exact: true,
+        component: lazy(() => import('views/AddCarePlan'))
+      },
+
+      {
+        path: '/EditeCarePlan',
+        exact: true,
+        component: lazy(() => import('views/EditeCarePlan'))
+      },
+
+      {
+        path: '/CarePlan',
+        exact: true,
+        component: lazy(() => import('views/AllCarePlan'))
+      },
 
       /******************************************************************************* */
       {
