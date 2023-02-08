@@ -63,7 +63,7 @@ import { PersonalCare } from './personal-care/entities/personal-care.entity';
         RiskAssesment,
         SocialInterest,
         OralCare,
-        PersonalCare
+        PersonalCare,
       ],
       synchronize: true,
     }),

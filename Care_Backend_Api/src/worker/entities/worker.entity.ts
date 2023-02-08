@@ -19,7 +19,7 @@ export class Worker {
   BOD: string;
 
   @Column()
-  Ni_Number: number;
+  Ni_Number: string;
 
   @Column()
   Adress: string;
