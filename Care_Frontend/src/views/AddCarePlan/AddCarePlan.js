@@ -8,8 +8,80 @@ import "./AddCarePlan.css"
 import { ToastContainer } from 'react-toastify'
 import { CreateCarePlantApi } from 'Hook/CarePlan/Get-Create-CarePlan-Hook';
 import { useGetAllUserApi } from 'Hook/AllUser/Get-All-user-Hook';
+import Modal from 'react-bootstrap/Modal';
+import { useGetsocial_interestsApi } from 'Hook/Social-interests/Get-Social-interests-Hook';
+import AddsocialAssessment from './Add-socialinterests.js/Add-socialinterests';
 
 const CarePlan  =() =>{
+
+  const {data:socialData} =  useGetsocial_interestsApi()
+  const {social_interestsData} = useSelector(state => state.GetAllsocial_interestseSlice)
+console.log(social_interestsData)
+/* start modle code  */
+const [showOralCare, setshowOralCare] = useState(false);
+
+const handleCloseshowOralCare = () => setshowOralCare(false);
+const handleShowshowOralCare = () => setshowOralCare(true);
+
+
+
+const [showPersonalCare, setShowPersonalCare] = useState(false);
+
+const handleClosePersonalCare = () => setShowPersonalCare(false);
+const handleShowPersonalCare = () => setShowPersonalCare(true);
+
+
+const [showsocial, setShowsocial] = useState(false);
+
+const handleCloseShowsocial = () => setShowsocial(false);
+const handleShowShowsocial = () => setShowsocial(true);
+
+
+const [showSkinCare, setShowSkinCare] = useState(false);
+
+const handleCloseSkinCare = () => setShowSkinCare(false);
+const handleShowSkinCare = () => setShowSkinCare(true);
+
+
+
+const [showHealthCare, setShowHealthCare] = useState(false);
+
+const handleCloseHealthCare = () => setShowHealthCare(false);
+const handleShowHealthCare = () => setShowHealthCare(true);
+
+
+
+const [showcontinenceCare, setShowcontinenceCare] = useState(false);
+
+const handleClosecontinenceCare = () => setShowcontinenceCare(false);
+const handleShowcontinenceCare = () => setShowcontinenceCare(true);
+
+
+
+
+const [showRisks, setShowRisks] = useState(false);
+
+const handleCloseRisks = () => setShowRisks(false);
+const handleShowRisks = () => setShowRisks(true);
+
+
+
+
+const [showmedication, setShowmedication] = useState(false);
+
+const handleClosemedication = () => setShowmedication(false);
+const handleShowmedication = () => setShowmedication(true);
+
+
+
+const [shownutrition, setShownutrition] = useState(false);
+
+const handleClosenutrition = () => setShownutrition(false);
+const handleShownutrition = () => setShownutrition(true);
+/* end modle code  */
+
+
+
 
     const {isLoading,mutate:SubmitCreateCarePlant,isError,error,refetch} =  CreateCarePlantApi()
     const {CreateCarePlantrData} = useSelector(state => state.CreateCarePlantSlice)
@@ -29,10 +101,10 @@ const [clientId,setclientId]=useState()
     const [personal_care,setpersonal_care]=useState()
     const [continence_care,setcontinence_care]=useState()
     const [comunication,setcomunication]=useState()
-    const [oral_care,setoral_care]=useState()
+    const [oral_care,setoral_care]=useState([])
     const [nutrition_and_hydration,setnutrition_and_hydration]=useState()
     const [skin_care,setskin_care]=useState()
-    const [social_intersts,setsocial_intersts]=useState()
+    const [social_intersts,setsocial_intersts]=useState([])
     const [night_time_support,setnight_time_support]=useState()
     const [emotional_support,setemotional_support]=useState()
     const [expressing_sexuality,setexpressing_sexuality]=useState()
@@ -83,7 +155,18 @@ const handel_clientId=(e)=>{
 
     }
     const handel_oral_care=(e)=>{
-        setoral_care(e.target.value)
+
+
+      if(e.target.checked === true){
+        let value =e.target.value
+        setoral_care((oldoralcare)=>[...oldoralcare,value] )
+        // risks.concat(e.target.value)
+      }else{
+        const newArr1=oral_care.filter((item)=>item!=e?.target?.value)
+        setoral_care(newArr1 )
+
+      }
+        
 
     }
     const handel_nutrition_and_hydration=(e)=>{
@@ -95,7 +178,17 @@ const handel_clientId=(e)=>{
 
     }
     const handel_social_intersts=(e)=>{
-        setsocial_intersts(e.target.value)
+
+      if(e.target.checked === true){
+        let value =e.target.value
+        setsocial_intersts((oldsocial)=>[...oldsocial,value] )
+        // risks.concat(e.target.value)
+      }else{
+        const newArr2=social_intersts.filter((item)=>item!=e?.target?.value)
+        setsocial_intersts(newArr2 )
+
+      }
+        
 
     }
     const handel_night_time_support=(e)=>{
@@ -144,13 +237,24 @@ const handel_clientId=(e)=>{
     }
 
     const handel_risks=(e)=>{
-        setrisks([e.target.value])
+
+     
+      if(e.target.checked === true){
+        let value =e.target.value
+          setrisks((oldrisks)=>[...oldrisks,value] )
+        // risks.concat(e.target.value)
+      }else{
+        const newArr=risks.filter((item)=>item!=e?.target?.value)
+         setrisks(newArr )
+
+      }
+        
 
     }
     const {data}=useGetAllUserApi()
 
     const {AllUserData} =useSelector(state => state.GetAllUserSlice)
-    console.log(date);
+    console.log(social_intersts,"risks");
 
     const handelSave =()=>{
         const data = {
@@ -166,7 +270,7 @@ const handel_clientId=(e)=>{
             "oral_care": oral_care,
             "nutrition_and_hydration": nutrition_and_hydration,
             "skin_care": skin_care,
-            "social_intersts": social_intersts,
+            "socialInterests": social_intersts,
             "night_time_support": night_time_support,
             "emotional_support": emotional_support,
             "expressing_sexuality": expressing_sexuality,
@@ -183,18 +287,162 @@ const handel_clientId=(e)=>{
         SubmitCreateCarePlant(data)
     }
 
-    console.log();
+    console.log(social_intersts);
+    console.log(oral_care);
     return(
 
-        <div className='border'>
+        <div className='itembox '>
+
+
+<Modal show={showOralCare} onHide={handleCloseshowOralCare}>
+        <Modal.Header closeButton>
+          <Modal.Title className='d-flex justify-content-center align-items-center text-center '> 
+          <div className=' text-center bg-info ' >Add Oral Care</div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        
+
+             </Modal.Body>
+        <Modal.Footer>
+       
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={showPersonalCare} onHide={handleClosePersonalCare}>
+        <Modal.Header closeButton>
+          <Modal.Title className='text-center '> 
+          <div className=' titlemodel   text-center bg-info ' >Add Personal Care</div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+             </Modal.Body>
+        <Modal.Footer>
+       
+        </Modal.Footer>
+      </Modal>
+
+
+      <Modal show={showSkinCare} onHide={handleCloseSkinCare}>
+        <Modal.Header closeButton>
+          <Modal.Title className='text-center '> 
+          <div className=' titlemodel   text-center bg-info ' >Add Skin Care</div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+             </Modal.Body>
+        <Modal.Footer>
+       
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={showsocial} onHide={handleCloseShowsocial}>
+        <Modal.Header closeButton>
+          <Modal.Title className='text-center '> 
+          <div className=' titlemodel   text-center bg-info ' >Add social intersts Care</div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <AddsocialAssessment handleCloseShowsocial={handleCloseShowsocial} />
+
+             </Modal.Body>
+        <Modal.Footer>
+       
+        </Modal.Footer>
+      </Modal>
+
+
+      <Modal show={showHealthCare} onHide={handleCloseHealthCare}>
+        <Modal.Header closeButton>
+          <Modal.Title className='text-center '> 
+          <div className=' titlemodel   text-center bg-info ' >Add Health Care</div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+             </Modal.Body>
+        <Modal.Footer>
+       
+        </Modal.Footer>
+      </Modal>
+
+
+
+      <Modal show={shownutrition} onHide={handleClosenutrition}>
+        <Modal.Header closeButton>
+          <Modal.Title className='text-center '> 
+          <div className=' titlemodel   text-center bg-info ' >Add continence Care</div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+             </Modal.Body>
+        <Modal.Footer>
+       
+        </Modal.Footer>
+      </Modal>
+
+
+      <Modal show={showcontinenceCare} onHide={handleClosecontinenceCare}>
+        <Modal.Header closeButton>
+          <Modal.Title className='text-center '> 
+          <div className=' titlemodel   text-center bg-info ' >Add continence Care</div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+             </Modal.Body>
+        <Modal.Footer>
+       
+        </Modal.Footer>
+      </Modal>
+
+
+
+
+      <Modal show={showRisks} onHide={handleCloseRisks}>
+        <Modal.Header closeButton>
+          <Modal.Title className='text-center '> 
+          <div className=' titlemodel   text-center bg-info ' >Add Risks Care</div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+             </Modal.Body>
+        <Modal.Footer>
+       
+        </Modal.Footer>
+      </Modal>
+
+
+      <Modal show={showmedication} onHide={handleClosemedication}>
+        <Modal.Header closeButton>
+          <Modal.Title className='text-center '> 
+          <div className=' titlemodel   text-center bg-info ' >Add medication managment</div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+             </Modal.Body>
+        <Modal.Footer>
+       
+        </Modal.Footer>
+      </Modal>
+
+
+
  
-<div className='box'>
-    <div className=' title d-flex justify-content-start text-center mt-2 '>
+<div className='box '>
+    <div className=' title d-flex justify-content-start text-center m-2 '>
         <h5 className='p-2'>basics</h5>
     </div>
-    <div className='border '>
 
-    <div class="input-group m-2">
+<div className='d-flex justify-content-center align-items-center flex-column'>
+<div className='itembox  ' >
+
+<div class="input-group m-2">
 <span className="input-group-text spantxt" id="basic-addon1">Client Name</span>
 <select class="form-select form-select-sm inputshadowGender " onChange={handel_clientId}  aria-label=".form-select-sm example">
 <option selected>Client Name</option>
@@ -212,9 +460,9 @@ const handel_clientId=(e)=>{
 <option selected>Worker Name</option>
 
 {
-    AllUserData?.map((item,index)=>{return (
+AllUserData?.map((item,index)=>{return (
 <option key={index} value={item.id}>{item.username}</option>
-    )})
+)})
 }
 
 
@@ -223,7 +471,7 @@ const handel_clientId=(e)=>{
 
 
 
-    <div class="input-group m-2 ">
+<div class="input-group m-2 ">
 <span className="input-group-text spantxt" id="basic-addon1">lcds </span>
 <input type="number" className="form-control inputshadow" onChange={handel_lcds}   placeholder="lcds " aria-label="First Name" aria-describedby="basic-addon1"/>
 </div>
@@ -362,62 +610,71 @@ const handel_clientId=(e)=>{
 </select>
 </div>
 
-    </div>
+</div>
 
 
+</div>
 
 
-    <div className='border mt-3'>
-
-    <div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
-        <h5 className='p-2'>oral care</h5>
-    </div>
+   
 
 
-    <div class="input-group ms-2 mb-3   ">
+<div className='d-flex justify-content-center align-items-center flex-column'>
+
+<div className='itembox mt-3'>
+
+<div className='d-flex justify-content-between align-items-center'>
+<div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
+<h5 className='p-2'>Oral Care</h5>
+</div>
+<div class="p-3"><button onClick={handleShowshowOralCare} type="button" class="btn btn-secondary "><i class="fas fa-plus"></i></button></div>
+</div>
+
+
+<div class="input-group ms-2 mb-3   ">
 {/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
 <form className='container p-1' style={{width:"100%"}}>
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input onChange={handel_oral_care}  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{width:"100%"}}>
+<input onChange={handel_oral_care}  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
 
 
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox"  id="vehicle1" name="vehicle1" value="Bike2"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" onChange={handel_oral_care} id="vehicle1" name="vehicle1" value="Bike2"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
 
 
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input   type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input   type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
 
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
 
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
 
-  
+
 </form>
 {/* <Multiselect
-                    className=" "
-                    placeholder=" Select"
-                    options={options}
-                    onSelect={onSelect}
-                    onRemove={onRemove}
-                    showCheckbox = {true}
-                    displayValue="name"
-                    style={{ color: "red"  }}
-                /> */}
-                
-                </div>
+                className=" "
+                placeholder=" Select"
+                options={options}
+                onSelect={onSelect}
+                onRemove={onRemove}
+                showCheckbox = {true}
+                displayValue="name"
+                style={{ color: "red"  }}
+            /> */}
+            
+            </div>
 
 
 
@@ -426,55 +683,119 @@ const handel_clientId=(e)=>{
 </div>
 
 
-<div className='border mt-3'>
+<div className='itembox mt-3'>
 
+<div className='d-flex justify-content-between align-items-center'>
 <div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
-    <h5 className='p-2'>personal care</h5>
+<h5 className='p-2'>personal care</h5>
+</div>
+<div class="p-3"><button type="button" onClick={handleShowPersonalCare} class="btn btn-secondary "><i class="fas fa-plus"></i></button></div>
+</div>
+<div class="input-group ms-2 mb-3   ">
+
+{/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
+<form className='container p-1' style={{width:"100%"}}>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input onChange={handel_personal_care}  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
+
+
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
+
+
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
+
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
+
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
+
+
+</form>
+{/* <Multiselect
+                className=" "
+                placeholder=" Select"
+                options={options}
+                onSelect={onSelect}
+                onRemove={onRemove}
+                showCheckbox = {true}
+                displayValue="name"
+                style={{ color: "red"  }}
+            /> */}
+            
+            </div>
+
+
+
+
+
+</div>
+
+
+<div className='itembox mt-3'>
+
+<div className='d-flex justify-content-between align-items-center'>
+<div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
+<h5 className='p-2'>skin care</h5>
+</div>
+<div class="p-3"><button type="button" onClick={handleShowSkinCare} class="btn btn-secondary "><i class="fas fa-plus"></i></button></div>
 </div>
 <div class="input-group ms-2 mb-3   ">
 {/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
 <form className='container p-1' style={{width:"100%"}}>
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input onChange={handel_personal_care}  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input onChange={handel_skin_care}  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
 
 
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
 
 
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
 
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
 
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
 
-  
+
 </form>
 {/* <Multiselect
-                    className=" "
-                    placeholder=" Select"
-                    options={options}
-                    onSelect={onSelect}
-                    onRemove={onRemove}
-                    showCheckbox = {true}
-                    displayValue="name"
-                    style={{ color: "red"  }}
-                /> */}
-                
-                </div>
+                className=" "
+                placeholder=" Select"
+                options={options}
+                onSelect={onSelect}
+                onRemove={onRemove}
+                showCheckbox = {true}
+                displayValue="name"
+                style={{ color: "red"  }}
+            /> */}
+            
+            </div>
 
 
 
@@ -483,55 +804,58 @@ const handel_clientId=(e)=>{
 </div>
 
 
-<div className='border mt-3'>
+<div className='itembox mt-3'>
 
+<div className='d-flex justify-content-between align-items-center'>
 <div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
-    <h5 className='p-2'>skin care</h5>
+<h5 className='p-2'>health care</h5>
+</div>
+<div class="p-3"><button type="button" onClick={handleShowHealthCare} class="btn btn-secondary "><i class="fas fa-plus"></i></button></div>
 </div>
 <div class="input-group ms-2 mb-3   ">
 {/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
 <form className='container p-1' style={{width:"100%"}}>
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input onChange={handel_skin_care}  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input onChange={handel_health_care} type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
 
 
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
 
 
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
 
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
 
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
 
-  
+
 </form>
 {/* <Multiselect
-                    className=" "
-                    placeholder=" Select"
-                    options={options}
-                    onSelect={onSelect}
-                    onRemove={onRemove}
-                    showCheckbox = {true}
-                    displayValue="name"
-                    style={{ color: "red"  }}
-                /> */}
-                
-                </div>
+                className=" "
+                placeholder=" Select"
+                options={options}
+                onSelect={onSelect}
+                onRemove={onRemove}
+                showCheckbox = {true}
+                displayValue="name"
+                style={{ color: "red"  }}
+            /> */}
+            
+            </div>
 
 
 
@@ -540,55 +864,220 @@ const handel_clientId=(e)=>{
 </div>
 
 
-<div className='border mt-3'>
 
+
+<div className='itembox mt-3'>
+<div className='d-flex justify-content-between align-items-center'>
 <div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
-    <h5 className='p-2'>health care</h5>
+<h5 className='p-2'>social intersts</h5>
+</div>
+<div class="p-3"><button type="button" onClick={handleShowShowsocial} class="btn btn-secondary "><i class="fas fa-plus"></i></button></div>
+</div>
+
+<div class="input-group ms-2 mb-3   ">
+{/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
+<form className='container p-1' style={{width:"100%"}}>
+
+{
+  social_interestsData?.map((item,index)=>{return(
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input onChange={handel_social_intersts} type="checkbox" id="vehicle1s" name="vehicle1s" value={item?.name}/>
+<label className='ms-1' for="vehicle1s "> {item?.name}</label><br/>
+</div>
+  )})
+}
+
+
+
+
+</form>
+
+            </div>
+
+
+
+
+</div>
+
+
+
+<div className='itembox mt-3'>
+
+<div className='d-flex justify-content-between align-items-center'>
+<div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
+<h5 className='p-2'>continence care</h5>
+</div>
+<div class="p-3"><button type="button" onClick={handleShowcontinenceCare} class="btn btn-secondary "><i class="fas fa-plus"></i></button></div>
+</div>
+
+
+<div class="input-group ms-2 mb-3   ">
+{/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
+<form className='container p-1' style={{width:"100%"}}>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input onChange={handel_continence_care}  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
+
+
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
+
+
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
+
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
+
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
+
+
+</form>
+{/* <Multiselect
+                className=" "
+                placeholder=" Select"
+                options={options}
+                onSelect={onSelect}
+                onRemove={onRemove}
+                showCheckbox = {true}
+                displayValue="name"
+                style={{ color: "red"  }}
+            /> */}
+            
+            </div>
+
+
+
+
+
+</div>
+
+
+
+<div className='itembox mt-3'>
+<div className='d-flex justify-content-between align-items-center'>
+<div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
+<h5 className='p-2'>nutrition and hydration</h5>
+</div>
+<div class="p-3"><button type="button" onClick={handleShownutrition} class="btn btn-secondary "><i class="fas fa-plus"></i></button></div>
+</div>
+
+
+
+<div class="input-group ms-2 mb-3   ">
+{/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
+<form className='container p-1' style={{width:"100%"}}>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input onChange={handel_nutrition_and_hydration}  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
+
+
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
+
+
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
+
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
+
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
+
+
+</form>
+{/* <Multiselect
+                className=" "
+                placeholder=" Select"
+                options={options}
+                onSelect={onSelect}
+                onRemove={onRemove}
+                showCheckbox = {true}
+                displayValue="name"
+                style={{ color: "red"  }}
+            /> */}
+            
+            </div>
+
+
+
+
+
+</div>
+
+
+<div className='itembox mt-3'>
+
+<div className='d-flex justify-content-between align-items-center'>
+<div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
+<h5 className='p-2'>Risks</h5>
+</div>
+<div class="p-3"><button type="button" onClick={handleShowRisks} class="btn btn-secondary "><i class="fas fa-plus"></i></button></div>
 </div>
 <div class="input-group ms-2 mb-3   ">
 {/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
 <form className='container p-1' style={{width:"100%"}}>
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input onChange={handel_health_care} type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input onChange={(e)=>handel_risks(e)} type="checkbox" id="vehicle12" name="vehicle12" value="Bike1"/>
+<label className='ms-1' for="vehicle12 "> I have a bike</label><br/>
+</div>
 
 
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" onChange={handel_risks} id="vehicle1" name="vehicle1" value="Bike2"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
 
 
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" onChange={handel_risks} id="vehicle1" name="vehicle1" value="Bike3"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
 
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+{/* <div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
 
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div> */}
 
-  
+
 </form>
 {/* <Multiselect
-                    className=" "
-                    placeholder=" Select"
-                    options={options}
-                    onSelect={onSelect}
-                    onRemove={onRemove}
-                    showCheckbox = {true}
-                    displayValue="name"
-                    style={{ color: "red"  }}
-                /> */}
-                
-                </div>
+                className=" "
+                placeholder=" Select"
+                options={options}
+                onSelect={onSelect}
+                onRemove={onRemove}
+                showCheckbox = {true}
+                displayValue="name"
+                style={{ color: "red"  }}
+            /> */}
+            
+            </div>
 
 
 
@@ -599,291 +1088,63 @@ const handel_clientId=(e)=>{
 
 
 
-<div className='border mt-3'>
 
+
+
+
+
+<div className='itembox mt-3'>
+
+<div className='d-flex justify-content-between align-items-center'>
 <div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
-    <h5 className='p-2'>social intersts</h5>
+<h5 className='p-2'>medication managment</h5>
+</div>
+<div class="p-3"><button type="button" onClick={handleShowmedication} class="btn btn-secondary "><i class="fas fa-plus"></i></button></div>
 </div>
 <div class="input-group ms-2 mb-3   ">
 {/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
 <form className='container p-1' style={{width:"100%"}}>
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input onChange={handel_social_intersts} type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input onChange={handel_medication_managment} type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
 
 
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
 
 
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
 
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
 
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
+<div className='checkboxstyle  checkshadow' style={{}}>
+<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+</div>
 
-  
+
 </form>
 {/* <Multiselect
-                    className=" "
-                    placeholder=" Select"
-                    options={options}
-                    onSelect={onSelect}
-                    onRemove={onRemove}
-                    showCheckbox = {true}
-                    displayValue="name"
-                    style={{ color: "red"  }}
-                /> */}
-                
-                </div>
-
-
-
-
-</div>
-
-
-
-<div className='border mt-3'>
-
-<div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
-    <h5 className='p-2'>continence care</h5>
-</div>
-<div class="input-group ms-2 mb-3   ">
-{/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
-<form className='container p-1' style={{width:"100%"}}>
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input onChange={handel_continence_care}  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
-
-
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
-
-
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
-
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
-
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
-
-  
-</form>
-{/* <Multiselect
-                    className=" "
-                    placeholder=" Select"
-                    options={options}
-                    onSelect={onSelect}
-                    onRemove={onRemove}
-                    showCheckbox = {true}
-                    displayValue="name"
-                    style={{ color: "red"  }}
-                /> */}
-                
-                </div>
-
-
-
-
-
-</div>
-
-
-
-<div className='border mt-3'>
-
-<div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
-    <h5 className='p-2'>nutrition and hydration</h5>
-</div>
-<div class="input-group ms-2 mb-3   ">
-{/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
-<form className='container p-1' style={{width:"100%"}}>
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input onChange={handel_nutrition_and_hydration}  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
-
-
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
-
-
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
-
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
-
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
-
-  
-</form>
-{/* <Multiselect
-                    className=" "
-                    placeholder=" Select"
-                    options={options}
-                    onSelect={onSelect}
-                    onRemove={onRemove}
-                    showCheckbox = {true}
-                    displayValue="name"
-                    style={{ color: "red"  }}
-                /> */}
-                
-                </div>
-
-
-
-
-
-</div>
-
-
-<div className='border mt-3'>
-
-<div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
-    <h5 className='p-2'>risks</h5>
-</div>
-<div class="input-group ms-2 mb-3   ">
-{/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
-<form className='container p-1' style={{width:"100%"}}>
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input onChange={handel_risks} type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
-
-
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
-
-
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
-
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
-
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
-
-  
-</form>
-{/* <Multiselect
-                    className=" "
-                    placeholder=" Select"
-                    options={options}
-                    onSelect={onSelect}
-                    onRemove={onRemove}
-                    showCheckbox = {true}
-                    displayValue="name"
-                    style={{ color: "red"  }}
-                /> */}
-                
-                </div>
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div className='border mt-3'>
-
-<div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
-    <h5 className='p-2'>medication managment</h5>
-</div>
-<div class="input-group ms-2 mb-3   ">
-{/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
-<form className='container p-1' style={{width:"100%"}}>
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input onChange={handel_medication_managment} type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
-
-
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
-
-
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
-
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
-
-    <div className='checkboxstyle  checkshadow' style={{}}>
-    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-    </div>
-
-  
-</form>
-{/* <Multiselect
-                    className=" "
-                    placeholder=" Select"
-                    options={options}
-                    onSelect={onSelect}
-                    onRemove={onRemove}
-                    showCheckbox = {true}
-                    displayValue="name"
-                    style={{ color: "red"  }}
-                /> */}
-                
-                </div>
+                className=" "
+                placeholder=" Select"
+                options={options}
+                onSelect={onSelect}
+                onRemove={onRemove}
+                showCheckbox = {true}
+                displayValue="name"
+                style={{ color: "red"  }}
+            /> */}
+            
+            </div>
 
 
 
@@ -895,6 +1156,10 @@ const handel_clientId=(e)=>{
 </div>
 
 
+
+</div>
+
+ 
 
 
 

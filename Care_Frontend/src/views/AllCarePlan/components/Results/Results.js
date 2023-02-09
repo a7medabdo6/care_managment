@@ -58,6 +58,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Results = props => {
+
+  const [dataEdite,setdataEdite] =useState()
  const {isLoading,mutate:SubmitDeletCarePlan,isError,error,refetch} =  DeletCarePlanApi()
   const {DeletCarePlanData} = useSelector(state => state.DeletCarePlanSlice)
 console.log(DeletCarePlanData)
@@ -75,7 +77,9 @@ const [Id,setId] =useState()
  
   
 
-
+const handelcrossDataTOedite=()=>{
+  setdataEdite()
+}
 
 //   const {isLoading,mutate:SubmitDeletCarePlan,isError,error,refetch} =  DeletCarePlanApi()
 //   const {DeletCarePlanData} = useSelector(state => state.DeletCarePlanSlice)
@@ -209,7 +213,7 @@ const [custmerData,setcustmerData]=useState()
         </Modal.Header>
         <Modal.Body>
            <div className='d-flex '>
-           <EditeCarePlan custmerData={custmerData}/>
+           <EditeCarePlan custmerData={custmerData} handleCloseEdite={handleCloseEdite}/>
            </div>
              </Modal.Body>
         <Modal.Footer>

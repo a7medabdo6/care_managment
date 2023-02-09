@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useMutation, useQuery } from "react-query"
+import { useMutation, useQuery, useQueryClient } from "react-query"
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -16,6 +16,7 @@ import { CreateRiskAssesmentSliceInfo } from 'Redux_Slices/RiskAssesment/Create-
 export const CreateRiskAssesmentApi = data =>{
     const dispatch = useDispatch();
     const router = useRouter();
+    const QueryClient = useQueryClient();
 
     return(useMutation(UseCreateRiskAssesmentData,{
         onSuccess: res => {
@@ -30,8 +31,9 @@ export const CreateRiskAssesmentApi = data =>{
           // localStorage.setItem('token', JSON.stringify(result.data.token));
           //  window.location.replace('/');
           // router.history.push('/');
-  
-             notify("The Service User  has been created","success")    
+
+          QueryClient.invalidateQueries('GetAllRiskAssesment');
+             notify("The risk  has been created","success")    
   
 //    setTimeout(() => {
 //       router.history.push('/');

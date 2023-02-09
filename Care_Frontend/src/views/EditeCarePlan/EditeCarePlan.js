@@ -1,29 +1,25 @@
-import { CreateServiceUserApi } from 'Hook/Service-user/Create-Service-User-hook';
-import notify from 'Hook/useNotifaction';
 import React, { useState } from 'react';
-import Multiselect from 'multiselect-react-dropdown';
 
 import { useSelector } from 'react-redux';
 import "./EditeCarePlan.css"
 import { ToastContainer } from 'react-toastify'
+import { CreateCarePlantApi } from 'Hook/CarePlan/Get-Create-CarePlan-Hook';
+import { useGetAllUserApi } from 'Hook/AllUser/Get-All-user-Hook';
+import { useEditeCarePlanApi } from 'Hook/CarePlan/Get-Edite-CarePlan-Hook';
 
-const EditeCarePlan  =({custmerData}) =>{
-  
-    const [options,setoptions] = useState(
-        [{name: 'Option 1️⃣', id: 1},{name: 'Option 2️⃣', id: 2}]
-    )
+const EditeCarePlan  =({custmerData,handleCloseEdite}) =>{
 
-console.log(custmerData)
+   
 
-    const onSelect =(selectedList, selectedItem)=>{
+  const {isLoading,mutate:SubmitEditeCarePlan,isError,error,refetch} =  useEditeCarePlanApi()
+  const {EditeCarePlanData} = useSelector(state => state.EditeCarePlanDataSlice)
+console.log(isLoading)
 
-    }
-  
-    const onRemove =(selectedList, selectedItem)=>{
 
-    }
-  
-    
+
+
+const [clientId,setclientId]=useState()
+
     const [lcds,setlcds]=useState()
     const [date,setdate]=useState()
     const [level_of_understand,setlevel_of_understand]=useState()
@@ -47,9 +43,15 @@ console.log(custmerData)
     const [frequency,setfrequency]=useState()
     const [spiritual_and_culture_wellbeing,setspiritual_and_culture_wellbeing]=useState()
     const [userId,setuserId]=useState()
-    const [risks,setrisks]=useState()
+    const [risks,setrisks]=useState([])
 
 console.log(emotional_support);
+
+
+const handel_clientId=(e)=>{
+        setclientId(6)
+
+    }
     const handel_lcds=(e)=>{
         setlcds(e.target.value)
 
@@ -140,10 +142,57 @@ console.log(emotional_support);
     }
 
     const handel_risks=(e)=>{
-        setrisks(e.target.value)
+
+      console.log(e.target.checked)
+      if(e.target.checked === true){
+        setrisks(risks.concat(e.target.value) )
+      }
+        
 
     }
+    const {data}=useGetAllUserApi()
 
+    const {AllUserData} =useSelector(state => state.GetAllUserSlice)
+    console.log(risks);
+
+    const handelSave =()=>{
+        const FormData = {
+            data:{
+                "clientId":6,
+
+            "service_user_lcds_number": lcds,
+            "date": date,
+            "level_of_understand": level_of_understand,
+            "mobility": mobility,
+            "personal_care": personal_care,
+            "continence_care": continence_care,
+            "comunication": comunication,
+            "oral_care": oral_care,
+            "nutrition_and_hydration": nutrition_and_hydration,
+            "skin_care": skin_care,
+            "social_intersts": social_intersts,
+            "night_time_support": night_time_support,
+            "emotional_support": emotional_support,
+            "expressing_sexuality": expressing_sexuality,
+            "health_care": health_care,
+            "medication_managment": medication_managment,
+            "mental_health": mental_health,
+            "end_og_life_preference": end_og_life_preference,
+            "breathing": breathing,
+            "frequency": frequency,
+            "spiritual_and_culture_wellbeing": spiritual_and_culture_wellbeing,
+            "userId": +userId,
+            "risks": risks,
+            },
+            id:custmerData?.id
+          }
+          SubmitEditeCarePlan(FormData)
+          if(EditeCarePlanData !== null){
+            handleCloseEdite()
+          }
+    }
+
+    console.log();
     return(
 
         <div className='border'>
@@ -154,6 +203,34 @@ console.log(emotional_support);
     </div>
     <div className='border '>
 
+    <div class="input-group m-2">
+<span className="input-group-text spantxt" id="basic-addon1">Client Name</span>
+<select class="form-select form-select-sm inputshadowGender " onChange={handel_clientId}  aria-label=".form-select-sm example">
+<option selected>Client Name</option>
+<option value="9">heigh</option>
+<option value="medium">medium</option>
+<option value="low">low</option>
+
+</select>
+</div>
+
+
+<div class="input-group m-2">
+<span className="input-group-text spantxt" id="basic-addon1">Worker</span>
+<select class="form-select form-select-sm inputshadowGender " onChange={handel_userId}  aria-label=".form-select-sm example">
+<option selected>Worker Name</option>
+
+{
+    AllUserData?.map((item,index)=>{return (
+<option key={index} value={item.id}>{item.username}</option>
+    )})
+}
+
+
+</select>
+</div>
+
+
 
     <div class="input-group m-2 ">
 <span className="input-group-text spantxt" id="basic-addon1">lcds </span>
@@ -162,13 +239,13 @@ console.log(emotional_support);
 
 <div class="input-group m-2">
 <span className="input-group-text spantxt" id="basic-addon1">Date</span>
-<input  type="date" name="dateofbirth" onChange={handel_data} className=" inputshadow"  id="dateofbirth"/>
+<input type="date" name="dateofbirth" className=" inputshadow" onChange={handel_data} id="dateofbirth"/>
 </div>
 
 
 <div class="input-group m-2">
 <span className="input-group-text spantxt" id="basic-addon1">Night Time Support</span>
-<input type="date" name="dateofbirth" onChange={handel_night_time_support} className=" inputshadow"  id="dateofbirth"/>
+<input type="date" name="dateofbirth" className=" inputshadow" onChange={handel_night_time_support} id="dateofbirth"/>
 </div>
 
 
@@ -178,7 +255,7 @@ console.log(emotional_support);
 
 <div class="input-group m-2">
 <span className="input-group-text spantxt" id="basic-addon1">level of understand</span>
-<select class="form-select form-select-sm inputshadowGender " onChange={handel_level_of_understand} aria-label=".form-select-sm example">
+<select class="form-select form-select-sm inputshadowGender " onChange={handel_level_of_understand}  aria-label=".form-select-sm example">
 <option selected>level of understand</option>
 <option value="heigh">heigh</option>
 <option value="medium">medium</option>
@@ -188,15 +265,21 @@ console.log(emotional_support);
 </div>
 
 
-<div class="input-group m-2 ">
-<span className="input-group-text spantxt" id="basic-addon1">social_intersts</span>
-<input type="text" onChange={handel_social_intersts} className="form-control inputshadow"   placeholder="social_intersts" aria-label="First Name" aria-describedby="basic-addon1"/>
+<div class="input-group m-2">
+<span className="input-group-text spantxt" id="basic-addon1">comunication</span>
+<select class="form-select form-select-sm inputshadowGender " onChange={handel_comunication}  aria-label=".form-select-sm example">
+<option selected>level of handel_comunication</option>
+<option value="heigh">heigh</option>
+<option value="medium">medium</option>
+<option value="low">low</option>
+
+</select>
 </div>
 
 
 <div class="input-group m-2">
-<span className="input-group-text spantxt" id="basic-addon1">emotional_support</span>
-<select class="form-select form-select-sm inputshadowGender " onChange={handel_emotional_support}  aria-label=".form-select-sm example">
+<span className="input-group-text spantxt" id="basic-addon1">emotional support</span>
+<select class="form-select form-select-sm inputshadowGender " onChange={handel_emotional_support} aria-label=".form-select-sm example">
 <option selected>emotional_support</option>
 <option value="heigh">heigh</option>
 <option value="medium">medium</option>
@@ -207,29 +290,19 @@ console.log(emotional_support);
 
 
 <div class="input-group m-2 ">
-<span className="input-group-text spantxt" id="basic-addon1">expressing_sexuality</span>
-<input type="text" onChange={handel_expressing_sexuality} className="form-control inputshadow"   placeholder="expressing_sexuality" aria-label="First Name" aria-describedby="basic-addon1"/>
+<span className="input-group-text spantxt" id="basic-addon1">expressing sexuality</span>
+<input type="text" className="form-control inputshadow" onChange={handel_expressing_sexuality}  placeholder="expressing_sexuality" aria-label="First Name" aria-describedby="basic-addon1"/>
 </div>
 
 
 
 
 
-<div class="input-group m-2">
-<span className="input-group-text spantxt" id="basic-addon1">level of understand</span>
-<select class="form-select form-select-sm inputshadowGender " aria-label=".form-select-sm example">
-<option selected>level of understand</option>
-<option value="heigh">heigh</option>
-<option value="medium">medium</option>
-<option value="low">low</option>
-
-</select>
-</div>
 
 
 <div class="input-group m-2">
 <span className="input-group-text spantxt" id="basic-addon1">breathing</span>
-<select class="form-select form-select-sm inputshadowGender " onChange={handel_breathing} aria-label=".form-select-sm example">
+<select class="form-select form-select-sm inputshadowGender " onChange={handel_breathing}  aria-label=".form-select-sm example">
 <option selected>breathing</option>
 <option value="heigh">heigh</option>
 <option value="medium">medium</option>
@@ -243,8 +316,8 @@ console.log(emotional_support);
 
 
 <div class="input-group m-2">
-<span className="input-group-text spantxt" id="basic-addon1">mental_health</span>
-<select class="form-select form-select-sm inputshadowGender " onChange={handel_mental_health}  aria-label=".form-select-sm example">
+<span className="input-group-text spantxt" id="basic-addon1">mental health</span>
+<select class="form-select form-select-sm inputshadowGender " onChange={handel_mental_health} aria-label=".form-select-sm example">
 <option selected>mental_health</option>
 <option value="heigh">heigh</option>
 <option value="medium">medium</option>
@@ -268,10 +341,10 @@ console.log(emotional_support);
 
 <div class="input-group m-2">
 <span className="input-group-text spantxt" id="basic-addon1">mobility</span>
-<select class="form-select form-select-sm inputshadowGender " onChange={handel_mobility}  aria-label=".form-select-sm example">
+<select class="form-select form-select-sm inputshadowGender " onChange={handel_mobility} aria-label=".form-select-sm example">
 <option selected>mobility</option>
-<option value="yes">Yes</option>
-<option value="no">No</option>
+<option value="heigh">Yes</option>
+<option value="medium">No</option>
 
 </select>
 </div>
@@ -279,10 +352,10 @@ console.log(emotional_support);
 
 <div class="input-group m-2">
 <span className="input-group-text spantxt" id="basic-addon1">frequency</span>
-<select class="form-select form-select-sm inputshadowGender " onChange={handel_frequency} aria-label=".form-select-sm example">
+<select class="form-select form-select-sm inputshadowGender " onChange={handel_frequency}  aria-label=".form-select-sm example">
 <option selected>frequency</option>
-<option value="yes">Yes</option>
-<option value="no">No</option>
+<option value="heigh">Yes</option>
+<option value="medium">No</option>
 
 </select>
 </div>
@@ -290,10 +363,10 @@ console.log(emotional_support);
 
 <div class="input-group m-2">
 <span className="input-group-text spantxt" id="basic-addon1">end og life preference</span>
-<select class="form-select form-select-sm inputshadowGender " onChange={handel_end_og_life_preference}  aria-label=".form-select-sm example">
+<select class="form-select form-select-sm inputshadowGender " onChange={handel_end_og_life_preference} aria-label=".form-select-sm example">
 <option selected>end og life preference</option>
-<option value="yes">Yes</option>
-<option value="no">No</option>
+<option value="heigh">Yes</option>
+<option value="medium">No</option>
 
 </select>
 </div>
@@ -306,22 +379,54 @@ console.log(emotional_support);
     <div className='border mt-3'>
 
     <div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
-        <h5 className='p-2'>oral_care</h5>
+        <h5 className='p-2'>oral care</h5>
     </div>
 
 
-<div class="input-group ms-2 mb-3   ">
-<span className="input-group-text spantxtMultiSelect" id="basic-addon1">oral_care</span>
-<Multiselect
-                        className=" "
-                        placeholder=" Select"
-                        options={options}
-                        onSelect={onSelect}
-                        onRemove={onRemove}
-                        showCheckbox = {true}
-                        displayValue="name"
-                        style={{ color: "red"  }}
-                    /></div>
+    <div class="input-group ms-2 mb-3   ">
+{/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
+<form className='container p-1' style={{width:"100%"}}>
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input onChange={handel_oral_care}  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox"  id="vehicle1" name="vehicle1" value="Bike2"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input   type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+  
+</form>
+{/* <Multiselect
+                    className=" "
+                    placeholder=" Select"
+                    options={options}
+                    onSelect={onSelect}
+                    onRemove={onRemove}
+                    showCheckbox = {true}
+                    displayValue="name"
+                    style={{ color: "red"  }}
+                /> */}
+                
+                </div>
 
 
 
@@ -333,11 +438,41 @@ console.log(emotional_support);
 <div className='border mt-3'>
 
 <div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
-    <h5 className='p-2'>personal_care</h5>
+    <h5 className='p-2'>personal care</h5>
 </div>
 <div class="input-group ms-2 mb-3   ">
-<span className="input-group-text spantxtMultiSelect" id="basic-addon1">personal_care</span>
-<Multiselect
+{/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
+<form className='container p-1' style={{width:"100%"}}>
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input onChange={handel_personal_care}  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+  
+</form>
+{/* <Multiselect
                     className=" "
                     placeholder=" Select"
                     options={options}
@@ -346,7 +481,9 @@ console.log(emotional_support);
                     showCheckbox = {true}
                     displayValue="name"
                     style={{ color: "red"  }}
-                /></div>
+                /> */}
+                
+                </div>
 
 
 
@@ -358,11 +495,41 @@ console.log(emotional_support);
 <div className='border mt-3'>
 
 <div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
-    <h5 className='p-2'>skin_care</h5>
+    <h5 className='p-2'>skin care</h5>
 </div>
 <div class="input-group ms-2 mb-3   ">
-<span className="input-group-text spantxtMultiSelect" id="basic-addon1">skin_care</span>
-<Multiselect
+{/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
+<form className='container p-1' style={{width:"100%"}}>
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input onChange={handel_skin_care}  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+  
+</form>
+{/* <Multiselect
                     className=" "
                     placeholder=" Select"
                     options={options}
@@ -371,7 +538,9 @@ console.log(emotional_support);
                     showCheckbox = {true}
                     displayValue="name"
                     style={{ color: "red"  }}
-                /></div>
+                /> */}
+                
+                </div>
 
 
 
@@ -383,11 +552,41 @@ console.log(emotional_support);
 <div className='border mt-3'>
 
 <div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
-    <h5 className='p-2'>health_care</h5>
+    <h5 className='p-2'>health care</h5>
 </div>
 <div class="input-group ms-2 mb-3   ">
-<span className="input-group-text spantxtMultiSelect" id="basic-addon1">health_care</span>
-<Multiselect
+{/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
+<form className='container p-1' style={{width:"100%"}}>
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input onChange={handel_health_care} type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+  
+</form>
+{/* <Multiselect
                     className=" "
                     placeholder=" Select"
                     options={options}
@@ -396,7 +595,9 @@ console.log(emotional_support);
                     showCheckbox = {true}
                     displayValue="name"
                     style={{ color: "red"  }}
-                /></div>
+                /> */}
+                
+                </div>
 
 
 
@@ -410,11 +611,41 @@ console.log(emotional_support);
 <div className='border mt-3'>
 
 <div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
-    <h5 className='p-2'>social_intersts</h5>
+    <h5 className='p-2'>social intersts</h5>
 </div>
 <div class="input-group ms-2 mb-3   ">
-<span className="input-group-text spantxtMultiSelect" id="basic-addon1">social_intersts</span>
-<Multiselect
+{/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
+<form className='container p-1' style={{width:"100%"}}>
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input onChange={handel_social_intersts} type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+  
+</form>
+{/* <Multiselect
                     className=" "
                     placeholder=" Select"
                     options={options}
@@ -423,7 +654,66 @@ console.log(emotional_support);
                     showCheckbox = {true}
                     displayValue="name"
                     style={{ color: "red"  }}
-                /></div>
+                /> */}
+                
+                </div>
+
+
+
+
+</div>
+
+
+
+<div className='border mt-3'>
+
+<div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
+    <h5 className='p-2'>continence care</h5>
+</div>
+<div class="input-group ms-2 mb-3   ">
+{/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
+<form className='container p-1' style={{width:"100%"}}>
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input onChange={handel_continence_care}  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+  
+</form>
+{/* <Multiselect
+                    className=" "
+                    placeholder=" Select"
+                    options={options}
+                    onSelect={onSelect}
+                    onRemove={onRemove}
+                    showCheckbox = {true}
+                    displayValue="name"
+                    style={{ color: "red"  }}
+                /> */}
+                
+                </div>
 
 
 
@@ -436,11 +726,41 @@ console.log(emotional_support);
 <div className='border mt-3'>
 
 <div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
-    <h5 className='p-2'>continence_care</h5>
+    <h5 className='p-2'>nutrition and hydration</h5>
 </div>
 <div class="input-group ms-2 mb-3   ">
-<span className="input-group-text spantxtMultiSelect" id="basic-addon1">continence_care</span>
-<Multiselect
+{/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
+<form className='container p-1' style={{width:"100%"}}>
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input onChange={handel_nutrition_and_hydration}  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+  
+</form>
+{/* <Multiselect
                     className=" "
                     placeholder=" Select"
                     options={options}
@@ -449,33 +769,9 @@ console.log(emotional_support);
                     showCheckbox = {true}
                     displayValue="name"
                     style={{ color: "red"  }}
-                /></div>
-
-
-
-
-
-</div>
-
-
-
-<div className='border mt-3'>
-
-<div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
-    <h5 className='p-2'>nutrition_and_hydration</h5>
-</div>
-<div class="input-group ms-2 mb-3   ">
-<span className="input-group-text spantxtMultiSelect" id="basic-addon1">nutrition_and_hydration</span>
-<Multiselect
-                    className=" "
-                    placeholder=" Select"
-                    options={options}
-                    onSelect={onSelect}
-                    onRemove={onRemove}
-                    showCheckbox = {true}
-                    displayValue="name"
-                    style={{ color: "red"  }}
-                /></div>
+                /> */}
+                
+                </div>
 
 
 
@@ -490,8 +786,38 @@ console.log(emotional_support);
     <h5 className='p-2'>risks</h5>
 </div>
 <div class="input-group ms-2 mb-3   ">
-<span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span>
-<Multiselect
+{/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
+<form className='container p-1' style={{width:"100%"}}>
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input onChange={handel_risks} type="checkbox" id="vehicle1" name="vehicle1" value="Bike1"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" onChange={handel_risks} id="vehicle1" name="vehicle1" value="Bike2"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" onChange={handel_risks} id="vehicle1" name="vehicle1" value="Bike3"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+  
+</form>
+{/* <Multiselect
                     className=" "
                     placeholder=" Select"
                     options={options}
@@ -500,24 +826,62 @@ console.log(emotional_support);
                     showCheckbox = {true}
                     displayValue="name"
                     style={{ color: "red"  }}
-                /></div>
+                /> */}
+                
+                </div>
 
 
 
 
 
 </div>
+
+
+
+
+
+
 
 
 
 <div className='border mt-3'>
 
 <div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
-    <h5 className='p-2'>Worker</h5>
+    <h5 className='p-2'>medication managment</h5>
 </div>
 <div class="input-group ms-2 mb-3   ">
-<span className="input-group-text spantxtMultiSelect" id="basic-addon1">Worker</span>
-<Multiselect
+{/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
+<form className='container p-1' style={{width:"100%"}}>
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input onChange={handel_medication_managment} type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+    <div className='checkboxstyle  checkshadow' style={{}}>
+    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+  <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+    </div>
+
+  
+</form>
+{/* <Multiselect
                     className=" "
                     placeholder=" Select"
                     options={options}
@@ -526,35 +890,9 @@ console.log(emotional_support);
                     showCheckbox = {true}
                     displayValue="name"
                     style={{ color: "red"  }}
-                /></div>
-
-
-
-
-
-</div>
-
-
-
-
-
-<div className='border mt-3'>
-
-<div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
-    <h5 className='p-2'>medication_managment</h5>
-</div>
-<div class="input-group ms-2 mb-3   ">
-<span className="input-group-text spantxtMultiSelect" id="basic-addon1">medication_managment</span>
-<Multiselect
-                    className=" "
-                    placeholder=" Select"
-                    options={options}
-                    onSelect={onSelect}
-                    onRemove={onRemove}
-                    showCheckbox = {true}
-                    displayValue="name"
-                    style={{ color: "red"  }}
-                /></div>
+                /> */}
+                
+                </div>
 
 
 
@@ -572,7 +910,7 @@ console.log(emotional_support);
 
 
 <div className='d-flex justify-content-end p-3'>
-    <button className='p-2 saveBtn'>Save</button>
+    <button onClick={handelSave} className='p-2 saveBtn'>Save</button>
 </div>
 <ToastContainer></ToastContainer>
 </div>

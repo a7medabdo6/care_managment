@@ -60,6 +60,17 @@ export default [
               icon: ReportProblemOutlinedIcon,
              
             },
+
+            {
+              title: 'Social interests',
+              href: '/socialinterests',
+              icon: ReportProblemOutlinedIcon,
+             
+            },
+
+
+
+            
             {
               title: 'Daily Notes',
               href: '/DailyNotes',
@@ -88,11 +99,7 @@ export default [
            
            
       
-            {
-              title: 'mail',
-              href: '/user/mail',
-              icon: MailOutlineOutlinedIcon
-            },
+            
 
             // {
             //   title: 'SetUp',
@@ -120,11 +127,7 @@ export default [
       
             /***************************************************** */
        /**************************************** */
-      {
-        title: 'Service',
-        href: '/service/user',
-        icon: PeopleIcon
-      },
+    
 
       {
         title: 'Profile',
@@ -144,12 +147,7 @@ export default [
         href: '/management',
         icon: BarChartIcon,
         children: [
-          {
-            title: 'Customers',
-            href: '/management/customers',
-            icon: FormatListBulletedOutlinedIcon
-
-          },
+         
           userdata?.role == 1 && {
             title: 'All Workers',
             href: '/workers',

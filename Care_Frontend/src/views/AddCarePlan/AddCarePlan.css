@@ -1,7 +1,7 @@
 .box{
     margin-left: 100px;
     margin-right: 100px;
-    
+    background-color: #dfdfe2;
 }
 .title{
   height: fit-content;
@@ -10,7 +10,22 @@
   border-radius: 8%;
   margin-bottom: 8px;
 }
-.container { border:2px solid #ccc; width:100%; height: 100px; overflow-y: scroll;}
+.container { border:2px solid #ccc;
+   width:100%;
+    height: 100px;
+     overflow-y: scroll;
+margin-left: 0;
+    }
+
+.btn{
+  background-color: #72B3BF;
+}
+    .itembox{
+      border: 1px solid rgb(136, 135, 135);
+      background-color: white;
+      width: 99%;
+    }
+
 .checkboxstyle{
   width: 100%;
   box-shadow: inset 0px 1px 8px rgba(0, 0, 0, 0.2);
@@ -67,6 +82,7 @@ border: none;
 
   .input-group{
     height: 29 !important;
+    width: 99%;
   }
 
   .spantxt{

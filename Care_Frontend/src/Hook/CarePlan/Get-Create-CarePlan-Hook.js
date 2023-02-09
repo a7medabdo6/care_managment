@@ -29,7 +29,7 @@ export const CreateCarePlantApi = data =>{
           // localStorage.setItem('user', JSON.stringify(result.data));
           // localStorage.setItem('token', JSON.stringify(result.data.token));
           //  window.location.replace('/');
-          // router.history.push('/');
+          router.history.push('/CarePlan');
   
              notify("The CarePlan  has been created","success")    
   

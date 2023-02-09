@@ -5,140 +5,97 @@ import "./AddRiskAssessment.css"
 import Multiselect from 'multiselect-react-dropdown';
 import { CreateRiskAssesmentApi } from "Hook/RiskAssesment/Create-Risk-Assesment-Hook";
 import { useSelector } from "react-redux";
-const AddRiskAssessment =()=>{
+const AddRiskAssessment =({handleClose})=>{
 
 
     const {isLoading,mutate:SubmitCreateRiskAssesment,isError,error,refetch} =  CreateRiskAssesmentApi()
     const {CreateRiskAssesmentrData} = useSelector(state => state.CreateRiskAssesmentSlice)
 console.log(CreateRiskAssesmentrData)
 
-    const [options, setoptions] = useState([
-        {name: 'Option 1️⃣', id: 1},{name: 'Option 2️⃣', id: 2}
-    ]);
-  const  onSelect=(selectedList, selectedItem)=> {
-        
+const [name,setname]=useState()
+const [level,setlevel]=useState()
+
+const [type,settype]=useState()
+
+
+const HandelLevel=(e)=>{
+    setlevel(e.target.value)
+
+}
+
+
+const handelName=(e)=>{
+    setname(e.target.value)
+}
+
+const handelType=(e)=>{
+    settype(e.target.value)
+
+}
+const handelSave =()=>{
+    const data ={
+        "name": name,
+        "type": type,
+        "level": level
     }
+    SubmitCreateRiskAssesment(data)
+  
+    handleClose()
+
+   
     
-  const  onRemove=(selectedList, selectedItem)=> {
-    
-        
-    }
+}
+ 
     return(
-        <div>
-             <div className=" container ">
-            <div className="p-2 border bg-info bg-gradient w-25 rounded-3 p-2 text-center">Assessment</div>
-            <div className="box border">
-                <h2>Service User</h2>
-                <p>mohammed</p>
-                <h3>Risk</h3>
-                <p>Falls Risk / Slips and Trips</p>
-                <div className="d-flex flex-column mt-3">
-                    <label className="mb-2">Last Assessed</label>
-                    <input type="date" name="dateofbirth" className=" inputshadow" id="dateofbirth"/>
-
-                </div>
-                <div className="mt-3">
-                    <label className="mb-2"> What The Risk ?</label>
-                    <input type="text" className="form-control inputshadow" placeholder=""  aria-describedby="basic-addon1"/>
-
-                </div>
-                <div className=" mt-3">
-                <label className="mb-2"> Risk befoor intervention</label>
-<select className="form-select form-select-sm inputshadowselect  " aria-label=".form-select-sm example">
-<option selected>Please Select</option>
-<option value="1">option 1</option>
-<option value="2">option 1</option>
-
-</select>
-</div>
-                <div className="mt-3">
-                    <label className="mb-2"> Who is at Risk ?</label>
-                    <input type="text" className="form-control inputshadow" placeholder=""  aria-describedby="basic-addon1"/>
-
-                </div>
-
-                <div className=" mt-3">
-                <label className="mb-2"> is the rish histourical</label>
-<select className="form-select form-select-sm inputshadowselect " aria-label=".form-select-sm example">
-<option selected>please Select</option>
-<option value="1">option 1</option>
-<option value="2">option 1</option>
-
-</select>
-</div>
-
-<div className="mt-3">
-                    <label className="mb-2"> What could happen ?</label>
-                    <input style={{height:"100px"}} type="text" className="form-control inputshadow" placeholder=""  aria-describedby="basic-addon1"/>
-
-                </div>
-                <div className="mt-3">
-                    <label className="mb-2"> Action to take by Staff</label>
-                    <input style={{height:"100px"}} type="text" className="form-control inputshadow" placeholder=""  aria-describedby="basic-addon1"/>
-
-                </div>
-
-                <div className=" mt-3 mb-2">
-                <label className="mb-2"> Risk Following .....</label>
-<select className="form-select form-select-sm inputshadowselect " aria-label=".form-select-sm example">
-<option selected>Please Select</option>
-<option value="1">option 1</option>
-<option value="2">option 1</option>
-
-</select>
-</div>
-                
-            </div>
-        </div>
+        
+   
+            
         <div className="container">
-        <div className="p-2 mt-5 border bg-info bg-gradient w-25 rounded-3 text-center">Summery</div>
-        <div className="box border">
-        <div class=" mt-3">
-                <label className="mb-2"> Risk Level</label>
-<select className="form-select form-select-sm inputshadowselect " aria-label=".form-select-sm example">
-<option selected>Please Select</option>
-<option value="1">option 1</option>
-<option value="2">option 1</option>
+
+<div class="input-group m-2 ">
+<span className="input-group-text spantxt" id="basic-addon1">Risk Name </span>
+<input type="text" className="form-control inputshadow" onChange={handelName}   placeholder="Risk Name " aria-label="Risk Name" aria-describedby="basic-addon1"/>
+</div>
+
+
+<div class="input-group m-2">
+<span className="input-group-text spantxt" style={{height:"35px"}} id="basic-addon1">Type Risk</span>
+<select class="form-select form-select-sm inputshadowselect " onChange={handelType}  aria-label=".form-select-sm example">
+<option selected>Type Risk</option>
+<option value="medication">medication</option>
+<option value="Generic">Generic</option>
+
 
 </select>
 </div>
 
-<div className="mt-3">
-                    <label className="mb-2"> Total Score</label>
-                    <input style={{height:"100px"}} type="text" className="form-control inputshadow" placeholder=""  aria-describedby="basic-addon1"/>
-
-                </div>
-                <label className="mb-2"> Signaturs</label>
-
-                <Multiselect
-                        className="mt-2"
-                        placeholder=" staff team"
-                        options={options}
-                        onSelect={onSelect}
-                        onRemove={onRemove}
-                        displayValue="name"
-                        showCheckbox = "true"
-                        style={{ color: "red" }}
-                    />
-
-
-                <div>
-                    <a style={{color:"green"}} href="#">I have read and understood those risk assessment notes . </a>
-
-                </div>
-
-        </div>
 
 
 
-        </div>
+<div class="input-group m-2">
+<span className="input-group-text spantxt" style={{height:"35px"}} id="basic-addon1">Risk level</span>
+<select class="form-select form-select-sm inputshadowselect " onChange={HandelLevel}  aria-label=".form-select-sm example">
+<option selected>Risk level</option>
+<option value="heigh">heigh</option>
+<option value="medium">medium</option>
+<option value="low">low</option>
 
-        <div>
+</select>
+</div>
+
+
+<div className='d-flex justify-content-end p-3'>
+    <button onClick={handelSave} className='p-2 saveBtn bg-info'>Save</button>
+</div>
+
+        
+</div>
+        
        
             
-        </div>
+        
 
-        </div>
+        
        
     )
 }

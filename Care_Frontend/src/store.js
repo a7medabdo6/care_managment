@@ -17,6 +17,12 @@ import DeletRiskAssesmentSlice from "./Redux_Slices/RiskAssesment/Delet-RiskAsse
 import GetAllCAREplaneSlice from "./Redux_Slices/CarePlan/Get-CarePlane-Slice"
 import DeletCarePlanSlice from "./Redux_Slices/CarePlan/Delet-CarePlan-Slice"
 import CreateCarePlantSlice from "./Redux_Slices/CarePlan/Create-CarePlan-Slice"
+import EditeCarePlanDataSlice from "./Redux_Slices/CarePlan/Edite-CarePlan-Hook-Slice"
+import EditeRiskAssesmentDataSlice from "./Redux_Slices/RiskAssesment/Edite-Risk-Assesment-Slice"
+import GetAllsocial_interestseSlice from "./Redux_Slices/Social-interests/Get-Social-interests-Slice"
+import Createsocial_intereststSlice from "./Redux_Slices/Social-interests/Create-Social-interests-Slice"
+import Deletsocial_interestsSlice from "./Redux_Slices/Social-interests/Delet-Social-interests-Slice"
+import Editesocial_interestsDataSlice from "./Redux_Slices/Social-interests/Edite-Social-interests-Slice"
 export const store = configureStore({
   reducer: {
     UserInfo: userSlice,
@@ -36,7 +42,13 @@ export const store = configureStore({
     DeletRiskAssesmentSlice:DeletRiskAssesmentSlice,
     GetAllCAREplaneSlice:GetAllCAREplaneSlice,
     DeletCarePlanSlice:DeletCarePlanSlice,
-    CreateCarePlantSlice:CreateCarePlantSlice
+    CreateCarePlantSlice:CreateCarePlantSlice,
+    EditeCarePlanDataSlice:EditeCarePlanDataSlice,
+    EditeRiskAssesmentDataSlice:EditeRiskAssesmentDataSlice,
+    GetAllsocial_interestseSlice:GetAllsocial_interestseSlice,
+    Createsocial_intereststSlice:Createsocial_intereststSlice,
+    Deletsocial_interestsSlice:Deletsocial_interestsSlice,
+    Editesocial_interestsDataSlice:Editesocial_interestsDataSlice
 
    }
 })
