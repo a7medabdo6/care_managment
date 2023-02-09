@@ -26,7 +26,7 @@ import ContactMailOutlinedIcon from '@material-ui/icons/ContactMailOutlined';
 import DetailsOutlinedIcon from '@material-ui/icons/DetailsOutlined';
 import MailOutlineOutlinedIcon from '@material-ui/icons/MailOutlineOutlined';
 import CropLandscapeIcon from '@material-ui/icons/CropLandscape';
-import { Label } from 'components';
+import AllInclusiveOutlinedIcon from '@material-ui/icons/AllInclusiveOutlined';import { Label } from 'components';
  const userdata =JSON.parse(localStorage.getItem("user")) 
  
 export default [
@@ -64,11 +64,16 @@ export default [
             {
               title: 'Social interests',
               href: '/socialinterests',
-              icon: ReportProblemOutlinedIcon,
+              icon: AllInclusiveOutlinedIcon,
              
             },
 
-
+            {
+              title: 'Oral Care',
+              href: '/oralcare',
+              icon: ReportProblemOutlinedIcon,
+             
+            },
 
             
             {

@@ -9,17 +9,17 @@ import useRouter from 'utils/useRouter';
 
 
 import notify from 'Hook/useNotifaction';
-import { UseCreatesocial_intereststData } from 'Api_Requests/Social-interests/Use-Create-Social-interests';
-import { Createsocial_intereststSliceInfo } from 'Redux_Slices/Social-interests/Create-Social-interests-Slice';
+import { CreateOralCaretSliceInfo } from 'Redux_Slices/Oral-Care/Create-Oral-Care-Slice';
+import { UseCreateOralCareData } from 'Api_Requests/Oral-Care/Use-Create-Oral-Care';
 
 
 
-export const Createsocial_intereststApi = data =>{
+export const CreateOralCaretApi = data =>{
     const dispatch = useDispatch();
     const router = useRouter();
     const QueryClient = useQueryClient();
 
-    return(useMutation((data)=>{return (UseCreatesocial_intereststData(data))},{
+    return(useMutation((data)=>{return (UseCreateOralCareData(data))},{
         onSuccess: res => {
           const result = {
             status: res.status + '-' + res.statusText,
@@ -27,12 +27,12 @@ export const Createsocial_intereststApi = data =>{
             data: res.data
           };
           console.log(result,"result");
-           dispatch(Createsocial_intereststSliceInfo(result.data));
+           dispatch(CreateOralCaretSliceInfo(result.data));
           // localStorage.setItem('user', JSON.stringify(result.data));
           // localStorage.setItem('token', JSON.stringify(result.data.token));
           //  window.location.replace('/');
           // router.history.push('/');
-          QueryClient.invalidateQueries('GetAllsocial_interests');
+          QueryClient.invalidateQueries('GetAllOralCare');
 
              notify("The social interests  has been created","success")    
   

@@ -57,7 +57,7 @@ const handelSave =()=>{
 
 <div class="input-group m-2 ">
 <span className="input-group-text spantxt" style={{width:"120px"}} id="basic-addon1">Type </span>
-<input type="text" className="form-control inputshadow" onChange={handelType}   placeholder="social Name " aria-label="social Name" aria-describedby="basic-addon1"/>
+<input type="text" className="form-control inputshadow" onChange={handelType}   placeholder="social type " aria-label="social Name" aria-describedby="basic-addon1"/>
 </div>
 
 

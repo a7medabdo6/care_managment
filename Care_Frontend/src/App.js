@@ -41,7 +41,7 @@ const App = () => {
   //   setcheckRoutes(true)
   // }
   return (
-    <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient} >
       <ThemeProvider theme={theme}>
         <MuiPickersUtilsProvider utils={MomentUtils}>
           <Router history={history}>

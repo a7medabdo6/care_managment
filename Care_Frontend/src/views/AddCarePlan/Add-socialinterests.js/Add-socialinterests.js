@@ -47,7 +47,7 @@ const handelSave =()=>{
         
    
             
-        <div className="container">
+        <div className="">
 
 <div class="input-group m-2 ">
 <span className="input-group-text spantxt" id="basic-addon1" style={{width:"120px"}}>Name </span>

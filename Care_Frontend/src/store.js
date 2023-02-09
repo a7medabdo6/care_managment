@@ -23,6 +23,10 @@ import GetAllsocial_interestseSlice from "./Redux_Slices/Social-interests/Get-So
 import Createsocial_intereststSlice from "./Redux_Slices/Social-interests/Create-Social-interests-Slice"
 import Deletsocial_interestsSlice from "./Redux_Slices/Social-interests/Delet-Social-interests-Slice"
 import Editesocial_interestsDataSlice from "./Redux_Slices/Social-interests/Edite-Social-interests-Slice"
+import CreateOralCaretSlice from "./Redux_Slices/Oral-Care/Create-Oral-Care-Slice"
+import EditeOralCareDataSlice from "./Redux_Slices/Oral-Care/Edite-Oral-Care-Slice"
+import DeletOralCareSlice from "./Redux_Slices/Oral-Care/Delet-Oral-Care-Slice"
+import GetAllOralCareeSlice from "./Redux_Slices/Oral-Care/Get-Oral-Care-Slice"
 export const store = configureStore({
   reducer: {
     UserInfo: userSlice,
@@ -48,7 +52,12 @@ export const store = configureStore({
     GetAllsocial_interestseSlice:GetAllsocial_interestseSlice,
     Createsocial_intereststSlice:Createsocial_intereststSlice,
     Deletsocial_interestsSlice:Deletsocial_interestsSlice,
-    Editesocial_interestsDataSlice:Editesocial_interestsDataSlice
+    Editesocial_interestsDataSlice:Editesocial_interestsDataSlice,
+    CreateOralCaretSlice:CreateOralCaretSlice,
+    DeletOralCareSlice:DeletOralCareSlice,
+    EditeOralCareDataSlice:EditeOralCareDataSlice,
+    GetAllOralCareeSlice:GetAllOralCareeSlice
+    
 
    }
 })

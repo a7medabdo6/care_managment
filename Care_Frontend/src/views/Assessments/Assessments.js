@@ -58,7 +58,7 @@ const [Id,setId] =useState()
     return(
 
         
-        <div className="container">
+        <div className="container" style={{overflow:"auto"}}>
             <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title className='text-center '> 

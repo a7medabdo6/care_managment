@@ -36,7 +36,7 @@ export const useGetsocial_interestsApi = formData => {
         // console.log(err.response.data.message);
         //   dispatch(errorAtLogin(err.response.data.detail));
         //  return err;
-        notify(err.response.data.message,"error")      
+        notify(err?.response?.data?.message,"error")       
 
       }
     });

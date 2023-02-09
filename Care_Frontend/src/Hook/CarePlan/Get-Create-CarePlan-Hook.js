@@ -29,9 +29,11 @@ export const CreateCarePlantApi = data =>{
           // localStorage.setItem('user', JSON.stringify(result.data));
           // localStorage.setItem('token', JSON.stringify(result.data.token));
           //  window.location.replace('/');
-          router.history.push('/CarePlan');
+          notify("The CarePlan  has been created","success")    
+
+          setTimeout(()=>{ router.history.push('/CarePlan');
+        },2000)
   
-             notify("The CarePlan  has been created","success")    
   
 //    setTimeout(() => {
 //       router.history.push('/');
@@ -42,7 +44,7 @@ export const CreateCarePlantApi = data =>{
           // console.log(err.response.data.message);
           //   dispatch(errorAtLogin(err.response.data.detail));
           //  return err;
-          notify(err.response.data.message,"error")      
+          notify(err?.response?.data?.message,"error")       
   
         }
       }))

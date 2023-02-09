@@ -11,11 +11,23 @@ import { useGetAllUserApi } from 'Hook/AllUser/Get-All-user-Hook';
 import Modal from 'react-bootstrap/Modal';
 import { useGetsocial_interestsApi } from 'Hook/Social-interests/Get-Social-interests-Hook';
 import AddsocialAssessment from './Add-socialinterests.js/Add-socialinterests';
+import { useGetOralCareApi } from 'Hook/Oral-Care/Get-Oral-Care-Hook';
+import AddOralCare from './Add-Oral-.js/Add-Oral';
+import { useGetAllServiceUserApi } from 'Hook/Service-user/GetALLServiceUserData-Hook';
+import { useGetAllRiskAssesmentApi } from 'Hook/RiskAssesment/Get-all-Risk-Hook';
+import AddRiskAssessment from './Add-Risk-Assessment';
 
 const CarePlan  =() =>{
 
   const {data:socialData} =  useGetsocial_interestsApi()
   const {social_interestsData} = useSelector(state => state.GetAllsocial_interestseSlice)
+
+
+
+  const[itemOral,setitemOral]= useState()
+
+  const {data:OralData} =  useGetOralCareApi()
+  const {OralCareData} = useSelector(state => state.GetAllOralCareeSlice)
 console.log(social_interestsData)
 /* start modle code  */
 const [showOralCare, setshowOralCare] = useState(false);
@@ -87,11 +99,15 @@ const handleShownutrition = () => setShownutrition(true);
     const {CreateCarePlantrData} = useSelector(state => state.CreateCarePlantSlice)
 console.log(CreateCarePlantrData)
    
+const {data:AllSEVICE}=useGetAllServiceUserApi()
+const {AllServiceUserData} =useSelector(state => state.GetAllServiceUserSlice )
+console.log(AllServiceUserData);
 
 
 
 
-
+const {data:RiskAssesmentData} =  useGetAllRiskAssesmentApi()
+const {AllRiskAssesmentData} = useSelector(state => state.GetRiskAssesmentSlice)
 const [clientId,setclientId]=useState()
 
     const [lcds,setlcds]=useState()
@@ -123,7 +139,7 @@ console.log(emotional_support);
 
 
 const handel_clientId=(e)=>{
-        setclientId(6)
+        setclientId(e.target.value)
 
     }
     const handel_lcds=(e)=>{
@@ -258,7 +274,7 @@ const handel_clientId=(e)=>{
 
     const handelSave =()=>{
         const data = {
-            "clientId":6,
+            "clientId":+clientId,
 
             "service_user_lcds_number": lcds,
             "date": date,
@@ -296,12 +312,12 @@ const handel_clientId=(e)=>{
 
 <Modal show={showOralCare} onHide={handleCloseshowOralCare}>
         <Modal.Header closeButton>
-          <Modal.Title className='d-flex justify-content-center align-items-center text-center '> 
-          <div className=' text-center bg-info ' >Add Oral Care</div>
+          <Modal.Title className='d-flex justify-content-center align-items-center '> 
+          <div className=' ' >Add Oral Care</div>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        
+        <AddOralCare handleCloseshowOralCare={handleCloseshowOralCare} itemOral={itemOral}/>
 
              </Modal.Body>
         <Modal.Footer>
@@ -341,7 +357,7 @@ const handel_clientId=(e)=>{
       <Modal show={showsocial} onHide={handleCloseShowsocial}>
         <Modal.Header closeButton>
           <Modal.Title className='text-center '> 
-          <div className=' titlemodel   text-center bg-info ' >Add social intersts Care</div>
+          <div className=' titlemodel    ' >Add social intersts Care</div>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -405,10 +421,11 @@ const handel_clientId=(e)=>{
       <Modal show={showRisks} onHide={handleCloseRisks}>
         <Modal.Header closeButton>
           <Modal.Title className='text-center '> 
-          <div className=' titlemodel   text-center bg-info ' >Add Risks Care</div>
+          <div className=' titlemodel   text-center  ' >Add Risks Care</div>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <AddRiskAssessment handleCloseRisks={handleCloseRisks}/>
 
              </Modal.Body>
         <Modal.Footer>
@@ -446,9 +463,13 @@ const handel_clientId=(e)=>{
 <span className="input-group-text spantxt" id="basic-addon1">Client Name</span>
 <select class="form-select form-select-sm inputshadowGender " onChange={handel_clientId}  aria-label=".form-select-sm example">
 <option selected>Client Name</option>
-<option value="9">heigh</option>
-<option value="medium">medium</option>
-<option value="low">low</option>
+{
+  AllServiceUserData?.map((item,index)=>{return(
+<option key={index} value={item?.id}>mohammed</option>
+  )})
+}
+
+
 
 </select>
 </div>
@@ -633,46 +654,20 @@ AllUserData?.map((item,index)=>{return (
 
 <div class="input-group ms-2 mb-3   ">
 {/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
-<form className='container p-1' style={{width:"100%"}}>
-<div className='checkboxstyle  checkshadow' style={{width:"100%"}}>
-<input onChange={handel_oral_care}  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-
+<form className='containerBox p-1' style={{width:"100%"}}>
+{
+  OralCareData?.map((item,index)=>{return(
 <div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" onChange={handel_oral_care} id="vehicle1" name="vehicle1" value="Bike2"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
+<input onChange={()=>{return(handel_oral_care,setitemOral(item))}} type="checkbox" id="vehicle1s" name="vehicle1s" value={item?.name}/>
+<label className='ms-1' for="vehicle1s "> {item?.name}</label><br/>
 </div>
+  )})
+}
 
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input   type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
 
 
 </form>
-{/* <Multiselect
-                className=" "
-                placeholder=" Select"
-                options={options}
-                onSelect={onSelect}
-                onRemove={onRemove}
-                showCheckbox = {true}
-                displayValue="name"
-                style={{ color: "red"  }}
-            /> */}
+
             
             </div>
 
@@ -694,7 +689,7 @@ AllUserData?.map((item,index)=>{return (
 <div class="input-group ms-2 mb-3   ">
 
 {/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
-<form className='container p-1' style={{width:"100%"}}>
+<form className='containerBox p-1' style={{width:"100%"}}>
 <div className='checkboxstyle  checkshadow' style={{}}>
 <input onChange={handel_personal_care}  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
 <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
@@ -754,7 +749,7 @@ AllUserData?.map((item,index)=>{return (
 </div>
 <div class="input-group ms-2 mb-3   ">
 {/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
-<form className='container p-1' style={{width:"100%"}}>
+<form className='containerBox p-1' style={{width:"100%"}}>
 <div className='checkboxstyle  checkshadow' style={{}}>
 <input onChange={handel_skin_care}  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
 <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
@@ -814,7 +809,7 @@ AllUserData?.map((item,index)=>{return (
 </div>
 <div class="input-group ms-2 mb-3   ">
 {/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
-<form className='container p-1' style={{width:"100%"}}>
+<form className='containerBox p-1' style={{width:"100%"}}>
 <div className='checkboxstyle  checkshadow' style={{}}>
 <input onChange={handel_health_care} type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
 <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
@@ -876,7 +871,7 @@ AllUserData?.map((item,index)=>{return (
 
 <div class="input-group ms-2 mb-3   ">
 {/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
-<form className='container p-1' style={{width:"100%"}}>
+<form className='containerBox p-1' style={{width:"100%"}}>
 
 {
   social_interestsData?.map((item,index)=>{return(
@@ -913,7 +908,7 @@ AllUserData?.map((item,index)=>{return (
 
 <div class="input-group ms-2 mb-3   ">
 {/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
-<form className='container p-1' style={{width:"100%"}}>
+<form className='containerBox p-1' style={{width:"100%"}}>
 <div className='checkboxstyle  checkshadow' style={{}}>
 <input onChange={handel_continence_care}  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
 <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
@@ -976,7 +971,7 @@ AllUserData?.map((item,index)=>{return (
 
 <div class="input-group ms-2 mb-3   ">
 {/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
-<form className='container p-1' style={{width:"100%"}}>
+<form className='containerBox p-1' style={{width:"100%"}}>
 <div className='checkboxstyle  checkshadow' style={{}}>
 <input onChange={handel_nutrition_and_hydration}  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
 <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
@@ -1036,46 +1031,22 @@ AllUserData?.map((item,index)=>{return (
 </div>
 <div class="input-group ms-2 mb-3   ">
 {/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
-<form className='container p-1' style={{width:"100%"}}>
+<form className='containerBox p-1' style={{width:"100%"}}>
+
+{
+  AllRiskAssesmentData?.map((item,index)=>{return(
 <div className='checkboxstyle  checkshadow' style={{}}>
-<input onChange={(e)=>handel_risks(e)} type="checkbox" id="vehicle12" name="vehicle12" value="Bike1"/>
-<label className='ms-1' for="vehicle12 "> I have a bike</label><br/>
+<input onChange={handel_social_intersts} type="checkbox" id="vehicle1s" name="vehicle1s" value={item?.name}/>
+<label className='ms-1' for="vehicle1s "> {item?.name}</label><br/>
 </div>
+  )})
+}
 
 
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" onChange={handel_risks} id="vehicle1" name="vehicle1" value="Bike2"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" onChange={handel_risks} id="vehicle1" name="vehicle1" value="Bike3"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-{/* <div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div> */}
 
 
 </form>
-{/* <Multiselect
-                className=" "
-                placeholder=" Select"
-                options={options}
-                onSelect={onSelect}
-                onRemove={onRemove}
-                showCheckbox = {true}
-                displayValue="name"
-                style={{ color: "red"  }}
-            /> */}
+
             
             </div>
 
@@ -1103,7 +1074,7 @@ AllUserData?.map((item,index)=>{return (
 </div>
 <div class="input-group ms-2 mb-3   ">
 {/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
-<form className='container p-1' style={{width:"100%"}}>
+<form className='containerBox p-1' style={{width:"100%"}}>
 <div className='checkboxstyle  checkshadow' style={{}}>
 <input onChange={handel_medication_managment} type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
 <label className='ms-1' for="vehicle1 "> I have a bike</label><br/>

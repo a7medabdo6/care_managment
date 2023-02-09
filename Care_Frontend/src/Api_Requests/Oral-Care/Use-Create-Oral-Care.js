@@ -1,7 +1,7 @@
 import baseUrl from '../../Api/baseURL'
 
 
-export const UseCreateOral_CareData  = async data => {
+export const UseCreateOralCareData  = async data => {
     const config = {
         headers: {
             
@@ -9,5 +9,5 @@ export const UseCreateOral_CareData  = async data => {
         }
     }
     return await baseUrl.post(
-      'social-interests',data,config );
+      'oral-care',data,config );
   };

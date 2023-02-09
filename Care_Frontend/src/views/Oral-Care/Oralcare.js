@@ -1,30 +1,32 @@
 
-import { Deletsocial_interestsApi } from 'Hook/Social-interests/Delet-Social-interests-Hook';
-import { useGetsocial_interestsApi } from 'Hook/Social-interests/Get-Social-interests-Hook';
+
+import { DeletOralCareApi } from 'Hook/Oral-Care/Delet-Oral-Care-Hook';
+import { useGetOralCareApi } from 'Hook/Oral-Care/Get-Oral-Care-Hook';
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
-import AddsocialAssessment from './Add-socialinterests.js/Add-socialinterests';
-import Editesocial from './Edite-socialinterests.js/Edite-socialinterests';
+import AddOralCare from './Add-Oral-.js/Add-Oral';
+import EditeOralCare from './Edite-Oral.js/Edite-Oral';
 
-import "./social.css"
+
+import "./Oralcare.css"
 const Socialinterests =()=>{
-  const {data} =  useGetsocial_interestsApi()
-  const {social_interestsData} = useSelector(state => state.GetAllsocial_interestseSlice)
+  const {data} =  useGetOralCareApi()
+  const {OralCareData} = useSelector(state => state.GetAllOralCareeSlice)
 
-const [itemdata,setitemdata]=useState()
 
-  const {isLoading,mutate:SubmitDeletsocialAssesment,isError,error,refetch} =  Deletsocial_interestsApi()
-  const {Deletsocial_interestsData} = useSelector(state => state.Deletsocial_interestsSlice)
 
-  console.log(social_interestsData)
+  const {isLoading,mutate:SubmitDeletOralCre,isError,error,refetch} =  DeletOralCareApi()
+  const {DeletOralCareData} = useSelector(state => state.DeletOralCareSlice)
 
-  console.log(Deletsocial_interestsData)
+  console.log(OralCareData)
+
+  console.log(DeletOralCareData)
 const [Id,setId] =useState()
   const handelDeletsocial =(id)=>{
-    SubmitDeletsocialAssesment(id)
+    SubmitDeletOralCre(id)
     handleCloseDelet()
   }
   const [showDelet, setshowDelet] = useState(false);
@@ -55,6 +57,8 @@ const [Id,setId] =useState()
             setshowaddsocial(true)
         )
     }
+console.log(OralCareData)
+    const [itemdata,setitemdata]= useState()
     return(
 
         
@@ -62,11 +66,11 @@ const [Id,setId] =useState()
             <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title className='text-center '> 
-          <div className=' titlemodel   text-center bg-info ' >Add social Assessment</div>
+          <div className=' titlemodel   text-center bg-info ' >Add OralCare</div>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <AddsocialAssessment handleClose={handleClose}/>
+        <AddOralCare handleClose={handleClose}/>
 
              </Modal.Body>
         <Modal.Footer>
@@ -80,11 +84,11 @@ const [Id,setId] =useState()
       <Modal show={showEdite} onHide={handleCloseEdite}>
         <Modal.Header closeButton>
           <Modal.Title className='text-center '> 
-          <div className=' titlemodel   text-center p-1'>Edite social interests</div>
+          <div className=' titlemodel   text-center bg-info p-1'>Edite OralCare</div>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-           <Editesocial Id={Id} handleCloseEdite={handleCloseEdite} itemdata={itemdata}/>
+           <EditeOralCare Id={Id} handleCloseEdite={handleCloseEdite} itemdata={itemdata}/>
              </Modal.Body>
         <Modal.Footer>
       
@@ -95,7 +99,7 @@ const [Id,setId] =useState()
       <Modal show={showDelet} onHide={handleCloseDelet}>
         <Modal.Header closeButton>
           <Modal.Title className='text-center '> 
-          <div className=' titlemodel   text-center  bg-gradient p-1'>Alert</div>
+          <div className=' titlemodel   text-center bg-info bg-gradient p-1'>Alert</div>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -110,28 +114,33 @@ const [Id,setId] =useState()
           </Button>
         </Modal.Footer>
       </Modal>
-            <div className="text-center fw-bold m-5 fs-1">Social interests</div>
+            <div className="text-center fw-bold m-5 fs-1">Oral Care</div>
             <div>
                 
           <table  className="table table-striped border mt-3 table-responsive">
   <thead >
     <tr className="bg-info bg-gradient text-center">
       <th scope="col">Name</th>
-      <th scope="col">Type</th>
-      
+      <th scope="col">Frequency</th>
+      <th scope="col">Created</th>
+      <th scope="col">time</th>
+      <th scope="col">Modified</th>
+
       <th scope="col">Actions</th>
 
     </tr>
   </thead>
   <tbody className='text-center'>
     {
-      social_interestsData?.map((item,index)=>{
+      OralCareData?.map((item,index)=>{
         return(
           <tr key={index}>
-          <td>{item.name}</td>
-          <td>{item.type}</td>
-      
-      
+          <td>{item?.name}</td>
+          <td>{item?.frequency}</td>
+          <td>{item?.created_at}</td>
+          <td>{item?.time}</td>
+          <td>{item?.time}</td>
+
           <td >
           <i className=" me-5 fa-regular fa-pen-to-square" onClick={()=>(handleShowEdite(),setId(item.id),setitemdata(item))}></i>
           <i onClick={()=>(handleShowDelet(),setId(item.id))} className="fas fa-trash-alt"></i>

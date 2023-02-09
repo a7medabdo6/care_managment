@@ -118,7 +118,12 @@ const routes = [
         exact: true,
         component: lazy(() => import('views/Socialinterests'))
       },
-      
+
+         {
+        path: '/oralcare',
+        exact: true,
+        component: lazy(() => import('views/Oral-Care'))
+      },
       /******************************************************************************* */
       {
         path: '/Assessments',
