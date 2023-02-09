@@ -26,7 +26,7 @@ services:
       # Where our data will be persisted
     volumes:
       - db: /var/lib/mysql
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
   adminer:
     image: adminer
     restart: always
