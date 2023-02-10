@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class PersonalCare {
+export class HouseKeeping {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -30,7 +30,7 @@ export class PersonalCare {
   })
   is_done: boolean;
 
-  @ManyToMany(() => Plan, (plan) => plan.personal_care, {
+  @ManyToMany(() => Plan, (plan) => plan.house_keeping, {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
   })

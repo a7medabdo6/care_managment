@@ -20,6 +20,8 @@ import { ServiceUserService } from 'src/service-user/service-user.service';
 import { SocialInterestsService } from 'src/social-interests/social-interests.service';
 import { OralCare } from 'src/oral-care/entities/oral-care.entity';
 import { OralCareService } from 'src/oral-care/oral-care.service';
+import { HouseKeepingService } from 'src/house-keeping/house-keeping.service';
+import { PersonalCareService } from 'src/personal-care/personal-care.service';
 
 @Controller('plan')
 @UseInterceptors(CurrentUserInterceptor)
@@ -32,6 +34,8 @@ export class PlanController {
     private readonly risksService: RiskAssesmentService,
     private readonly socialInterests: SocialInterestsService,
     private readonly oralcareservice: OralCareService,
+    private readonly HouseKeepingService: HouseKeepingService,
+    private readonly PersonalCareService: PersonalCareService,
   ) {}
 
   @Post()
@@ -46,7 +50,12 @@ export class PlanController {
     const socialInterests = await this.socialInterests.findAllByIds(
       createPlanDto.socialInterests,
     );
-
+    const houseKeeping = await this.HouseKeepingService.findAllByIds(
+      createPlanDto.house_keeping,
+    );
+    const personalcare = await this.PersonalCareService.findAllByIds(
+      createPlanDto.personal_care,
+    );
     return this.planService.create(
       createPlanDto,
       User,
@@ -54,6 +63,8 @@ export class PlanController {
       risks,
       socialInterests,
       oralcare,
+      houseKeeping,
+      personalcare,
     );
   }
 

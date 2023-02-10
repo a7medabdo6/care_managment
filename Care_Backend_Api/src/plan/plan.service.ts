@@ -4,7 +4,9 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { HouseKeeping } from 'src/house-keeping/entities/house-keeping.entity';
 import { OralCare } from 'src/oral-care/entities/oral-care.entity';
+import { PersonalCare } from 'src/personal-care/entities/personal-care.entity';
 import { RiskAssesment } from 'src/risk_assesment/entities/risk_assesment.entity';
 import { ServiceUser } from 'src/service-user/entities/service-user.entity';
 import { SocialInterest } from 'src/social-interests/entities/social-interest.entity';
@@ -25,6 +27,8 @@ export class PlanService {
     risks: RiskAssesment[],
     socialInterests: SocialInterest[],
     oralcare: OralCare[],
+    houseKeeping: HouseKeeping[],
+    personalcare:PersonalCare[]
   ) {
     const plan = await this.repo.create(createPlanDto);
     plan.user = User;
@@ -32,6 +36,8 @@ export class PlanService {
     plan.riskAssesments = risks;
     plan.socialInterests = socialInterests;
     plan.oral_care = oralcare;
+    plan.house_keeping = houseKeeping;
+    plan.personal_care=personalcare
     return this.repo.save(plan);
   }
 

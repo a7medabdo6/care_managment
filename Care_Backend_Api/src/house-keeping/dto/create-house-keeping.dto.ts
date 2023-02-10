@@ -1,8 +1,11 @@
 import { IsOptional, IsString } from 'class-validator';
 
-export class CreatePersonalCareDto {
+export class CreateHouseKeepingDto {
   @IsString()
   name: string;
+
+  //   @IsOptional()
+  //   type: string;
 
   @IsString()
   frequency: string;
