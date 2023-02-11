@@ -11,7 +11,7 @@ services:
     ports:
       - '5000:5000'
     depends_on:  # don't run untill mongoDb service will not start 
-            - db 
+            - mysql 
   mysql:
     image: mysql
     container_name: mysql_container
