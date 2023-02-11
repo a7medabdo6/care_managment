@@ -12,7 +12,7 @@ services:
       - '5000:5000'
     depends_on:  # don't run untill mongoDb service will not start 
             - db 
-  db:
+  mysql:
     image: mysql
     container_name: mysql_container
     # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
