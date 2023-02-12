@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services:
   nestjs-app:
     build:
@@ -22,13 +22,8 @@ services:
     cap_add:
       - SYS_NICE
     environment:
-      MYSQL_DATABASE: 'care'
-      # So you don't have to use root, but you can if you like
-      # You can use whatever password you like
-      # MYSQL_USER: "root"
-      # MYSQL_PASSWORD: 'password'
-      # Password for root access
-      MYSQL_ROOT_PASSWORD: 'toor'
+      - MYSQL_DATABASE=care
+      - MYSQL_ROOT_PASSWORD=toor 
     ports:
       # <Port exposed> : < MySQL Port running inside container>
       - '3306:3306'
