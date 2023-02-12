@@ -67,7 +67,7 @@ import { HouseKeeping } from './house-keeping/entities/house-keeping.entity';
         OralCare,
         PersonalCare,
         HouseKeeping,
-        PersonalCare
+        PersonalCare,
       ],
       synchronize: true,
     }),
@@ -81,7 +81,7 @@ import { HouseKeeping } from './house-keeping/entities/house-keeping.entity';
     OralCareModule,
     PersonalCareModule,
     HouseKeepingModule,
-    PersonalCareModule
+    PersonalCareModule,
   ],
   controllers: [AppController],
   providers: [AppService, CronService],
