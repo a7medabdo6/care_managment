@@ -45,6 +45,14 @@ export class PlanService {
     const plans = await this.repo.find({});
     return plans;
   }
+  async findallForOneWorker (id:number) {
+    return this.repo.find({
+      where:{
+        user:id
+      },
+      relations:["user"]
+    })
+  }
 
   async findOne(id: number) {
     console.log(id, 'id');
