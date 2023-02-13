@@ -72,6 +72,10 @@ export class PlanController {
   findAll() {
     return this.planService.findAll();
   }
+  @Get('worker-plans/:id')
+  findallForOneWorker(@Param('id') id:string){
+    return this.planService.findallForOneWorker(+id)
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
