@@ -22,9 +22,6 @@ export class CreatePlanDto {
   mobility: string;
 
   @IsOptional()
-  personal_care: string;
-
-  @IsOptional()
   continence_care: string;
 
   @IsOptional()
@@ -83,4 +80,10 @@ export class CreatePlanDto {
 
   @IsArray()
   oral_care: [];
+
+  @IsArray()
+  house_keeping: [];
+
+  @IsArray()
+  personal_care: [];
 }

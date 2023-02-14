@@ -30,6 +30,8 @@ import { OralCareModule } from './oral-care/oral-care.module';
 import { PersonalCareModule } from './personal-care/personal-care.module';
 import { OralCare } from './oral-care/entities/oral-care.entity';
 import { PersonalCare } from './personal-care/entities/personal-care.entity';
+import { HouseKeepingModule } from './house-keeping/house-keeping.module';
+import { HouseKeeping } from './house-keeping/entities/house-keeping.entity';
 @Module({
   imports: [
     ScheduleModule.forRoot(),
@@ -64,6 +66,8 @@ import { PersonalCare } from './personal-care/entities/personal-care.entity';
         SocialInterest,
         OralCare,
         PersonalCare,
+        HouseKeeping,
+        PersonalCare,
       ],
       synchronize: true,
     }),
@@ -75,6 +79,8 @@ import { PersonalCare } from './personal-care/entities/personal-care.entity';
     RiskAssesmentModule,
     SocialInterestsModule,
     OralCareModule,
+    PersonalCareModule,
+    HouseKeepingModule,
     PersonalCareModule,
   ],
   controllers: [AppController],

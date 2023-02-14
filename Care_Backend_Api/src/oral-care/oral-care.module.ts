@@ -7,8 +7,8 @@ import { OralCare } from './entities/oral-care.entity';
 @Module({
   controllers: [OralCareController],
   imports: [TypeOrmModule.forFeature([OralCare])],
+  exports: [OralCareService],
 
   providers: [OralCareService],
-  exports: [OralCareService],
 })
 export class OralCareModule {}

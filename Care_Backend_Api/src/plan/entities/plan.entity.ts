@@ -1,4 +1,6 @@
+import { HouseKeeping } from 'src/house-keeping/entities/house-keeping.entity';
 import { OralCare } from 'src/oral-care/entities/oral-care.entity';
+import { PersonalCare } from 'src/personal-care/entities/personal-care.entity';
 import { RiskAssesment } from 'src/risk_assesment/entities/risk_assesment.entity';
 import { ServiceUser } from 'src/service-user/entities/service-user.entity';
 import { SocialInterest } from 'src/social-interests/entities/social-interest.entity';
@@ -33,9 +35,6 @@ export class Plan {
 
   @Column()
   mobility: string;
-
-  @Column()
-  personal_care: string;
 
   @Column()
   continence_care: string;
@@ -141,6 +140,42 @@ export class Plan {
     },
   })
   oral_care?: OralCare[];
+
+  @ManyToMany(
+    () => HouseKeeping,
+    (houseKeeping) => houseKeeping.plans, //optional
+    { onDelete: 'NO ACTION', onUpdate: 'NO ACTION' },
+  )
+  @JoinTable({
+    name: 'plan_housekeeping',
+    joinColumn: {
+      name: 'plan_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'housekeeping_id',
+      referencedColumnName: 'id',
+    },
+  })
+  house_keeping?: HouseKeeping[];
+
+  @ManyToMany(
+    () => PersonalCare,
+    (PersonalCare) => PersonalCare.plans, //optional
+    { onDelete: 'NO ACTION', onUpdate: 'NO ACTION' },
+  )
+  @JoinTable({
+    name: 'plan_personalcare',
+    joinColumn: {
+      name: 'plan_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'personalcare_id',
+      referencedColumnName: 'id',
+    },
+  })
+  personal_care?: PersonalCare[];
 
   @CreateDateColumn({
     type: 'timestamp',
