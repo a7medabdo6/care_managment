@@ -10,7 +10,7 @@ import useRouter from 'utils/useRouter';
 
 import notify from 'Hook/useNotifaction';
 import { UseCreateRiskAssesmentData } from 'Api_Requests/RiskAssisment/Use-Create-Risk-assisment';
-import { CreateRiskAssesmentSliceInfo } from 'Redux_Slices/RiskAssesment/Create-RiskAssesment-Slice';
+import { CreateRiskAssesmentSliceInfo, errors } from 'Redux_Slices/RiskAssesment/Create-RiskAssesment-Slice';
 
 
 export const CreateRiskAssesmentApi = data =>{
@@ -41,7 +41,15 @@ export const CreateRiskAssesmentApi = data =>{
     
         },
         onError: err => {
-          // console.log(err.response.data.message);
+          // console.log(err.respo
+          const result = {
+            status: err.status + '-' + err.statusText,
+            headers: err.headers,
+            data: err?.response?.data?.message
+          };
+
+          console.log(result.data);
+          dispatch(errors(result?.data));
           //   dispatch(errorAtLogin(err.response.data.detail));
           //  return err;
           notify(err?.response?.data?.message,"error")       

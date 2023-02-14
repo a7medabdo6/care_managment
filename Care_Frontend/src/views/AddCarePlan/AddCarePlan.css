@@ -1,10 +1,8 @@
 .box{
-    margin-left: 100px;
-    margin-right: 100px;
+   
     background-color: #dfdfe2;
 }
 .title{
-  height: fit-content;
   width: fit-content;
   background-color: #72B3BF;
   border-radius: 8%;
@@ -18,11 +16,8 @@
     overflow-y: scroll;
 margin-left: 0;
    }
-.container { border:2px solid #ccc;
-   width:100%;
-     overflow-y: scroll;
-margin-left: 0;
-    }
+ 
+
 
 .btn{
   background-color: #72B3BF;
@@ -58,12 +53,12 @@ border: none;
     font-size: 1em;
     line-height: 1.45;
     outline: none;
-    padding: 0.6em 1.45em 0.7em;
+    padding: 0em 1.45em -1.3em;
     -webkit-transition: .18s ease-out;
     -moz-transition: .18s ease-out;
     -o-transition: .18s ease-out;
     transition: .18s ease-out;
-    height: 29px;
+    height: 38px;
     margin-right: 15px;
   }
   
@@ -93,7 +88,7 @@ border: none;
   }
 
   .spantxt{
-  height: 29px;
+  height: 38px;
   width: 200px;
   }
 

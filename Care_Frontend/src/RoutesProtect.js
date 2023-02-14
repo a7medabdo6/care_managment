@@ -19,7 +19,7 @@ const routes = [
       {
         path: '/user/CreateProfile',
         exact: true,
-        component: lazy(() => import('views/GreateProfile'))
+        component: lazy(() => import('views/CreateProfile'))
       },
     
     
@@ -101,11 +101,11 @@ const routes = [
         component: lazy(() => import('views/AddCarePlan'))
       },
 
-      {
-        path: '/EditeCarePlan',
-        exact: true,
-        component: lazy(() => import('views/EditeCarePlan'))
-      },
+      // {
+      //   path: '/EditeCarePlan',
+      //   exact: true,
+      //   component: lazy(() => import('views/EditeCarePlan'))
+      // },
 
       {
         path: '/CarePlan',
@@ -124,6 +124,17 @@ const routes = [
         exact: true,
         component: lazy(() => import('views/Oral-Care'))
       },
+      {
+        path: '/housekeeping',
+        exact: true,
+        component: lazy(() => import('views/HouseKeeping'))
+      },
+      {
+        path: '/PersonalCare',
+        exact: true,
+        component: lazy(() => import('views/PersonalCare'))
+      },
+      
       /******************************************************************************* */
       {
         path: '/Assessments',
@@ -137,9 +148,9 @@ const routes = [
       },
      
       {
-        path: '/service/user',
+        path: '/viewServiceUser/:id',
         exact: true,
-        component: lazy(() => import('views/ServiceUser'))
+        component: lazy(() => import('views/AllServiceUser/View-serviceUser'))
       },
       {
         path: '/AllServiceUser',
@@ -166,6 +177,13 @@ const routes = [
         exact: true,
         component: lazy(() => import('views/MailBox/Compose'))
       },
+      {
+        path: '/viewServiceUser',
+        exact: true,
+        component: lazy(() => import('views/AllServiceUser/View-serviceUser'))
+      },
+
+      
       /************************************************************** */
       {
         path: '/changelog',

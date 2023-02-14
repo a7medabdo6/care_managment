@@ -21,7 +21,7 @@ const routes = [
     path: '*',
     component: AuthLayout,
     routes: [
-      {
+      { 
         path: '/auth/login',
         exact: true,
         component: lazy(() => import('views/Login'))

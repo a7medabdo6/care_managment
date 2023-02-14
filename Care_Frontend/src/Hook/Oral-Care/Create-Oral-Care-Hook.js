@@ -9,8 +9,8 @@ import useRouter from 'utils/useRouter';
 
 
 import notify from 'Hook/useNotifaction';
-import { CreateOralCaretSliceInfo } from 'Redux_Slices/Oral-Care/Create-Oral-Care-Slice';
 import { UseCreateOralCareData } from 'Api_Requests/Oral-Care/Use-Create-Oral-Care';
+import { CreateOralCaretSliceInfo, errors } from 'Redux_Slices/Oral-Care/Create-Oral-Care-Slice';
 
 
 
@@ -34,7 +34,7 @@ export const CreateOralCaretApi = data =>{
           // router.history.push('/');
           QueryClient.invalidateQueries('GetAllOralCare');
 
-             notify("The social interests  has been created","success")    
+             notify("The Oral Care  has been created","success")    
   
 //    setTimeout(() => {
 //       router.history.push('/');
@@ -42,6 +42,14 @@ export const CreateOralCaretApi = data =>{
     
         },
         onError: err => {
+          const result = {
+            status: err.status + '-' + err.statusText,
+            headers: err.headers,
+            data: err?.response?.data?.message
+          };
+
+          console.log(result.data);
+          dispatch(errors(result?.data));
           // console.log(err.response.data.message);
           //   dispatch(errorAtLogin(err.response.data.detail));
           //  return err;

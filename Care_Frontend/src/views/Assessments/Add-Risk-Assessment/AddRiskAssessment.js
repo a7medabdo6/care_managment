@@ -5,12 +5,13 @@ import "./AddRiskAssessment.css"
 import Multiselect from 'multiselect-react-dropdown';
 import { CreateRiskAssesmentApi } from "Hook/RiskAssesment/Create-Risk-Assesment-Hook";
 import { useSelector } from "react-redux";
-const AddRiskAssessment =({handleClose})=>{
+import notify from "Hook/useNotifaction";
+import { useEffect } from "react";
+const AddRiskAssessment =({handleClose,SubmitCreateRiskAssesment,CreateRiskAssesmentrData,errors})=>{
 
 
-    const {isLoading,mutate:SubmitCreateRiskAssesment,isError,error,refetch} =  CreateRiskAssesmentApi()
-    const {CreateRiskAssesmentrData} = useSelector(state => state.CreateRiskAssesmentSlice)
-console.log(CreateRiskAssesmentrData)
+    // const {isLoading,mutate:SubmitCreateRiskAssesment,isError,error,refetch} =  CreateRiskAssesmentApi()
+    // const {CreateRiskAssesmentrData} = useSelector(state => state.CreateRiskAssesmentSlice)
 
 const [name,setname]=useState()
 const [level,setlevel]=useState()
@@ -40,11 +41,28 @@ const handelSave =()=>{
     }
     SubmitCreateRiskAssesment(data)
   
-    handleClose()
 
    
     
 }
+
+useEffect(()=>{
+    if(errors){
+        if(errors !== [] )
+    errors.map((item)=>{return(
+        notify(item,"error")
+    )})
+
+    }
+},[errors])
+ 
+
+useEffect(()=>{
+    if(CreateRiskAssesmentrData){
+        handleClose()
+
+    }
+},[CreateRiskAssesmentrData])
  
     return(
         
@@ -59,7 +77,7 @@ const handelSave =()=>{
 
 
 <div class="input-group m-2">
-<span className="input-group-text spantxt" style={{height:"35px"}} id="basic-addon1">Type Risk</span>
+<span className="input-group-text spantxt" style={{height:"38px"}} id="basic-addon1">Type Risk</span>
 <select class="form-select form-select-sm inputshadowselect " onChange={handelType}  aria-label=".form-select-sm example">
 <option selected>Type Risk</option>
 <option value="medication">medication</option>
@@ -73,7 +91,7 @@ const handelSave =()=>{
 
 
 <div class="input-group m-2">
-<span className="input-group-text spantxt" style={{height:"35px"}} id="basic-addon1">Risk level</span>
+<span className="input-group-text spantxt" style={{height:"38px"}} id="basic-addon1">Risk level</span>
 <select class="form-select form-select-sm inputshadowselect " onChange={HandelLevel}  aria-label=".form-select-sm example">
 <option selected>Risk level</option>
 <option value="heigh">heigh</option>

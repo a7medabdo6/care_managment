@@ -27,7 +27,7 @@ export const useEditeOralCareApi = (FormData) => {
         // router.history.push('/');
         QueryClient.invalidateQueries('GetAllOralCare');
 
-        notify("The OralCare  has been Edite","success")    
+        notify("The Oral Care  has been Edite","success")    
 
 
   

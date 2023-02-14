@@ -63,9 +63,8 @@ const handelSave =()=>{
 
 
 <div class="input-group m-2">
-<span className="input-group-text spantxt" style={{height:"35px"}} id="basic-addon1">Type Risk</span>
+<span className="input-group-text spantxt" style={{height:"38px"}} id="basic-addon1">Type Risk</span>
 <select class="form-select form-select-sm inputshadowselect " onChange={handelType}  aria-label=".form-select-sm example">
-<option selected>Type Risk</option>
 <option value="medication">medication</option>
 <option value="Generic">Generic</option>
 
@@ -77,9 +76,8 @@ const handelSave =()=>{
 
 
 <div class="input-group m-2">
-<span className="input-group-text spantxt" style={{height:"35px"}} id="basic-addon1">Risk level</span>
+<span className="input-group-text spantxt" style={{height:"38px"}} id="basic-addon1">Risk level</span>
 <select class="form-select form-select-sm inputshadowselect " onChange={HandelLevel}  aria-label=".form-select-sm example">
-<option selected>Risk level</option>
 <option value="heigh">heigh</option>
 <option value="medium">medium</option>
 <option value="low">low</option>

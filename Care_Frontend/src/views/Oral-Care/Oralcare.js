@@ -1,5 +1,6 @@
 
 
+import { CreateOralCaretApi } from 'Hook/Oral-Care/Create-Oral-Care-Hook';
 import { DeletOralCareApi } from 'Hook/Oral-Care/Delet-Oral-Care-Hook';
 import { useGetOralCareApi } from 'Hook/Oral-Care/Get-Oral-Care-Hook';
 import React, { useState } from 'react';
@@ -13,6 +14,13 @@ import EditeOralCare from './Edite-Oral.js/Edite-Oral';
 
 import "./Oralcare.css"
 const Socialinterests =()=>{
+
+
+
+  const {mutate:SubmitCreateOral,isSuccess } =  CreateOralCaretApi()
+  const {CreateOralCaretrData,errors} = useSelector(state => state.CreateOralCaretSlice)
+console.log(errors)
+
   const {data} =  useGetOralCareApi()
   const {OralCareData} = useSelector(state => state.GetAllOralCareeSlice)
 
@@ -66,11 +74,11 @@ console.log(OralCareData)
             <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title className='text-center '> 
-          <div className=' titlemodel   text-center bg-info ' >Add OralCare</div>
+          <div className=' titlemodel   text-center ' >Add OralCare</div>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <AddOralCare handleClose={handleClose}/>
+        <AddOralCare handleClose={handleClose} SubmitCreateOral={SubmitCreateOral} errors={errors} CreateOralCaretrData={CreateOralCaretrData}/>
 
              </Modal.Body>
         <Modal.Footer>
@@ -84,7 +92,7 @@ console.log(OralCareData)
       <Modal show={showEdite} onHide={handleCloseEdite}>
         <Modal.Header closeButton>
           <Modal.Title className='text-center '> 
-          <div className=' titlemodel   text-center bg-info p-1'>Edite OralCare</div>
+          <div className=' titlemodel   text-center'>Edite OralCare</div>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -99,7 +107,7 @@ console.log(OralCareData)
       <Modal show={showDelet} onHide={handleCloseDelet}>
         <Modal.Header closeButton>
           <Modal.Title className='text-center '> 
-          <div className=' titlemodel   text-center bg-info bg-gradient p-1'>Alert</div>
+          <div className=' titlemodel   text-center '>Alert</div>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -109,9 +117,12 @@ console.log(OralCareData)
           <Button variant="secondary" onClick={handleCloseDelet}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={()=>handelDeletsocial(Id)} >
+
+          <button type="button" onClick={()=>handelDeletsocial(Id)} className="btn btn-danger">Delet</button>
+
+          {/* <Button variant="primary" onClick={()=>handelDeletsocial(Id)} >
             Delet
-          </Button>
+          </Button> */}
         </Modal.Footer>
       </Modal>
             <div className="text-center fw-bold m-5 fs-1">Oral Care</div>
@@ -160,14 +171,14 @@ console.log(OralCareData)
   </tbody>
 </table>
         </div>
-        <div className="d-flex justify-content-between flex-row-reverse">
-            <div className="d-flex">
-                <div className="p-3">
-                <button onClick={handleShow} type="button" className="btn btn-secondary bg-info bg-gradient">
+        <div className="d-flex justify-content-between flex-row-reverse align-items-center">
+            <div className=" d-flex justify-content-between flex-row-reverse align-items-center">
+                <div className="p-3 d-flex justify-content-between flex-row-reverse align-items-center">
+             
+
+                <button onClick={handleShow} type="button" className="btn btn-secondary d-flex justify-content-between flex-row-reverse align-items-center inputshadow">
                 <i className="fas fa-plus"></i>
                 </button>
-
-                
                 </div>
               
             </div>

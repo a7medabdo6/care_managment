@@ -27,6 +27,16 @@ import CreateOralCaretSlice from "./Redux_Slices/Oral-Care/Create-Oral-Care-Slic
 import EditeOralCareDataSlice from "./Redux_Slices/Oral-Care/Edite-Oral-Care-Slice"
 import DeletOralCareSlice from "./Redux_Slices/Oral-Care/Delet-Oral-Care-Slice"
 import GetAllOralCareeSlice from "./Redux_Slices/Oral-Care/Get-Oral-Care-Slice"
+import CreateHouseKeepingtSlice from "./Redux_Slices/House_Keeping/Create-House_Keeping-Slice"
+import DeletHouseKeepingSlice from "./Redux_Slices/House_Keeping/Delet-House_Keeping-Slice"
+import EditeHouseKeepingDataSlice from "./Redux_Slices/House_Keeping/Edite-House_Keeping-Slice"
+import GetAllHouseKeepingeSlice from "./Redux_Slices/House_Keeping/Get-House_Keeping-Slice"
+import CreatePersonalCaretSlice from "./Redux_Slices/Personal_Care/Create-Personale-Care-Slice.js"
+import DeletPersonalCareSlice from "./Redux_Slices/Personal_Care/Delet-Personale-Care-Slice"
+import EditePersonalCareDataSlice from "./Redux_Slices/Personal_Care/Edite-Personale-Care-Slice"
+import GetOneServiceUserSlice  from "./Redux_Slices/Service-User/Get-One-Service-User-Slice"
+import GetAllPersonalCareeSlice from "./Redux_Slices/Personal_Care/Get-Personale-Care-Slice"
+import WorkerSignUpSlice from "./Redux_Slices/Worker/WorkerSignUpSlice"
 export const store = configureStore({
   reducer: {
     UserInfo: userSlice,
@@ -56,8 +66,16 @@ export const store = configureStore({
     CreateOralCaretSlice:CreateOralCaretSlice,
     DeletOralCareSlice:DeletOralCareSlice,
     EditeOralCareDataSlice:EditeOralCareDataSlice,
-    GetAllOralCareeSlice:GetAllOralCareeSlice
-    
-
+    GetAllOralCareeSlice:GetAllOralCareeSlice,
+    CreateHouseKeepingtSlice:CreateHouseKeepingtSlice,
+    EditeHouseKeepingDataSlice:EditeHouseKeepingDataSlice,
+    GetAllHouseKeepingeSlice:GetAllHouseKeepingeSlice,
+    DeletHouseKeepingSlice:DeletHouseKeepingSlice,
+    EditePersonalCareDataSlice:EditePersonalCareDataSlice,
+    DeletPersonalCareSlice:DeletPersonalCareSlice,
+    CreatePersonalCaretSlice:CreatePersonalCaretSlice,
+    GetAllPersonalCareeSlice:GetAllPersonalCareeSlice,
+    GetOneServiceUserSlice:GetOneServiceUserSlice,
+    WorkerSignUpSlice:WorkerSignUpSlice,
    }
 })

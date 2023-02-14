@@ -35,7 +35,7 @@ export const DeletOralCareApi = (id) =>{
           // router.history.push('/');
           QueryClient.invalidateQueries('GetAllOralCare');
 
-             notify("The OralCare  has been Deleted","success")    
+             notify("The Oral Care  has been Deleted","success")    
   
 //    setTimeout(() => {
 //       router.history.push('/');

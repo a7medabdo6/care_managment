@@ -10,7 +10,7 @@ import useRouter from 'utils/useRouter';
 
 import notify from 'Hook/useNotifaction';
 import { UseCreatesocial_intereststData } from 'Api_Requests/Social-interests/Use-Create-Social-interests';
-import { Createsocial_intereststSliceInfo } from 'Redux_Slices/Social-interests/Create-Social-interests-Slice';
+import { Createsocial_intereststSliceInfo, errors } from 'Redux_Slices/Social-interests/Create-Social-interests-Slice';
 
 
 
@@ -42,6 +42,15 @@ export const Createsocial_intereststApi = data =>{
     
         },
         onError: err => {
+
+          const result = {
+            status: err.status + '-' + err.statusText,
+            headers: err.headers,
+            data: err?.response?.data?.message
+          };
+
+          console.log(result.data);
+          dispatch(errors(result?.data));
           // console.log(err.response.data.message);
           //   dispatch(errorAtLogin(err.response.data.detail));
           //  return err;

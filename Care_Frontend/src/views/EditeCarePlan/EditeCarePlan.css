@@ -6,7 +6,7 @@ background-color: #72B3BF;
 border-radius: 8%;
 margin-bottom: 8px;
 }
-.container { border:2px solid #ccc; width:95%; height: 100px; overflow-y: scroll;}
+
 .checkboxstyle{
 width: 100%;
 box-shadow: inset 0px 1px 8px rgba(0, 0, 0, 0.2);

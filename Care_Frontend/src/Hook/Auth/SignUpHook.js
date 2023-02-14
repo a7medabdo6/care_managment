@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import useRouter from 'utils/useRouter';
 import { useInsertDataSignUp } from "Api_Requests/useInsertDataSignUp";
-import SignUpSlice, { UserSignUp } from "Redux_Slices/auth/SignUpSlice";
+import SignUpSlice, { errors, UserSignUp } from "Redux_Slices/auth/SignUpSlice";
 
 import notify from 'Hook/useNotifaction';
 
@@ -35,6 +35,13 @@ export const useSignUpApi = data => {
   
       },
       onError: err => {
+        const result = {
+          status: err.status + '-' + err.statusText,
+          headers: err.headers,
+          data: err.data
+        };
+        dispatch(errors(result.data));
+
         console.log(err.response.data.message);
         //   dispatch(errorAtLogin(err.response.data.detail));
         //  return err;

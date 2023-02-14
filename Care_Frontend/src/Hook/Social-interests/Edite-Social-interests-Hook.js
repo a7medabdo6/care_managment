@@ -31,7 +31,7 @@ export const useEditesocial_interestsApi = (FormData) => {
         // router.history.push('/');
         QueryClient.invalidateQueries('GetAllsocial_interests');
 
-        notify("The social_interests  has been Edite","success")    
+        notify("The social interests  has been Edite","success")    
 
 
   

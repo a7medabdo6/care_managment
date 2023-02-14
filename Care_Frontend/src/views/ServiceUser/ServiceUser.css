@@ -19,7 +19,7 @@
     -moz-transition: .18s ease-out;
     -o-transition: .18s ease-out;
     transition: .18s ease-out;
-    height: 29px;
+    height: 38px;
   }
   
   .inputshadowGender{
@@ -37,7 +37,7 @@
     -moz-transition: .18s ease-out;
     -o-transition: .18s ease-out;
     transition: .18s ease-out;
-    height: 29px;
+    height: 38px;
   }
 
   .input-group{
@@ -45,7 +45,7 @@
   }
 
   .spantxt{
-  height: 29px;
+  height: 38px;
   width: 145px;
   }
 

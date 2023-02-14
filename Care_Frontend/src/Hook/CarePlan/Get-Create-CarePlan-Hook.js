@@ -10,7 +10,7 @@ import useRouter from 'utils/useRouter';
 
 import notify from 'Hook/useNotifaction';
 import { UseCreateCarePlantData } from 'Api_Requests/CarePlan/UseCreatCarePlan';
-import { CreateCarePlantSliceInfo } from 'Redux_Slices/CarePlan/Create-CarePlan-Slice';
+import { CreateCarePlantSliceInfo, errors } from 'Redux_Slices/CarePlan/Create-CarePlan-Slice';
 
 
 export const CreateCarePlantApi = data =>{
@@ -41,10 +41,20 @@ export const CreateCarePlantApi = data =>{
     
         },
         onError: err => {
-          // console.log(err.response.data.message);
+          const result = {
+            status: err.status + '-' + err.statusText,
+            headers: err.headers,
+            data: err?.response?.data?.message
+          };
+          // console.log(result,"eroorrrrrrrr");
+
+          console.log(result.data);
+          dispatch(errors(result?.data));
+
           //   dispatch(errorAtLogin(err.response.data.detail));
           //  return err;
-          notify(err?.response?.data?.message,"error")       
+         
+          notify(result.data,"error")       
   
         }
       }))

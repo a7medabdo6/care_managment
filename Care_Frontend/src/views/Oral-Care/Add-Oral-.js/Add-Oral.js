@@ -1,14 +1,13 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import Button from 'react-bootstrap/Button';
 
 import "./Add-Oral.css"
 import { useSelector } from "react-redux";
 import { CreateOralCaretApi } from "Hook/Oral-Care/Create-Oral-Care-Hook";
-const AddOralCare =({handleClose})=>{
+import notify from "Hook/useNotifaction";
+const AddOralCare =({handleClose,SubmitCreateOral,errors,CreateOralCaretrData})=>{
 
 
-    const {isLoading,mutate:SubmitCreatesocial,isError,error,refetch} =  CreateOralCaretApi()
-    const {CreateOralCaretrData} = useSelector(state => state.CreateOralCaretSlice)
 
 const [name,setname]=useState()
 const [frequency,setfrequency]=useState()
@@ -53,13 +52,35 @@ const handelSave =()=>{
         "time": Time,
         "dirctions": dirctions
       }
-    SubmitCreatesocial(data)
-    handleClose()
 
-   
+
+      SubmitCreateOral(data)
+  
+
+  
+
+
     
 }
+
+
+useEffect(()=>{
+    if(errors){
+        if(errors !== [] )
+    errors.map((item)=>{return(
+        notify(item,"error")
+    )})
+
+    }
+},[errors])
  
+
+useEffect(()=>{
+    if(CreateOralCaretrData){
+        handleClose()
+
+    }
+},[CreateOralCaretrData])
     return(
         
    
@@ -68,32 +89,32 @@ const handelSave =()=>{
 
 <div class="input-group m-2 ">
 <span className="input-group-text spantxt" id="basic-addon1" style={{width:"120px"}}>Name </span>
-<input type="text" className="form-control inputshadow" onChange={handelName}   placeholder="social Name " aria-label="social Name" aria-describedby="basic-addon1"/>
+<input type="text" className="form-control inputshadow" onChange={handelName}   placeholder="Name " aria-label="social Name" aria-describedby="basic-addon1"/>
 </div>
 
 
 <div class="input-group m-2 ">
 <span className="input-group-text spantxt" style={{width:"120px"}} id="basic-addon1">Type </span>
-<input type="text" className="form-control inputshadow" onChange={handelType}   placeholder="social Name " aria-label="social Name" aria-describedby="basic-addon1"/>
+<input type="text" className="form-control inputshadow" onChange={handelType}   placeholder="type" aria-label="social Name" aria-describedby="basic-addon1"/>
 </div>
 
 
 
 <div class="input-group m-2 ">
 <span className="input-group-text spantxt" style={{width:"120px"}} id="basic-addon1">frequency </span>
-<input type="text" className="form-control inputshadow" onChange={handelfrequency}   placeholder="social Name " aria-label="social Name" aria-describedby="basic-addon1"/>
+<input type="text" className="form-control inputshadow" onChange={handelfrequency}   placeholder="frequency " aria-label="social Name" aria-describedby="basic-addon1"/>
 </div>
 
 
 <div class="input-group m-2 ">
 <span className="input-group-text spantxt" style={{width:"120px"}} id="basic-addon1">dirctions </span>
-<input type="text" className="form-control inputshadow" onChange={handeldirctions}   placeholder="social Name " aria-label="social Name" aria-describedby="basic-addon1"/>
+<input type="text" className="form-control inputshadow" onChange={handeldirctions}   placeholder="dirctions" aria-label="social Name" aria-describedby="basic-addon1"/>
 </div>
 
 
 <div class="input-group m-2 ">
 <span className="input-group-text spantxt" style={{width:"120px"}} id="basic-addon1">Time </span>
-<input type="time" className="form-control inputshadow" onChange={handelTime}   placeholder="social Name " aria-label="social Name" aria-describedby="basic-addon1"/>
+<input type="time" className="form-control inputshadow" onChange={handelTime}   placeholder="time " aria-label="social Name" aria-describedby="basic-addon1"/>
 </div>
 
 

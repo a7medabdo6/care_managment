@@ -6,16 +6,9 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import useRouter from 'utils/useRouter';
-import { useInsertDataSignUp } from "Api_Requests/useInsertDataSignUp";
-import SignUpSlice, { UserSignUp } from "Redux_Slices/auth/SignUpSlice";
-import { UseGetAllUserData } from 'Api_Requests/UseGetAllUser';
-import { GetAllUserSliceInfo } from 'Redux_Slices/AllUser/Get-All-user-Slice';
-import { GetAllCarePlanSliceInfo } from 'Redux_Slices/Service-User/Get-All-service-user-Slice';
-import { UseGetAllCarePlanData } from 'Api_Requests/Service-user/Get-All-Service-UserData';
-import { UseDeletServiceUData } from 'Api_Requests/Service-user/Delet-One-Service-User';
-import { DeletCarePlanSliceInfo } from 'Redux_Slices/Service-User/Delet-Service-user-Hook';
 import { UseEditeCarePlanDataToken } from 'Api_Requests/CarePlan/UseEditeCarePlane';
 import { EditeCarePlanDataSliceInfo } from 'Redux_Slices/CarePlan/Edite-CarePlan-Hook-Slice';
+
 
 
 
@@ -40,6 +33,7 @@ export const useEditeCarePlanApi = (FormData) => {
   
       },
       onError: err => {
+        
         // console.log(err.response.data.message);
         //   dispatch(errorAtLogin(err.response.data.detail));
         //  return err;

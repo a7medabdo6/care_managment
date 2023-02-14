@@ -43,13 +43,13 @@ const Header = props => {
       >
         Home
       </Typography>
-      <Typography
+      {/* <Typography
         component="h1"
         gutterBottom
         variant="h3"
       >
         RoundSys, {data.name}
-      </Typography>
+      </Typography> */}
       <Typography variant="subtitle1">Here's what's happening</Typography>
     </div>
   );

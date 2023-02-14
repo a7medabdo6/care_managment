@@ -4,11 +4,13 @@ import Button from 'react-bootstrap/Button';
 import "./Add-socialinterests.css"
 import { useSelector } from "react-redux";
 import { Createsocial_intereststApi } from "Hook/Social-interests/Create-Social-interests-Hook";
-const AddsocialAssessment =({handleClose})=>{
+import { useEffect } from "react";
+import notify from "Hook/useNotifaction";
+const AddsocialAssessment =({handleClose,SubmitCreatesocial,errors,Createsocial_intereststrData})=>{
 
 
-    const {isLoading,mutate:SubmitCreatesocial,isError,error,refetch} =  Createsocial_intereststApi()
-    const {Createsocial_intereststrData} = useSelector(state => state.Createsocial_intereststSlice)
+    // const {isLoading,mutate:SubmitCreatesocial,isError,error,refetch} =  Createsocial_intereststApi()
+    // const {Createsocial_intereststrData} = useSelector(state => state.Createsocial_intereststSlice)
 
 const [name,setname]=useState()
 const [IsDone,setIsDone]=useState(true)
@@ -37,11 +39,28 @@ const handelSave =()=>{
         "is_done": true
     }
     SubmitCreatesocial(data)
-    handleClose()
 
    
     
 }
+
+useEffect(()=>{
+    if(errors){
+        if(errors !== [] )
+    errors.map((item)=>{return(
+        notify(item,"error")
+    )})
+
+    }
+},[errors])
+ 
+
+useEffect(()=>{
+    if(Createsocial_intereststrData){
+        handleClose()
+
+    }
+},[Createsocial_intereststrData])
  
     return(
         

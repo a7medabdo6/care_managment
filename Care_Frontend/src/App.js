@@ -31,6 +31,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from 'react-query'
+import WorkerRoutes from 'WorkerRoutes';
 const queryClient = new QueryClient()
 
 const history = createBrowserHistory();
@@ -40,18 +41,23 @@ const App = () => {
   // if(localStorage.getItem("user")){
   //   setcheckRoutes(true)
   // }
+
   return (
     <QueryClientProvider client={queryClient} >
+          <Router history={history}>
       <ThemeProvider theme={theme}>
         <MuiPickersUtilsProvider utils={MomentUtils}>
-          <Router history={history}>
-            <ScrollReset />
-            <GoogleAnalytics />
-            <CookiesNotification />
-            {localStorage.getItem("user") ?renderRoutes(RoutesProdect) :renderRoutes(routes)}
-          </Router>
+      
+            {/* <ScrollReset /> */}
+            {/* <GoogleAnalytics /> */}
+            {/* <CookiesNotification /> */}
+            {/* {localStorage.getItem("user") ? renderRoutes(RoutesProdect):renderRoutes(routes)} */}
+
+            {localStorage.getItem("user") ?(JSON.parse(localStorage.getItem("user")).role !== 1 ?renderRoutes(WorkerRoutes): renderRoutes(RoutesProdect)) :renderRoutes(routes)}
+          
         </MuiPickersUtilsProvider>
       </ThemeProvider>
+      </Router>
     </QueryClientProvider>
   );
 };
