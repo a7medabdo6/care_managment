@@ -28,7 +28,7 @@ export class PlanService {
     socialInterests: SocialInterest[],
     oralcare: OralCare[],
     houseKeeping: HouseKeeping[],
-    personalcare:PersonalCare[]
+    personalcare: PersonalCare[],
   ) {
     const plan = await this.repo.create(createPlanDto);
     plan.user = User;
@@ -37,7 +37,7 @@ export class PlanService {
     plan.socialInterests = socialInterests;
     plan.oral_care = oralcare;
     plan.house_keeping = houseKeeping;
-    plan.personal_care=personalcare
+    plan.personal_care = personalcare;
     return this.repo.save(plan);
   }
 

@@ -27,7 +27,7 @@ import { CurrentUserInterceptor } from '../users/interceptors/current-user.inter
 import { AuthGuard } from 'src/guards/auth.guard';
 import { AdminGuard } from 'src/guards/admin.guard';
 @Controller('users')
-@Serialize(UserDto)
+ @Serialize(UserDto)
 export class UsersController {
   constructor(
     private readonly usersService: UsersService,
@@ -71,6 +71,11 @@ export class UsersController {
   @UseGuards(AdminGuard)
   findAll() {
     return this.usersService.findAll();
+  }
+  @Get(':id/plans')
+  @UseGuards(AuthGuard)
+  findAllForWorker(@Param('id') id: number) {
+    return this.usersService.findAllForWorker(id);
   }
 
   @Get(':id')
