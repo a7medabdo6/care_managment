@@ -34,16 +34,16 @@ if(ProfileDetails){
 }
 
 
-const [bod,setbod] = useState("")
-const [NI_Number,setNI_Number] = useState("")
-const [Adress,setAdress] = useState("")
-const [Phone,setPhone] = useState("")
-const [NEXT_OF_KIN,setNEXT_OF_KIN] = useState("")
-const [NEXT_OF_KIN_CONTACT,setNEXT_OF_KIN_CONTACT] = useState("")
-const [SEX,setSEX] = useState("")
-const [Application,setApplication] = useState("")
-const [USER,setUSER] = useState("")
-const [training,settraining] = useState("")
+const [bod,setbod] = useState(ProfileDetails?.worker?.BOD)
+const [NI_Number,setNI_Number] = useState(ProfileDetails?.worker?.Ni_Number)
+const [Adress,setAdress] = useState(ProfileDetails?.worker?.Adress)
+const [Phone,setPhone] = useState(ProfileDetails?.worker?.phone)
+const [NEXT_OF_KIN,setNEXT_OF_KIN] = useState(ProfileDetails?.worker?.next_of_kin)
+const [NEXT_OF_KIN_CONTACT,setNEXT_OF_KIN_CONTACT] = useState(ProfileDetails?.worker?.next_of_kin_Contact)
+const [SEX,setSEX] = useState(ProfileDetails?.worker?.sex)
+const [Application,setApplication] = useState()
+const [USER,setUSER] = useState()
+const [training,settraining] = useState()
 
 
 const router = useRouter();
@@ -154,17 +154,17 @@ const handelSubmit = (e) => {
       <div className='m-5'>
         <h2 className='bold'>Edite Profile</h2>
       </div>
-      <form className="row g-3 bg-white needs-validation container" novalidate>
+      <form className="row g-3 bg-white needs-validation container" style={{height:"100%"}} novalidate>
     <div className="col-md-6">
       <label for="validationCustom01" className="form-label fw-bold">BOD</label>
-      <input type="text" onChange={onchangebod} className="form-control" id="validationCustom01" value={ProfileDetails?.worker?.BOD}  required/>
+      <input type="text" onChange={onchangebod} className="form-control"value={bod} id="validationCustom01" placeholder={ProfileDetails?.worker?.BOD}  required/>
       <div className="valid-feedback">
         Looks good!
       </div>
     </div>
     <div className="col-md-6">
-      <label for="validationCustom02" className="form-label fw-bold">NI_Number</label>
-      <input type="text" onChange={onchangeNI_Number} className="form-control" id="validationCustom02" value={ProfileDetails?.worker?.Ni_Number
+      <label for="validationCustom02" className="form-label fw-bold">NI Number</label>
+      <input type="number" onChange={onchangeNI_Number} value={NI_Number} className="form-control" id="validationCustom02"  placeholder={ProfileDetails?.worker?.Ni_Number
 }  required/>
       <div className="valid-feedback">
         Looks good!
@@ -172,36 +172,36 @@ const handelSubmit = (e) => {
     </div>
     <div className="col-md-6">
     <label for="validationCustom01" className="form-label fw-bold">Adress</label>
-      <input type="text" onChange={onchangeAdress} className="form-control" id="validationCustom01" value={ProfileDetails?.worker?.Adress}  required/>
+      <input type="text" onChange={onchangeAdress} className="form-control" value={Adress} id="validationCustom01" placeholder={ProfileDetails?.worker?.Adress}  required/>
       <div className="valid-feedback">
         Looks good!
       </div>
     </div>
     <div className="col-md-6">
     <label for="validationCustom01" className="form-label fw-bold">Phone</label>
-      <input type="text" onChange={onchangePhone} className="form-control" id="validationCustom01" value={ProfileDetails?.worker?.phone}  required/>
+      <input type="number" onChange={onchangePhone} className="form-control" value={Phone} id="validationCustom01" placeholder={ProfileDetails?.worker?.phone}  required/>
       <div className="valid-feedback">
         Looks good!
       </div>
     </div>
     <div className="col-md-6">
-    <label for="validationCustom01" className="form-label fw-bold">NEXT_OF_KIN</label>
-      <input type="text" onChange={onchangeNEXT_OF_KIN} className="form-control" id="validationCustom01" value={ProfileDetails?.worker?.next_of_kin}  required/>
+    <label for="validationCustom01" className="form-label fw-bold">NEXT OF KIN</label>
+      <input type="text" onChange={onchangeNEXT_OF_KIN} value={NEXT_OF_KIN} className="form-control" id="validationCustom01" placeholder={ProfileDetails?.worker?.next_of_kin}  required/>
       <div className="valid-feedback">
         Looks good!
       </div>
     </div>
     <div className="col-md-6">
     <label for="validationCustom01" className="form-label fw-bold">SEX</label>
-      <input type="text" onChange={onchangeSEX} className="form-control" id="validationCustom01" value={ProfileDetails?.worker?.sex} required/>
+      <input type="text" onChange={onchangeSEX} className="form-control" value={SEX} id="validationCustom01" placeholder={ProfileDetails?.worker?.sex} required/>
       <div className="valid-feedback">
         Looks good!
       </div>
     </div>
 
     <div className="col-md-6">
-    <label for="validationCustom01" className="form-label fw-bold">NEXT_OF_KIN_CONTACT</label>
-      <input type="text" onChange={onchangeNEXT_OF_KIN_CONTACT} className="form-control" id="validationCustom01" value={ProfileDetails?.worker?.next_of_kin_Contact} required/>
+    <label for="validationCustom01" className="form-label fw-bold">NEXT OF KIN CONTACT</label>
+      <input type="text" onChange={onchangeNEXT_OF_KIN_CONTACT} value={NEXT_OF_KIN_CONTACT} className="form-control" id="validationCustom01" placeholder={ProfileDetails?.worker?.next_of_kin_Contact} required/>
       <div className="valid-feedback">
         Looks good!
       </div>

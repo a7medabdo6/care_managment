@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link, Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -13,7 +13,7 @@ import {
   Checkbox,
   Divider,
   Button,
-  Link,
+  
   Table,
   TableBody,
   TableCell,
@@ -76,6 +76,7 @@ const Results = props => {
 
 
   const { className, customers,AllServiceUserData, ...rest } = props;
+  console.log(AllServiceUserData);
 
   const dispatch = useDispatch();
 
@@ -94,6 +95,8 @@ const Results = props => {
   //   // window.location.replace('/ViewProfile');
 
   // }
+  
+ 
 
   const {ShowEditeServiceUserSliceInfoData} =useSelector(state => state.ShowEditeServiceUserSlice)
 console.log(ShowEditeServiceUserSliceInfoData);
@@ -221,7 +224,7 @@ console.log(ShowEditeServiceUserSliceInfoData);
       <Card>
         <CardHeader
           action={<GenericMoreButton />}
-          title="All customers"
+          title="All Service User"
         />
         <Divider />
         <CardContent className={classes.content}>
@@ -244,23 +247,24 @@ console.log(ShowEditeServiceUserSliceInfoData);
                     <TableCell>Number</TableCell>
                     <TableCell>initials</TableCell>
                     <TableCell>lcds</TableCell>
-                    <TableCell>age_ate_refferal</TableCell>
-                    <TableCell>home_address</TableCell>
-                    <TableCell>school_address</TableCell>
+                    {/* <TableCell>age_ate_refferal</TableCell> */}
+                    {/* <TableCell>home_address</TableCell>
+                    <TableCell>school_address</TableCell> */}
                     <TableCell>Sex</TableCell>
                     <TableCell>start_date</TableCell>
                     <TableCell>end_date</TableCell>
-                    <TableCell>qurdian_contact</TableCell>
+                    <TableCell >Actions</TableCell>
+                    {/* <TableCell>qurdian_contact</TableCell>
                     <TableCell>qurdian</TableCell>
                     <TableCell>relationship</TableCell>
                     <TableCell>support_worker</TableCell>
                     <TableCell>assesment_date</TableCell>
                     <TableCell>disability</TableCell>
                     <TableCell>ethnicity</TableCell>
-                    <TableCell>religion</TableCell>
-                    <TableCell>compliment_of_the_household</TableCell>
+                    <TableCell>religion</TableCell> */}
+                    {/* <TableCell>compliment_of_the_household</TableCell> */}
 
-                    <TableCell align="right">Actions</TableCell>
+                   
                   </TableRow>
                 </TableHead>
                 
@@ -278,13 +282,13 @@ console.log(ShowEditeServiceUserSliceInfoData);
                      
                       <TableCell>{customer.initials}</TableCell>
                       <TableCell>{customer.lcds}</TableCell>
-                      <TableCell>{customer.age_ate_refferal}</TableCell>
+                      {/* <TableCell>{customer.age_ate_refferal}</TableCell>
                       <TableCell>{customer.home_address}</TableCell>
-                      <TableCell>{customer.school_address}</TableCell>
+                      <TableCell>{customer.school_address}</TableCell> */}
                       <TableCell>{customer.sex}</TableCell>
                       <TableCell>{customer.start_date}</TableCell>
                       <TableCell>{customer.end_date}</TableCell>
-                      <TableCell>{customer.qurdian_contact}</TableCell>
+                      {/* <TableCell>{customer.qurdian_contact}</TableCell>
                       <TableCell>{customer.qurdian}</TableCell>
                       <TableCell>{customer.relationship}</TableCell>
                       <TableCell>{customer.support_worker}</TableCell>
@@ -293,10 +297,14 @@ console.log(ShowEditeServiceUserSliceInfoData);
                       <TableCell>{customer.ethnicity}</TableCell>
                       <TableCell>{customer.religion}</TableCell>
 
-                      <TableCell>{customer.compliment_of_the_household}</TableCell>
+                      <TableCell>{customer.compliment_of_the_household}</TableCell> */}
                       
                       <TableCell align="right " className='d-flex'>
-
+                        
+                        <Link to={{
+    pathname: `/viewServiceUser/${customer?.id}`,
+    state: customer // your data array of objects
+  }}  >
                         <Button
                           color="primary"
                           
@@ -305,6 +313,9 @@ console.log(ShowEditeServiceUserSliceInfoData);
                         >
                           View
                         </Button>
+                        </Link>
+
+                       
 
                         <Button
                           color="primary"

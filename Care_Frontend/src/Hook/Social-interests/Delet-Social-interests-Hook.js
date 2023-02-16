@@ -38,7 +38,7 @@ export const Deletsocial_interestsApi = (id) =>{
           // router.history.push('/');
           QueryClient.invalidateQueries('GetAllsocial_interests');
 
-             notify("The social_interests  has been Deleted","success")    
+             notify("The social interests  has been Deleted","success")    
   
 //    setTimeout(() => {
 //       router.history.push('/');

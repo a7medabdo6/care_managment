@@ -55,7 +55,7 @@ export default [
       // },
              /**************************************** */
              {
-              title: 'Resk Assessments',
+              title: 'Risk Assessments',
               href: '/Assessments',
               icon: ReportProblemOutlinedIcon,
              
@@ -75,13 +75,25 @@ export default [
              
             },
 
-            
             {
-              title: 'Daily Notes',
-              href: '/DailyNotes',
-              icon: EventNoteOutlinedIcon,
+              title: 'House Keeping',
+              href: '/housekeeping',
+              icon: HomeIcon,
              
             },
+            {
+              title: 'Personal Care',
+              href: '/PersonalCare',
+              icon: PersonIcon,
+             
+            },
+            
+            // {
+            //   title: 'Daily Notes',
+            //   href: '/DailyNotes',
+            //   icon: EventNoteOutlinedIcon,
+             
+            // },
 
             {
               title: 'Care Plan',
@@ -96,11 +108,11 @@ export default [
             //   icon: PeopleIcon
             // },
 
-            {
-              title: 'Daily Tasks',
-              href: '/service/user',
-              icon: FormatListBulletedOutlinedIcon
-            },
+            // {
+            //   title: 'Daily Tasks',
+            //   href: '/service/user',
+            //   icon: FormatListBulletedOutlinedIcon
+            // },
            
            
       

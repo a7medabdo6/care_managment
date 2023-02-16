@@ -69,32 +69,32 @@ const EditeOralCare =({handleCloseEdite,Id,itemdata})=>{
 
         <div class="input-group m-2 ">
         <span className="input-group-text spantxt" id="basic-addon1" style={{width:"120px"}}>Name </span>
-        <input type="text" className="form-control inputshadow" onChange={handelName}   placeholder={name} aria-label="social Name" aria-describedby="basic-addon1"/>
+        <input type="text" className="form-control inputshadow" onChange={handelName}   value={name} aria-label="social Name" aria-describedby="basic-addon1"/>
         </div>
         
         
         <div class="input-group m-2 ">
         <span className="input-group-text spantxt" style={{width:"120px"}} id="basic-addon1">Type </span>
-        <input type="text" className="form-control inputshadow" onChange={handelType}   placeholder={type} aria-label="social Name" aria-describedby="basic-addon1"/>
+        <input type="text" className="form-control inputshadow" onChange={handelType}   value={type} aria-label="social Name" aria-describedby="basic-addon1"/>
         </div>
         
         
         
         <div class="input-group m-2 ">
         <span className="input-group-text spantxt" style={{width:"120px"}} id="basic-addon1">frequency </span>
-        <input type="text" className="form-control inputshadow" onChange={handelfrequency}   placeholder={frequency} aria-label="social Name" aria-describedby="basic-addon1"/>
+        <input type="text" className="form-control inputshadow" onChange={handelfrequency}   value={frequency} aria-label="social Name" aria-describedby="basic-addon1"/>
         </div>
         
         
         <div class="input-group m-2 ">
         <span className="input-group-text spantxt" style={{width:"120px"}} id="basic-addon1">dirctions </span>
-        <input type="text" className="form-control inputshadow" onChange={handeldirctions}   placeholder={dirctions} aria-label="social Name" aria-describedby="basic-addon1"/>
+        <input type="text" className="form-control inputshadow" onChange={handeldirctions}   value={dirctions} aria-label="social Name" aria-describedby="basic-addon1"/>
         </div>
         
         
         <div class="input-group m-2 ">
         <span className="input-group-text spantxt" style={{width:"120px"}} id="basic-addon1">Time </span>
-        <input type="time" className="form-control inputshadow" onChange={handelTime}   placeholder={Time} aria-label="social Name" aria-describedby="basic-addon1"/>
+        <input type="time" className="form-control inputshadow" onChange={handelTime}   value={Time} aria-label="social Name" aria-describedby="basic-addon1"/>
         </div>
         
         

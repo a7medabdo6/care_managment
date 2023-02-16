@@ -42,7 +42,7 @@ return <div>looading</div>
     <div>
       <section style={{backgroundColor: "#eee"}}>
   <div class="container py-5">
-    <div class="row">
+    {/* <div class="row">
       <div class="col">
         <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
           <ol class="breadcrumb mb-0">
@@ -52,7 +52,7 @@ return <div>looading</div>
           </ol>
         </nav>
       </div>
-    </div>
+    </div> */}
 
     <div class="row">
       <div class="col-lg-4">

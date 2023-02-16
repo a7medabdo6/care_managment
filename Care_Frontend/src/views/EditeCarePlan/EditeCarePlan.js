@@ -13,36 +13,36 @@ const EditeCarePlan  =({custmerData,handleCloseEdite}) =>{
 
   const {isLoading,mutate:SubmitEditeCarePlan,isError,error,refetch} =  useEditeCarePlanApi()
   const {EditeCarePlanData} = useSelector(state => state.EditeCarePlanDataSlice)
-console.log(isLoading)
+console.log(custmerData)
 
 
 
 
-const [clientId,setclientId]=useState()
+const [clientId,setclientId]=useState(custmerData?.id)
 
-    const [lcds,setlcds]=useState()
-    const [date,setdate]=useState()
-    const [level_of_understand,setlevel_of_understand]=useState()
-    const [mobility,setmobility]=useState()
-    const [personal_care,setpersonal_care]=useState()
-    const [continence_care,setcontinence_care]=useState()
-    const [comunication,setcomunication]=useState()
-    const [oral_care,setoral_care]=useState()
-    const [nutrition_and_hydration,setnutrition_and_hydration]=useState()
-    const [skin_care,setskin_care]=useState()
-    const [social_intersts,setsocial_intersts]=useState()
-    const [night_time_support,setnight_time_support]=useState()
-    const [emotional_support,setemotional_support]=useState()
-    const [expressing_sexuality,setexpressing_sexuality]=useState()
-        const [health_care,sethealth_care]=useState()
+    const [lcds,setlcds]=useState(custmerData?.lcds)
+    const [date,setdate]=useState(custmerData?.date)
+    const [level_of_understand,setlevel_of_understand]=useState(custmerData?.level_of_understand)
+    const [mobility,setmobility]=useState(custmerData?.mobility)
+    const [personal_care,setpersonal_care]=useState(custmerData?.personal_care)
+    const [continence_care,setcontinence_care]=useState(custmerData?.continence_care)
+    const [comunication,setcomunication]=useState(custmerData?.comunication)
+    const [oral_care,setoral_care]=useState([])
+    const [nutrition_and_hydration,setnutrition_and_hydration]=useState(custmerData?.nutrition_and_hydration)
+    const [skin_care,setskin_care]=useState(custmerData?.skin_care)
+    const [social_intersts,setsocial_intersts]=useState([])
+    const [night_time_support,setnight_time_support]=useState(custmerData?.night_time_support)
+    const [emotional_support,setemotional_support]=useState(custmerData?.emotional_support)
+    const [expressing_sexuality,setexpressing_sexuality]=useState(custmerData?.expressing_sexuality)
+        const [health_care,sethealth_care]=useState(custmerData?.health_care)
 
-    const [medication_managment,setmedication_managment]=useState()
-    const [mental_health,setmental_health]=useState()
-    const [end_og_life_preference,setend_og_life_preference]=useState()
-    const [breathing,setbreathing]=useState()
-    const [frequency,setfrequency]=useState()
-    const [spiritual_and_culture_wellbeing,setspiritual_and_culture_wellbeing]=useState()
-    const [userId,setuserId]=useState()
+    const [medication_managment,setmedication_managment]=useState(custmerData?.medication_managment)
+    const [mental_health,setmental_health]=useState(custmerData?.mental_health)
+    const [end_og_life_preference,setend_og_life_preference]=useState(custmerData?.end_og_life_preference)
+    const [breathing,setbreathing]=useState(custmerData?.breathing)
+    const [frequency,setfrequency]=useState(custmerData?.frequency)
+    const [spiritual_and_culture_wellbeing,setspiritual_and_culture_wellbeing]=useState(custmerData?.spiritual_and_culture_wellbeing)
+    const [userId,setuserId]=useState(custmerData?.userId)
     const [risks,setrisks]=useState([])
 
 console.log(emotional_support);
@@ -187,9 +187,9 @@ const handel_clientId=(e)=>{
             id:custmerData?.id
           }
           SubmitEditeCarePlan(FormData)
-          if(EditeCarePlanData !== null){
-            handleCloseEdite()
-          }
+          handleCloseEdite()
+
+        
     }
 
     console.log();
@@ -197,14 +197,16 @@ const handel_clientId=(e)=>{
 
         <div className='border'>
  
-<div className='box'>
+<div className='box'style={{marginRight:0,marginLeft:0}}>
     <div className=' title d-flex justify-content-start text-center mt-2 '>
         <h5 className='p-2'>basics</h5>
     </div>
     <div className='border '>
 
-    <div class="input-group m-2">
+    {/* <div class="input-group m-2">
 <span className="input-group-text spantxt" id="basic-addon1">Client Name</span>
+<input type="number" value={lcds} className="form-control inputshadow" onChange={handel_clientId}   placeholder="lcds " aria-label="First Name" aria-describedby="basic-addon1"/>
+
 <select class="form-select form-select-sm inputshadowGender " onChange={handel_clientId}  aria-label=".form-select-sm example">
 <option selected>Client Name</option>
 <option value="9">heigh</option>
@@ -212,7 +214,7 @@ const handel_clientId=(e)=>{
 <option value="low">low</option>
 
 </select>
-</div>
+</div> */}
 
 
 <div class="input-group m-2">
@@ -234,18 +236,18 @@ const handel_clientId=(e)=>{
 
     <div class="input-group m-2 ">
 <span className="input-group-text spantxt" id="basic-addon1">lcds </span>
-<input type="number" className="form-control inputshadow" onChange={handel_lcds}   placeholder="lcds " aria-label="First Name" aria-describedby="basic-addon1"/>
+<input type="number" value={lcds} className="form-control inputshadow" onChange={handel_lcds}   placeholder="lcds " aria-label="First Name" aria-describedby="basic-addon1"/>
 </div>
 
 <div class="input-group m-2">
 <span className="input-group-text spantxt" id="basic-addon1">Date</span>
-<input type="date" name="dateofbirth" className=" inputshadow" onChange={handel_data} id="dateofbirth"/>
+<input type="date" value={date}  name="dateofbirth" className=" inputshadow" onChange={handel_data} id="dateofbirth"/>
 </div>
 
 
 <div class="input-group m-2">
 <span className="input-group-text spantxt" id="basic-addon1">Night Time Support</span>
-<input type="date" name="dateofbirth" className=" inputshadow" onChange={handel_night_time_support} id="dateofbirth"/>
+<input type="date" value={night_time_support} name="dateofbirth" className=" inputshadow" onChange={handel_night_time_support} id="dateofbirth"/>
 </div>
 
 
@@ -255,43 +257,31 @@ const handel_clientId=(e)=>{
 
 <div class="input-group m-2">
 <span className="input-group-text spantxt" id="basic-addon1">level of understand</span>
-<select class="form-select form-select-sm inputshadowGender " onChange={handel_level_of_understand}  aria-label=".form-select-sm example">
-<option selected>level of understand</option>
-<option value="heigh">heigh</option>
-<option value="medium">medium</option>
-<option value="low">low</option>
+<input type="text" value={level_of_understand} className="form-control inputshadow" onChange={handel_level_of_understand}  placeholder="level of understand" aria-label="First Name" aria-describedby="basic-addon1"/>
 
-</select>
+
 </div>
 
 
 <div class="input-group m-2">
 <span className="input-group-text spantxt" id="basic-addon1">comunication</span>
-<select class="form-select form-select-sm inputshadowGender " onChange={handel_comunication}  aria-label=".form-select-sm example">
-<option selected>level of handel_comunication</option>
-<option value="heigh">heigh</option>
-<option value="medium">medium</option>
-<option value="low">low</option>
+<input type="text" value={comunication} className="form-control inputshadow" onChange={handel_comunication}  placeholder="comunication" aria-label="First Name" aria-describedby="basic-addon1"/>
 
-</select>
+
 </div>
 
 
 <div class="input-group m-2">
 <span className="input-group-text spantxt" id="basic-addon1">emotional support</span>
-<select class="form-select form-select-sm inputshadowGender " onChange={handel_emotional_support} aria-label=".form-select-sm example">
-<option selected>emotional_support</option>
-<option value="heigh">heigh</option>
-<option value="medium">medium</option>
-<option value="low">low</option>
+<input type="text" value={emotional_support} className="form-control inputshadow" onChange={handel_emotional_support}  placeholder="emotional support" aria-label="First Name" aria-describedby="basic-addon1"/>
 
-</select>
+
 </div>
 
 
 <div class="input-group m-2 ">
 <span className="input-group-text spantxt" id="basic-addon1">expressing sexuality</span>
-<input type="text" className="form-control inputshadow" onChange={handel_expressing_sexuality}  placeholder="expressing_sexuality" aria-label="First Name" aria-describedby="basic-addon1"/>
+<input type="text" value={expressing_sexuality} className="form-control inputshadow" onChange={handel_expressing_sexuality}  placeholder="expressing_sexuality" aria-label="First Name" aria-describedby="basic-addon1"/>
 </div>
 
 
@@ -302,13 +292,9 @@ const handel_clientId=(e)=>{
 
 <div class="input-group m-2">
 <span className="input-group-text spantxt" id="basic-addon1">breathing</span>
-<select class="form-select form-select-sm inputshadowGender " onChange={handel_breathing}  aria-label=".form-select-sm example">
-<option selected>breathing</option>
-<option value="heigh">heigh</option>
-<option value="medium">medium</option>
-<option value="low">low</option>
+<input type="text"value={breathing} className="form-control inputshadow" onChange={handel_breathing}  placeholder="breathing" aria-label="First Name" aria-describedby="basic-addon1"/>
 
-</select>
+
 </div>
 
 
@@ -317,58 +303,42 @@ const handel_clientId=(e)=>{
 
 <div class="input-group m-2">
 <span className="input-group-text spantxt" id="basic-addon1">mental health</span>
-<select class="form-select form-select-sm inputshadowGender " onChange={handel_mental_health} aria-label=".form-select-sm example">
-<option selected>mental_health</option>
-<option value="heigh">heigh</option>
-<option value="medium">medium</option>
-<option value="low">low</option>
+<input type="text" value={mental_health} className="form-control inputshadow" onChange={handel_mental_health}  placeholder="mental health" aria-label="First Name" aria-describedby="basic-addon1"/>
 
-</select>
+
 </div>
 
 
 <div class="input-group m-2">
 <span className="input-group-text spantxt" id="basic-addon1">SCW</span>
-<select class="form-select form-select-sm inputshadowGender " onChange={handel_spiritual_and_culture_wellbeing}  aria-label=".form-select-sm example">
-<option selected>spiritual_and_culture_wellbeing</option>
-<option value="heigh">heigh</option>
-<option value="medium">medium</option>
-<option value="low">low</option>
+<input type="text" value={spiritual_and_culture_wellbeing} className="form-control inputshadow" onChange={handel_spiritual_and_culture_wellbeing}  placeholder="spiritual_and_culture_wellbeing" aria-label="First Name" aria-describedby="basic-addon1"/>
 
-</select>
+
 </div>
 
 
 <div class="input-group m-2">
 <span className="input-group-text spantxt" id="basic-addon1">mobility</span>
-<select class="form-select form-select-sm inputshadowGender " onChange={handel_mobility} aria-label=".form-select-sm example">
-<option selected>mobility</option>
-<option value="heigh">Yes</option>
-<option value="medium">No</option>
+<input type="text" value={mobility} className="form-control inputshadow" onChange={handel_mobility}  placeholder="mobility" aria-label="First Name" aria-describedby="basic-addon1"/>
 
-</select>
+
 </div>
 
 
 <div class="input-group m-2">
 <span className="input-group-text spantxt" id="basic-addon1">frequency</span>
-<select class="form-select form-select-sm inputshadowGender " onChange={handel_frequency}  aria-label=".form-select-sm example">
-<option selected>frequency</option>
-<option value="heigh">Yes</option>
-<option value="medium">No</option>
 
-</select>
+<input type="text" value={frequency} className="form-control inputshadow" onChange={handel_frequency}  placeholder="frequency" aria-label="First Name" aria-describedby="basic-addon1"/>
+
+
 </div>
 
 
 <div class="input-group m-2">
-<span className="input-group-text spantxt" id="basic-addon1">end og life preference</span>
-<select class="form-select form-select-sm inputshadowGender " onChange={handel_end_og_life_preference} aria-label=".form-select-sm example">
-<option selected>end og life preference</option>
-<option value="heigh">Yes</option>
-<option value="medium">No</option>
+<span className="input-group-text spantxt" id="basic-addon1">end of life preference</span>
+<input type="text" value={end_og_life_preference} className="form-control inputshadow" onChange={handel_end_og_life_preference}  placeholder="end of life preference" aria-label="First Name" aria-describedby="basic-addon1"/>
 
-</select>
+
 </div>
 
     </div>

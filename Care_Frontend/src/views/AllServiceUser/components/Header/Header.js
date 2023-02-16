@@ -6,14 +6,20 @@ import { Grid, Typography, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 import ServiceUserDefult from 'views/AllServiceUser/Add-serviceUser/ServiceUserDefult';
+import { CreateServiceUserApi } from 'Hook/Service-user/Create-Service-User-hook';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles(() => ({
   root: {}
 }));
 
 const Header = props => {
+
   const { className,AllServiceUserData , ...rest } = props;
 
+
+  const {isLoading,mutate:SubmitCreateServiceUser,isError,error,refetch} =  CreateServiceUserApi()
+  const {CreateServiceUserData,errors} = useSelector(state => state.CreateServiceUserSlice)
   const classes = useStyles();
   const [show, setShow] = useState(false);
 
@@ -33,7 +39,7 @@ const Header = props => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <ServiceUserDefult handleClose={handleClose}/>
+        <ServiceUserDefult handleClose={handleClose} errors={errors} CreateServiceUserData={CreateServiceUserData} SubmitCreateServiceUser={SubmitCreateServiceUser}/>
 
              </Modal.Body>
         <Modal.Footer>
@@ -50,19 +56,19 @@ const Header = props => {
         spacing={3}
       >
         <Grid item>
-          <Typography
+          {/* <Typography
             component="h2"
             gutterBottom
             variant="overline"
           >
             Management
-          </Typography>
-          <Typography
+          </Typography> */}
+          {/* <Typography
             component="h1"
             variant="h3"
           >
             Currnt Care Plan({AllServiceUserData?.length})
-          </Typography>
+          </Typography> */}
         </Grid>
         <Grid item>
         
@@ -71,7 +77,7 @@ const Header = props => {
             variant="contained"
             onClick={handleShow}
           >
-            Add customer
+            Add Service User
           </Button>
 
          

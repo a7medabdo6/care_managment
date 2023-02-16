@@ -10,7 +10,7 @@ import { Hidden } from '@material-ui/core';
 import useRouter from 'utils/useRouter';
 import { Navigation } from 'components';
 import navigationConfig from './navigationConfig';
-
+import WorkerNavigationConfig from "./WorkerNavigationConfig"
 const useStyles = makeStyles(theme => ({
   root: {
     height: '100%',
@@ -75,14 +75,28 @@ const NavBar = props => {
       </div>
       <Divider className={classes.divider} />
       <nav className={classes.navigation}>
-        {navigationConfig.map(list => (
-          <Navigation
-            component="div"
-            key={list.title}
-            pages={list.pages}
-            title={list.title}
-          />
-        ))}
+        {
+          JSON.parse(localStorage.getItem("user")).role !== 1 ?
+           ( WorkerNavigationConfig.map(list => (
+            <Navigation
+              component="div"
+              key={list.title}
+              pages={list.pages}
+              title={list.title}
+            />
+          ))):
+           (
+            navigationConfig.map(list => (
+              <Navigation
+                component="div"
+                key={list.title}
+                pages={list.pages}
+                title={list.title}
+              />
+            ))
+          )
+        }
+       
       </nav>
     </div>
   );

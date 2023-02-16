@@ -7,10 +7,13 @@ import { store } from './store.js';
 import { Provider } from 'react-redux';
 import 'react-notifications/lib/notifications.css';
 import "./index.css"
+import { Router } from 'react-router';
+
 
 ReactDOM.render(
   <Provider store={store}>
     <App />
+    
   </Provider>,
   document.getElementById('root')
 );

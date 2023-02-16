@@ -5,25 +5,26 @@ import { useSelector } from 'react-redux';
 import photo from "../../../../src/images/avatar.png"
 import "./ServiceUser.css"
 import { ToastContainer } from 'react-toastify'
+import { useEffect } from 'react';
 
-const ServiceUserDefult  =({handleClose}) =>{
-const [initials,setinitials] = useState("")
-const [lcds,setlcds] = useState("")
-const [age_ate_refferal,setage_ate_refferal] = useState("")
-const [home_address,sethome_address] = useState("")
-const [school_address,setschool_address] = useState("")
-const [start_date,setstart_date] = useState("")
-const [end_date,setend_date] = useState("")
-const [sex,setsex] = useState("")
-const [qurdian,setqurdian] = useState("")
-const [qurdian_contact,setqurdian_contact] = useState("")
-const [relationship,setrelationship] = useState("")
-const [support_worker,setsupport_worker] = useState("")
-const [assesment_date,setassesment_date] = useState("")
-const [disability,setdisability] = useState("")
-const [ethnicity,setethnicity] = useState("")
-const [religion,setreligion] = useState("")
-const [compliment_of_the_household,setcompliment_of_the_household] = useState("")
+const ServiceUserDefult  =({handleClose,errors,CreateServiceUserData,SubmitCreateServiceUser}) =>{
+const [initials,setinitials] = useState()
+const [lcds,setlcds] = useState()
+const [age_ate_refferal,setage_ate_refferal] = useState()
+const [home_address,sethome_address] = useState()
+const [school_address,setschool_address] = useState()
+const [start_date,setstart_date] = useState()
+const [end_date,setend_date] = useState()
+const [sex,setsex] = useState()
+const [qurdian,setqurdian] = useState()
+const [qurdian_contact,setqurdian_contact] = useState()
+const [relationship,setrelationship] = useState()
+const [support_worker,setsupport_worker] = useState()
+const [assesment_date,setassesment_date] = useState()
+const [disability,setdisability] = useState()
+const [ethnicity,setethnicity] = useState()
+const [religion,setreligion] = useState()
+const [compliment_of_the_household,setcompliment_of_the_household] = useState()
 
 const onchangeinitials =(e)=>{
     
@@ -102,8 +103,8 @@ const onchangecompliment_of_the_household =(e)=>{
      
    
     }
-    const {isLoading,mutate:SubmitCreateServiceUser,isError,error,refetch} =  CreateServiceUserApi()
-    const {CreateServiceUserData} = useSelector(state => state.CreateServiceUserSlice)
+    // const {isLoading,mutate:SubmitCreateServiceUser,isError,error,refetch} =  CreateServiceUserApi()
+    // const {CreateServiceUserData} = useSelector(state => state.CreateServiceUserSlice)
 const onClickSave= (e)=>{
     e.preventDefault()
    
@@ -131,15 +132,32 @@ const onClickSave= (e)=>{
    
         SubmitCreateServiceUser(data)
         
-        handleClose()
       
 
     
 // console.log(compliment_of_the_household);
 }
+
+useEffect(()=>{
+    if(errors){
+        if(errors !== [] )
+    errors.map((item)=>{return(
+        notify(item,"error")
+    )})
+
+    }
+},[errors])
+ 
+
+useEffect(()=>{
+    if(CreateServiceUserData){
+        handleClose()
+
+    }
+},[CreateServiceUserData])
     return(
 
-        <div className='border '>
+        <div className=' '>
                 
 
         {/* <div className='box mx-5'>
@@ -171,8 +189,7 @@ const onClickSave= (e)=>{
 <div className='box mt-5'>
 <div class="input-group mb-3">
 <span className="input-group-text spantxt" id="basic-addon1">title</span>
-<select class="form-select form-select-sm inputshadowGender " aria-label=".form-select-sm example">
-<option selected>Title</option>
+<select className="form-select form-select-sm inputshadowGender " style={{marginRight:"0"}} aria-label=".form-select-sm example">
 <option value="1">Mr</option>
 <option value="2">Mrs</option>
 
@@ -196,36 +213,36 @@ const onClickSave= (e)=>{
 
 <div className='box'>
 <div class="input-group mb-3">
-<span className="input-group-text spantxt" id="basic-addon1">age_ate_refferal</span>
-<input type="text" className="form-control inputshadow" onChange={onchangeage_ate_refferal} placeholder="age_ate_refferal" aria-label="PreferredName" aria-describedby="basic-addon1"/>
+<span className="input-group-text spantxt" id="basic-addon1">age ate refferal</span>
+<input type="text" className="form-control inputshadow" onChange={onchangeage_ate_refferal} placeholder="age ate refferal" aria-label="PreferredName" aria-describedby="basic-addon1"/>
 </div>
 </div>
 
 <div className='box'>
 <div class="input-group mb-3">
-<span className="input-group-text spantxt" id="basic-addon1">home_address</span>
-<input type="text" className="form-control inputshadow" onChange={onchangehome_address} placeholder="home_address" aria-label="PreferredName" aria-describedby="basic-addon1"/>
+<span className="input-group-text spantxt" id="basic-addon1">home address</span>
+<input type="text" className="form-control inputshadow" onChange={onchangehome_address} placeholder="home address" aria-label="PreferredName" aria-describedby="basic-addon1"/>
 </div>
 </div>
 
 <div className='box'>
 <div class="input-group mb-3">
-<span className="input-group-text spantxt" id="basic-addon1">school_address</span>
-<input type="text" className="form-control inputshadow" onChange={onchangeschool_address} placeholder="school_address" aria-label="PreferredName" aria-describedby="basic-addon1"/>
+<span className="input-group-text spantxt" id="basic-addon1">school address</span>
+<input type="text" className="form-control inputshadow" onChange={onchangeschool_address} placeholder="school address" aria-label="PreferredName" aria-describedby="basic-addon1"/>
 </div>
 </div>
 
 <div className='box'>
 <div class="input-group mb-3">
-<span className="input-group-text spantxt" id="basic-addon1">start_date</span>
-<input type="date" name="dateofbirth" className=" inputshadow" onChange={onchangestart_date} id="dateofbirth"/>
+<span className="input-group-text spantxt" id="basic-addon1">start date</span>
+<input type="date" name="dateofbirth" className=" inputshadow" style={{width:"322px"}} onChange={onchangestart_date} id="dateofbirth"/>
 </div>
 </div>
 
 <div className='box'>
 <div class="input-group mb-3">
-<span className="input-group-text spantxt" id="basic-addon1">end_date</span>
-<input type="date" name="dateofbirth" className=" inputshadow" onChange={onchangeend_date} id="dateofbirth"/>
+<span className="input-group-text spantxt" id="basic-addon1">end date</span>
+<input type="date" name="dateofbirth" className=" inputshadow" style={{width:"322px"}} onChange={onchangeend_date} id="dateofbirth"/>
 </div>
 </div>
 
@@ -233,7 +250,8 @@ const onClickSave= (e)=>{
 <div class="input-group mb-3">
 <span className="input-group-text spantxt" id="basic-addon1">sex</span>
 <select class="form-select form-select-sm inputshadowGender " onChange={onchangesex} aria-label=".form-select-sm example">
-<option selected>Gender</option>
+<option value="">Sex</option>
+
 <option value="male">male</option>
 <option value="femal">femal</option>
 
@@ -250,8 +268,8 @@ const onClickSave= (e)=>{
 
 <div className='box'>
 <div class="input-group mb-3">
-<span className="input-group-text spantxt" id="basic-addon1">qurdian_contact</span>
-<input type="number" className="form-control inputshadow" value={qurdian_contact} onChange={onchangequrdian_contact} placeholder="qurdian_contact" aria-label="PreferredName" aria-describedby="basic-addon1"/>
+<span className="input-group-text spantxt" id="basic-addon1">qurdian contact</span>
+<input type="number" className="form-control inputshadow" value={qurdian_contact} onChange={onchangequrdian_contact} placeholder="qurdian contact" aria-label="PreferredName" aria-describedby="basic-addon1"/>
 </div>
 </div>
 <div className='box'>
@@ -263,15 +281,15 @@ const onClickSave= (e)=>{
 
 <div className='box'>
 <div class="input-group mb-3">
-<span className="input-group-text spantxt" id="basic-addon1">support_worker</span>
-<input type="text" className="form-control inputshadow" onChange={onchangesupport_worker} placeholder="support_worker" aria-label="PreferredName" aria-describedby="basic-addon1"/>
+<span className="input-group-text spantxt" id="basic-addon1">support worker</span>
+<input type="text" className="form-control inputshadow" onChange={onchangesupport_worker} placeholder="support worker" aria-label="PreferredName" aria-describedby="basic-addon1"/>
 </div>
 </div>
 
 <div className='box'>
 <div class="input-group mb-3">
-<span className="input-group-text spantxt" id="basic-addon1">assesment_date</span>
-<input type="date" name="dateofbirth" className="  inputshadow" onChange={onchangeassesment_date} id="assesment_date"/>
+<span className="input-group-text spantxt" id="basic-addon1">assesment date</span>
+<input type="date" name="dateofbirth" className="  inputshadow" style={{width:"322px"}} onChange={onchangeassesment_date} id="assesment date"/>
 </div>
 </div>
 
@@ -299,7 +317,7 @@ const onClickSave= (e)=>{
 <div className='box'>
 <div class="input-group mb-3">
 <span className="input-group-text spantxt" id="basic-addon1">COTH</span>
-<input type="number" className="form-control inputshadow" value={compliment_of_the_household} onChange={onchangecompliment_of_the_household} placeholder="compliment_of_the_household" aria-label="PreferredName" aria-describedby="basic-addon1"/>
+<input type="number" className="form-control inputshadow" value={compliment_of_the_household} onChange={onchangecompliment_of_the_household} placeholder="compliment of the household" aria-label="PreferredName" aria-describedby="basic-addon1"/>
 </div>
 </div>
 
