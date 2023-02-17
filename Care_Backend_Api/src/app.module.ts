@@ -36,7 +36,7 @@ import { HouseKeeping } from './house-keeping/entities/house-keeping.entity';
   imports: [
     ScheduleModule.forRoot(),
     ConfigModule.forRoot({
-      envFilePath: 'production.env',
+      envFilePath: 'development.env',
     }),
     I18nModule.forRoot({
       fallbackLanguage: 'en',

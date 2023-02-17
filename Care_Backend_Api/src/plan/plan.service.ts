@@ -59,7 +59,16 @@ export class PlanService {
     if (!id) {
       throw new UnauthorizedException('unAuthorized');
     }
-    const plan = await this.repo.findOne({ where: { id } });
+    const plan = await this.repo.findOne({
+      where: { id },
+      relations: {
+        riskAssesments: true,
+        oral_care: true,
+        personal_care: true,
+        house_keeping: true,
+        socialInterests: true,
+      },
+    });
     if (!plan) {
       throw new NotFoundException('plan not found');
     }

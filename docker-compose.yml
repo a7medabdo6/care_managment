@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.1'
 services:
   nestjs-app:
     build:
@@ -36,7 +36,7 @@ services:
       # Opens port 3306 on the container
       - '3306'
       # Where our data will be persisted
-    # command: --init-file /docker-entrypoint-initdb.d/init.sql
+    command: --init-file /docker-entrypoint-initdb.d/init.sql
     
     volumes:
       - db:/var/lib/mysql
