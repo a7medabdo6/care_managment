@@ -1,3 +1,4 @@
+import { Doctor } from 'src/doctor/entities/doctor.entity';
 import { HouseKeeping } from 'src/house-keeping/entities/house-keeping.entity';
 import { OralCare } from 'src/oral-care/entities/oral-care.entity';
 import { PersonalCare } from 'src/personal-care/entities/personal-care.entity';
@@ -140,6 +141,10 @@ export class Plan {
     },
   })
   oral_care?: OralCare[];
+
+  @OneToMany(() => Doctor, (doctor) => doctor.plan) // specify inverse side as a second parameter
+  @JoinColumn()
+  doctors: Doctor;
 
   @ManyToMany(
     () => HouseKeeping,

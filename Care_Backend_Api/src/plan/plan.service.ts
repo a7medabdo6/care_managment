@@ -67,6 +67,7 @@ export class PlanService {
         personal_care: true,
         house_keeping: true,
         socialInterests: true,
+        doctors:true
       },
     });
     if (!plan) {
