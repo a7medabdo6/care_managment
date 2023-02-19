@@ -35,6 +35,7 @@ import { HouseKeeping } from './house-keeping/entities/house-keeping.entity';
 import { DoctorModule } from './doctor/doctor.module';
 import { NoteModule } from './note/note.module';
 import { Doctor } from './doctor/entities/doctor.entity';
+import { Note } from './note/entities/note.entity';
 @Module({
   imports: [
     ScheduleModule.forRoot(),
@@ -72,6 +73,7 @@ import { Doctor } from './doctor/entities/doctor.entity';
         HouseKeeping,
         PersonalCare,
         Doctor,
+        Note
       ],
       synchronize: true,
     }),
