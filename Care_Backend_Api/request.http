@@ -18,8 +18,36 @@ Content-Type: application/json
     "password":"aahmed"
 }
 ########################
+POST http://localhost:5000/doctor
+Content-Type: application/json
 
+{"email":"aaahmeed@gamil.com",
+    "phone":"aahmed",
+    "name":"aahmed",
+    "photo":"aahmed",
+    "planId":1
+}
+########################
 
+POST http://localhost:5000/users/signin
+Content-Type: application/json
+token:
+
+{"email":"admin@admin.com",
+    "password":"12345"
+  
+}
+########################
+GET http://localhost:5000/plan/1
+Content-Type: application/json
+
+{"email":"aaahmeed@gamil.com",
+    "phone":"aahmed",
+    "name":"aahmed",
+    "photo":"aahmed",
+    "planId":1
+}
+########################
 GET http://localhost:3000/users/whoami
 Content-Type: application/json
 

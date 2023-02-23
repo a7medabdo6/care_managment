@@ -1,4 +1,5 @@
 import { Expose, Transform } from 'class-transformer';
+import { Plan } from 'src/plan/entities/plan.entity';
 import { Worker } from 'src/worker/entities/worker.entity';
 
 export class UserDto {
@@ -19,8 +20,10 @@ export class UserDto {
   @Expose()
   Token: string;
 
-
   @Transform(({ obj }) => obj.worker)
   @Expose()
   worker: Worker;
+  @Transform(({ obj }) => obj.plans)
+  @Expose()
+  plans: Plan;
 }

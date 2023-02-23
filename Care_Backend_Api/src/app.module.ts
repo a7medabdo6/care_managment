@@ -32,6 +32,10 @@ import { OralCare } from './oral-care/entities/oral-care.entity';
 import { PersonalCare } from './personal-care/entities/personal-care.entity';
 import { HouseKeepingModule } from './house-keeping/house-keeping.module';
 import { HouseKeeping } from './house-keeping/entities/house-keeping.entity';
+import { DoctorModule } from './doctor/doctor.module';
+import { NoteModule } from './note/note.module';
+import { Doctor } from './doctor/entities/doctor.entity';
+import { Note } from './note/entities/note.entity';
 @Module({
   imports: [
     ScheduleModule.forRoot(),
@@ -68,6 +72,8 @@ import { HouseKeeping } from './house-keeping/entities/house-keeping.entity';
         PersonalCare,
         HouseKeeping,
         PersonalCare,
+        Doctor,
+        Note
       ],
       synchronize: true,
     }),
@@ -82,6 +88,8 @@ import { HouseKeeping } from './house-keeping/entities/house-keeping.entity';
     PersonalCareModule,
     HouseKeepingModule,
     PersonalCareModule,
+    DoctorModule,
+    NoteModule,
   ],
   controllers: [AppController],
   providers: [AppService, CronService],

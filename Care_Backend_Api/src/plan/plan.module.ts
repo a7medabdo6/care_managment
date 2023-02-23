@@ -26,5 +26,6 @@ import { PersonalCareModule } from 'src/personal-care/personal-care.module';
 
   controllers: [PlanController],
   providers: [PlanService, CurrentUserInterceptor],
+  exports: [PlanService],
 })
 export class PlanModule {}
