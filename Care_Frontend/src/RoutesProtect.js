@@ -82,17 +82,32 @@ const routes = [
         exact: true,
         component: lazy(() => import('views/ProfileUser'))
       },
+      {
+        path: '/Note',
+        exact: true,
+        component: lazy(() => import('views/Note'))
+      },
     
       {
         path: '/ViewProfile',
         exact: true,
         component: lazy(() => import('views/ViewProfile'))
       },
-    
+      {
+        path: '/viewplans',
+        exact: true,
+        component: lazy(() => import('views/AllCarePlan/View-Care-Plan'))
+      },
+      
       {
         path: '/workers',
         exact: true,
         component: lazy(() => import('views/AllWorkers'))
+      },
+      {
+        path: '/Doctors',
+        exact: true,
+        component: lazy(() => import('views/Doctor'))
       },
 
       {

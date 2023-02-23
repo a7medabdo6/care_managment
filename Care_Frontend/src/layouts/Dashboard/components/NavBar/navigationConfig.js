@@ -48,11 +48,12 @@ export default [
           // }
         ]
       },
-      // {
-      //   title: 'Overview',
-      //   href: '/overview',
-      //   icon: HomeIcon
-      // },
+
+      {
+        title: 'Doctors',
+        href: '/Doctors',
+        icon: HomeIcon
+      },
              /**************************************** */
              {
               title: 'Risk Assessments',
@@ -98,6 +99,12 @@ export default [
             {
               title: 'Care Plan',
               href: '/CarePlan',
+              icon: CropLandscapeIcon,
+             
+            },
+            {
+              title: 'Note',
+              href: '/Note',
               icon: CropLandscapeIcon,
              
             },

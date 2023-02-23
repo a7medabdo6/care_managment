@@ -94,7 +94,7 @@ const handelcrossDataTOedite=()=>{
   const [IdEdite,setIdEdite] =useState()
 
 const [custmerData,setcustmerData]=useState()
-
+console.log(custmerData);
   const handleCloseEdite = () => setShowEdite(false);
   const handleShowEdite = () => setShowEdite(true); 
 
@@ -112,7 +112,7 @@ const [custmerData,setcustmerData]=useState()
   const router = useRouter();
 
 
-  const { className, customers,CarePlanData, ...rest } = props;
+  const { className, customers,WorkerPlansData, ...rest } = props;
 
   const dispatch = useDispatch();
 
@@ -177,7 +177,7 @@ const [custmerData,setcustmerData]=useState()
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(event.target.value);
   };
-
+  const [IdPlan,setIdPlan]=useState()
   return (
     <div
       {...rest}
@@ -271,8 +271,9 @@ const [custmerData,setcustmerData]=useState()
               
              
               <TableBody>
-                  {CarePlanData?.map((customer,index) => (
-                    <TableRow
+                  {WorkerPlansData?.map((customer,index) =>{return (
+                    customer?.plans.map((plan,index)=>(
+                      <TableRow
                       hover
                       // key={customer.id}
                       // selected={selectedCustomers.indexOf(customer.id) !== -1}
@@ -280,26 +281,28 @@ const [custmerData,setcustmerData]=useState()
                    <TableCell>{index + 1}</TableCell>
 
                       
-                      <TableCell>{customer.comunication}</TableCell>
+                      <TableCell>{plan.comunication}</TableCell>
 
-                      <TableCell>{customer.date}</TableCell>
+                      <TableCell>{plan.date}</TableCell>
                       <TableCell>
                         {
-                          customer.frequency
+                          plan.frequency
                         }
                       </TableCell>
                       <TableCell>
                       {
-                          customer.created_at
+                          plan.created_at
                         }
                       </TableCell>
                       
                       <TableCell align="right">
+
+
                       <Link 
                      to={{
-                      pathname: "/viewplans",
-                      state: customer // your data array of objects
-                    }} >
+                      pathname: "/worker/viewplans",
+                      state: plan // your data array of objects
+                    }}   >
                       <Button
                       
                           color="primary"
@@ -309,20 +312,12 @@ const [custmerData,setcustmerData]=useState()
                           View
                         </Button>
                       </Link>
-                      
-                      <Button
-                          color="primary"
-                          onClick={()=>{return (handleShowEdite(),setIdEdite(customer.id),setcustmerData(customer))}}
-                          size="small"
-                          variant="outlined"
-                        >
-                          <i className="fa-regular fa-pen-to-square p-1"></i>
-                        </Button>
+                    
                     
                       
 
 
-                         <Button
+                         {/* <Button
                          className='ms-1'
                           color="primary"
                           onClick={()=>{return(setId(customer.id) ,handleShow())}}
@@ -331,10 +326,14 @@ const [custmerData,setcustmerData]=useState()
                           variant="outlined"
                         >
                           <i className="fa-sharp fa-solid fa-trash p-1"></i>
-                        </Button>
+                        </Button> */}
                       </TableCell>
                     </TableRow>
-                  ))}
+                    ))
+ 
+
+                  
+                  )} )}
                 </TableBody>
              
                 
