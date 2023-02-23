@@ -20,11 +20,11 @@ const AddDoctor =({handleClose,SubmitCreateHouseKeeping,CreateHouseKeepingtrData
     const {CreateDoctorsgtrData} = useSelector(state => state.CreateDoctorsgtSlice)
 console.log(CarePlanData)
 
-const [name,setname]=useState()
-const [email,setemail]=useState()
-const [phone,setphone]=useState()
-const [photo,setphoto]=useState()
-const [extra,setextra]=useState()
+const [name,setname]=useState("")
+const [email,setemail]=useState("")
+const [phone,setphone]=useState("")
+const [photo,setphoto]=useState("")
+const [extra,setextra]=useState("")
 const [plan,setplan]=useState()
 
 console.log(name);
@@ -39,7 +39,14 @@ const handelName=(e)=>{
 }
 
 const Handelphoto=(e)=>{
-    setphoto(e.target.value)
+    if(e.target.files && e.target.files[0]){
+
+        setphoto(e.target.files[0])
+    
+        // settraining(URL.createObjectURL(e.target.files[0]))
+        // setselctedfile(e.target.files[0])
+    
+    }
 
 }
 
@@ -56,7 +63,13 @@ const handelCarePlan=(e)=>{
     setplan(e.target.value)
 }
 const handelSave =()=>{
-    
+    const formData = new FormData()
+    formData.append("phone",phone)
+    formData.append("name",name)
+    formData.append("email",email)
+    formData.append("photo",photo)
+    formData.append("extra",extra)
+    formData.append("planId",+plan)
     const   data={
             "phone": phone,
             "name": name,
@@ -67,7 +80,7 @@ const handelSave =()=>{
           }
        
    
-    SubmiteAddDoctor(data)
+    SubmiteAddDoctor(formData)
   
     handleClose()
 
@@ -102,7 +115,7 @@ const handelSave =()=>{
         
         <div class="input-group m-2 ">
         <span className="input-group-text spantxt" id="basic-addon1">image</span>
-        <input type="text" className="form-control inputshadow" onChange={Handelphoto} value={photo}   placeholder="" aria-label="image" aria-describedby="basic-addon1"/>
+        <input type="file" className="form-control inputshadow" onChange={Handelphoto}    placeholder="" aria-label="image" aria-describedby="basic-addon1"/>
         </div>
         
         <div class="input-group m-2 ">

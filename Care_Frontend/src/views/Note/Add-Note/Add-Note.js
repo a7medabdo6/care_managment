@@ -27,7 +27,7 @@ const [doc,setdoc]=useState("")
 
 const [plan,setplan]=useState()
 
-console.log(doc);
+console.log(text);
 
 const Handeltype=(e)=>{
     settype(e.target.value)
@@ -62,13 +62,7 @@ const handelSave =()=>{
     formData.append("doc",doc)
     formData.append("planId",plan)
 
-    const   data={
-        "type": type,
-        "text": text,
-        "doc": doc,
-        "planId": plan
-      }
-       
+   
    
           SubmiteAddNote(formData)
   

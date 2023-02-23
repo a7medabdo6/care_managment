@@ -132,7 +132,7 @@ const [Id,setId] =useState()
           </Button> */}
         </Modal.Footer>
       </Modal>
-            <div className="text-center fw-bold m-5 fs-1">Notes  </div>
+            <div className="text-center fw-bold m-5 fs-1">Daily Notes  </div>
             <div>
                 
           <table  className="table table-striped border mt-3 table-responsive">

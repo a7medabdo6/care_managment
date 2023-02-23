@@ -103,7 +103,7 @@ export default [
              
             },
             {
-              title: 'Note',
+              title: 'Daily Notes',
               href: '/Note',
               icon: CropLandscapeIcon,
              

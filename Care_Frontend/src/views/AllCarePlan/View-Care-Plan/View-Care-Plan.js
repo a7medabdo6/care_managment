@@ -278,7 +278,6 @@ useEffect(()=>{
     
         <tr>
           <div className='checkboxstyle  checkshadow d-flex justify-content-start align-items-center' style={{}}>
-          <input className='ms-1 me-1'  type="checkbox" id="vehicle1s" name="vehicle1s" value={item?.id}/>
         <td style={{fontSize:"11px",fontWeight:"BOLD"}}>{item?.name}</td>
           </div>
          
@@ -339,7 +338,6 @@ useEffect(()=>{
     
         <tr>
           <div className='checkboxstyle  checkshadow d-flex justify-content-start align-items-center' style={{}}>
-          <input className='ms-1 me-1'  type="checkbox" id="vehicle1s" name="vehicle1s" value={item?.id}/>
         <td style={{fontSize:"11px",fontWeight:"BOLD"}}>{item?.name}</td>
           </div>
          
@@ -398,7 +396,6 @@ useEffect(()=>{
     
         <tr>
           <div className='checkboxstyle  checkshadow d-flex justify-content-start align-items-center' style={{}}>
-          <input className='ms-1 me-1'  type="checkbox" id="vehicle1s" name="vehicle1s" value={item?.id}/>
         <td style={{fontSize:"11px",fontWeight:"BOLD"}}>{item?.name}</td>
           </div>
          
@@ -462,7 +459,6 @@ useEffect(()=>{
     
         <tr>
           <div className='checkboxstyle  checkshadow d-flex justify-content-start align-items-center' style={{}}>
-          <input className='ms-1 me-1'  type="checkbox" id="vehicle1s" name="vehicle1s" value={item?.id}/>
         <td style={{fontSize:"11px",fontWeight:"BOLD"}}>{item?.name}</td>
           </div>
          
@@ -520,7 +516,6 @@ useEffect(()=>{
     
         <tr>
           <div className='checkboxstyle  checkshadow d-flex justify-content-start align-items-center' style={{}}>
-          <input className='ms-1 me-1'  type="checkbox" id="vehicle1s" name="vehicle1s" value={item?.id}/>
         <td style={{fontSize:"11px",fontWeight:"BOLD"}}>{item?.name}</td>
           </div>
          
@@ -583,7 +578,6 @@ useEffect(()=>{
     
         <tr>
           <div className='checkboxstyle  checkshadow d-flex justify-content-start align-items-center' style={{}}>
-          <input className='ms-1 me-1'  type="checkbox" id="vehicle1s" name="vehicle1s" value={item?.id}/>
         <td style={{fontSize:"11px",fontWeight:"BOLD"}}>{item?.name}</td>
           </div>
          

@@ -124,7 +124,7 @@ const [Id,setId] =useState()
           </Button> */}
         </Modal.Footer>
       </Modal>
-            <div className="text-center fw-bold m-5 fs-1">HouseKeeping  </div>
+            <div className="text-center fw-bold m-5 fs-1">Doctors  </div>
             <div>
                 
           <table  className="table table-striped border mt-3 table-responsive">
@@ -144,7 +144,11 @@ const [Id,setId] =useState()
       DoctorsgData?.map((item,index)=>{
         return(
           <tr key={index}>
-                      <td className='' >image</td>
+                      <td className='' >
+                        <div>
+              <img style={{width:"50px",height:"50px"}} src='../../images/avatar.png'/>
+            </div>
+            </td>
 
           <td className='' >{item.name}</td>
           <td className='' >{item.email}</td>
