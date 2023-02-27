@@ -1,3 +1,4 @@
+import { Training } from 'src/training/entities/training.entity';
 import { User } from 'src/users/entities/user.entity';
 import {
   Column,
@@ -36,14 +37,18 @@ export class Worker {
   @Column()
   next_of_kin_Contact: string;
 
-  @Column()
-  training: string;
+  // @Column()
+  // training: string;
 
   @Column()
   Application: string;
 
   @OneToOne(() => User, (user) => user.worker) // specify inverse side as a second parameter
   user: User;
+
+  @OneToMany(() => Training, (training) => training.worker) // specify inverse side as a second parameter
+  @JoinColumn()
+  training: Training;
 
   @CreateDateColumn({
     type: 'timestamp',

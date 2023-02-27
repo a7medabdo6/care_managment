@@ -1,4 +1,5 @@
 import { Expose, Transform } from 'class-transformer';
+import { Training } from 'src/training/entities/training.entity';
 import { User } from 'src/users/entities/user.entity';
 
 const keyify = (obj, prefix = '') =>
@@ -40,8 +41,9 @@ const translate = (obj, item) => {
 export class WorkerDto {
   @Expose()
   id: number;
-  @Expose()
-  training: string;
+
+  @Transform(({ obj }) => obj.training)
+  training: Training;
 
   //   obj.name_en ? obj.name_en : obj.name_ar
   @Transform(({ obj }) => obj.user)

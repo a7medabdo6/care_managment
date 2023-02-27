@@ -36,6 +36,8 @@ import { DoctorModule } from './doctor/doctor.module';
 import { NoteModule } from './note/note.module';
 import { Doctor } from './doctor/entities/doctor.entity';
 import { Note } from './note/entities/note.entity';
+import { TrainingModule } from './training/training.module';
+import { Training } from './training/entities/training.entity';
 @Module({
   imports: [
     ScheduleModule.forRoot(),
@@ -63,6 +65,8 @@ import { Note } from './note/entities/note.entity';
       entities: [
         User,
         Report,
+        Training,
+
         Worker,
         ServiceUser,
         Plan,
@@ -73,7 +77,7 @@ import { Note } from './note/entities/note.entity';
         HouseKeeping,
         PersonalCare,
         Doctor,
-        Note
+        Note,
       ],
       synchronize: true,
     }),
@@ -90,6 +94,7 @@ import { Note } from './note/entities/note.entity';
     PersonalCareModule,
     DoctorModule,
     NoteModule,
+    TrainingModule,
   ],
   controllers: [AppController],
   providers: [AppService, CronService],
