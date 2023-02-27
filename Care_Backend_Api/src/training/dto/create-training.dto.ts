@@ -20,5 +20,6 @@ export class CreateTrainingDto {
   comment: string;
 
   @IsNumber()
+  @IsOptional()
   workerId: number;
 }
