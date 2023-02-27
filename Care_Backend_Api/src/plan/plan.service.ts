@@ -69,6 +69,8 @@ export class PlanService {
         socialInterests: true,
         doctors: true,
         notes: true,
+        client:true,
+        user:true
       },
     });
     if (!plan) {
