@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useMutation, useQuery } from "react-query"
+import { useMutation, useQuery, useQueryClient } from "react-query"
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -12,6 +12,7 @@ import { errors, WorkerUserSignUp } from "Redux_Slices/Worker/WorkerSignUpSlice"
 export const useSignUpWorkerApi = data => {
     const dispatch = useDispatch();
     const router = useRouter();
+    const QueryClient = useQueryClient();
 
     return useMutation(useInsertDataSignUp, {
       onSuccess: res => {
@@ -28,6 +29,8 @@ export const useSignUpWorkerApi = data => {
         // router.history.push('/ProfilWorker');
 
            notify("The account has been created","success")    
+           QueryClient.invalidateQueries('getprofile');
+           
 
 
   

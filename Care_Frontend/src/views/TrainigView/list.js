@@ -18,11 +18,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const CustomerManagementList = () => {
+const CustomerManagementList = ({location}) => {
   const classes = useStyles();
 
   const [customers, setCustomers] = useState([{},{}]);
-
+  const state = location.state
+console.log(state);
   // useEffect(() => {
   //   let mounted = true;
 
@@ -51,25 +52,14 @@ const CustomerManagementList = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true); 
+  const [id,setid] =useState()
   return (
     <Page
       className={classes.root}
       title="Customer Management List"
     >
 
-<Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title className='text-center '> 
-          <div className=''>   Add Training</div>
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <AddTraining handleClose={handleClose}/>
-             </Modal.Body>
-        <Modal.Footer>
-         
-        </Modal.Footer>
-      </Modal>
+
       <Header AllUserData ={AllUserData} handleShow={handleShow} />
       <SearchBar
         onFilter={handleFilter}
@@ -80,6 +70,7 @@ const CustomerManagementList = () => {
           className={classes.results}
           customers={customers}
           AllUserData ={AllUserData}
+          state={state}
         />
       )}
     </Page>

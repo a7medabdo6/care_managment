@@ -1,5 +1,5 @@
 import { useGetProfileApi } from "Hook/Profile-Hook/Get-profile-Details-Hook";
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import {
@@ -20,26 +20,51 @@ import {
   ClickAwayListener
 } from '@material-ui/core';
 import { Link, Link as RouterLink } from 'react-router-dom';
+import Modal from 'react-bootstrap/Modal';
 
 import avatar from "../../images/avatar.png"
-const ViewProfile =()=>{
+import AddTraining from "../AddTraining";
+import { useGetOneworkerApi } from "../../Hook/Get-WorkerHook";
+const ViewProfile =({location})=>{
+  const state = location.state
+  console.log(state);
+  const [show, setShow] = useState(false);
 
- 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true); 
+  // const [idTOtraining,setidTOtraining] =useState()
 
  
 
   const {ProfileDataView} =useSelector(state => state.ViewProfileSlice)
   console.log(ProfileDataView);
+const idTOtraining =ProfileDataView[0]?.id
 
 
-  
- 
-  
+const {data}=useGetOneworkerApi(1)
+
+const {OneworkerData} =useSelector(state => state.GetOneworkereSlice)
+  console.log(OneworkerData);
   if(!ProfileDataView){
 return <div>looading</div>
   }
+
+ 
   return (
     <div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title className='text-center '> 
+          <div className=''>   Add Training</div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <AddTraining handleClose={handleClose} idTOtraining={idTOtraining}/>
+             </Modal.Body>
+        <Modal.Footer>
+         
+        </Modal.Footer>
+      </Modal>
       <section style={{backgroundColor: "#eee"}}>
   <div class="container py-5">
     {/* <div class="row">
@@ -67,9 +92,17 @@ return <div>looading</div>
             <p class="text-muted mb-1">Full Stack Developer</p>
             <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
             <div class="d-flex justify-content-center mb-2">
-            <Link to="/training">
-              <button type="button" class="btn btn-outline-primary ms-1">Add training</button>
-              </Link>              
+            <Link to={{
+    pathname: `/training/`,
+    state: idTOtraining // your data array of objects
+  }} >
+              <button type="button" class="btn btn-outline-primary ms-1">training</button>
+
+              </Link>   
+              
+              <button onClick={()=>{return(handleShow())}} type="button" class="btn btn-outline-primary ms-1">Add training</button>
+
+      
             </div>
            
           </div>

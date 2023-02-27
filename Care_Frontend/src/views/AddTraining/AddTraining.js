@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { ToastContainer } from 'react-toastify'
+import { CreateTrainingApi } from '../../Hook/Training/Create-Training-Hook'
 
-const AddTraining = () => {
+const AddTraining = ({idTOtraining}) => {
     const[name,setname]=useState()
     const[proof_of_training,setproof_of_training]=useState()
     const[expiry_date,setexpiry_date]=useState()
@@ -12,7 +15,15 @@ const AddTraining = () => {
  }
 
  const handelproof_of_training=(e)=>{
-    setproof_of_training(e.target.value)
+     if(e.target.files && e.target.files[0]){
+
+        setproof_of_training(e.target.files[0])
+
+    // settraining(URL.createObjectURL(e.target.files[0]))
+    // setselctedfile(e.target.files[0])
+
+}
+    // setproof_of_training(e.target.value)
  }
 
  const handelexpiry_date=(e)=>{
@@ -30,18 +41,22 @@ const AddTraining = () => {
  const handelworkerId=(e)=>{
     setworkerId(e.target.value)
  }
-//  const {isLoading,mutate:SubmitCreateCarePlant,isError,error:handelerror,refetch} =  CreateCarePlantApi()
-//  const {CreateCarePlantrData,error} = useSelector(state => state.CreateCarePlantSlice)
+ const {isLoading,mutate:SubmitCreateTRaining,isError,error:handelerror,refetch} =  CreateTrainingApi()
+ const {CreateTrainingrData,error} = useSelector(state => state.CreateTrainingSlice)
 const handelsave=()=>{
-    const data={
-        "name": name,
-        "proof_of_training": proof_of_training,
-        "expiry_date": expiry_date,
-        "status": status,
-        "comment": comment,
-        "worker":24
-      }
+    const formData = new FormData();
+    formData.append("name" , name)
+    formData.append("proof_of_training" , proof_of_training)
+    formData.append("expiry_date" , expiry_date)
+    formData.append("status" , status)
+    formData.append("comment" , comment)
+    formData.append("workerId" , idTOtraining)
+
+    SubmitCreateTRaining(formData)
+
+   
 }
+
 
 
   return (
@@ -80,8 +95,9 @@ const handelsave=()=>{
     <input onChange={handelproof_of_training} type="file" class="form-control" id="inputPassword"/>
     </div>
   </div> 
-        <div> <button type="button" class="btn btn-primary">Create</button>
+        <div> <button onClick={handelsave} type="button" class="btn btn-primary">Create</button>
  </div>
+        <ToastContainer></ToastContainer>
 
     </div>
   )

@@ -1,7 +1,7 @@
 import { useEditeProfileApi } from 'Hook/Profile-Hook/EditeProfileHook'
 import { GreateProfileApi } from 'Hook/Profile-Hook/GreateProfileHook'
 import notify from 'Hook/useNotifaction'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
@@ -20,7 +20,6 @@ const [USER,setUSER] = useState("")
 const [training,settraining] = useState("")
 
 
-const router = useRouter();
 
 const onchangebod =(e)=>{
   
@@ -79,6 +78,7 @@ const onchangetraining =(e)=>{
   // settraining(e.target.value)
 
 }
+const router = useRouter();
 
 let data ={}
     if(localStorage.getItem("user")){
@@ -89,7 +89,7 @@ let data ={}
      console.log(data.id);
     }
 
-const {isLoading,mutate:SubmitEditeProfile,isError,error,refetch} =  GreateProfileApi()
+const {isLoading,mutate:SubmitEditeProfile,data;craeteData,error,refetch} =  GreateProfileApi()
 const {GreateProfileData} = useSelector(state => state.GreateProfileSlice)
 
 const handelSubmit = (e) => {
@@ -122,7 +122,12 @@ const handelSubmit = (e) => {
 
 }
 
+useEffect(()=>{
+  if(craeteData){
+    router.history.push('/');
 
+  }
+},[craeteData])
 console.log(GreateProfileData);
   return (
     <div className='text-center'>

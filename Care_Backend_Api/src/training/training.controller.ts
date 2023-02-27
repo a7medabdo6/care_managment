@@ -48,7 +48,7 @@ export class TrainingController {
       proof_of_training?: Express.Multer.File[];
     },
   ) {
-    const worker = await this.workerService.findOne(1);
+    const worker = await this.workerService.findOne(createTrainingDto.workerId);
 
     return this.trainingService.create(
       {

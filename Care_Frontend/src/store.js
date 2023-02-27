@@ -51,7 +51,8 @@ import GetOneNoteeSlice from "./Redux_Slices/Note/Get-One-Note-Slice"
 import CreateTrainingSlice from "./Redux_Slices/Training/Create-Training-Slice"
 import DeletTrainingSlice from "./Redux_Slices/Training/Delete-Training-Slice"
 import EditeTrainingDataSlice from "./Redux_Slices/Training/Edite-Training-Slice"
-import GetAllTrainingeSlice from "./Redux_Slices/Training/Get-Training-Slice"
+import GetOneTrainingeSlice from "./Redux_Slices/Training/Get-One-Training-Slice"
+import GetOneworkereSlice from "./Redux_Slices/Get-WORKER-SLICE"
 export const store = configureStore({
   reducer: {
     UserInfo: userSlice,
@@ -106,6 +107,7 @@ export const store = configureStore({
     CreateTrainingSlice:CreateTrainingSlice,
     DeletTrainingSlice:DeletTrainingSlice,
     EditeTrainingDataSlice:EditeTrainingDataSlice,
-    GetAllTrainingeSlice:GetAllTrainingeSlice
+    GetOneTrainingeSlice:GetOneTrainingeSlice,
+    GetOneworkereSlice:GetOneworkereSlice
    }
 })

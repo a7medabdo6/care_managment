@@ -9,7 +9,7 @@ import useRouter from 'utils/useRouter';
 
 
 import notify from 'Hook/useNotifaction';
-import { CreateTrainingSliceInfo } from 'Redux_Slices/Training/Create-Training-Slice';
+import { CreateTrainingSliceInfo,errors } from 'Redux_Slices/Training/Create-Training-Slice';
 import { UseCreateTrainingData } from 'Api_Requests/Training/Use-Create-Training-Data';
 
 

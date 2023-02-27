@@ -108,13 +108,13 @@ const userId=AllUserData?.filter((item)=>item)
         const formData = new FormData();
         formData.append("Ni_Number" , NI_Number)
         formData.append("BOD" , bod)
-        formData.append("user" , 24)
+        // formData.append("user" , 24)
         formData.append("sex" , SEX)
         formData.append("Adress" , Adress)
         formData.append("next_of_kin_Contact" , NEXT_OF_KIN_CONTACT)
         formData.append("next_of_kin" , NEXT_OF_KIN)
         formData.append("phone" , Phone)
-        // formData.append("training" , training)
+         formData.append("user_email" , id)
         formData.append("Application" , Application)
   
         
@@ -131,19 +131,19 @@ console.log(GreateProfileData);
   return (
     <div className='text-center'>
       <div className='m-5'>
-        <h2 className='bold'>Greate Profile For Worker </h2>
+        
       </div>
       <form className="row g-3 bg-white needs-validation m-5" novalidate>
     <div className="col-md-6">
       <label for="validationCustom01" className="form-label fw-bold">BOD</label>
-      <input type="text" onChange={onchangebod} className="form-control" id="validationCustom01"  required/>
+      <input type="date" onChange={onchangebod} className="form-control" id="validationCustom01"  required/>
       <div className="valid-feedback">
         Looks good!
       </div>
     </div>
     <div className="col-md-6">
       <label for="validationCustom02" className="form-label fw-bold">NI_Number</label>
-      <input type="text" onChange={onchangeNI_Number} className="form-control" id="validationCustom02"  required/>
+      <input type="number" onChange={onchangeNI_Number} className="form-control" id="validationCustom02"  required/>
       <div className="valid-feedback">
         Looks good!
       </div>
@@ -157,7 +157,7 @@ console.log(GreateProfileData);
     </div>
     <div className="col-md-6">
     <label for="validationCustom01" className="form-label fw-bold">Phone</label>
-      <input type="text" onChange={onchangePhone} className="form-control" id="validationCustom01"  required/>
+      <input type="number" onChange={onchangePhone} className="form-control" id="validationCustom01"  required/>
       <div className="valid-feedback">
         Looks good!
       </div>
@@ -207,7 +207,7 @@ console.log(GreateProfileData);
     </div> */}
     
     <div className="col-12">
-      <button className="btn btn-primary" type="submit" onClick={handelSubmit} >Greate</button>
+      <button className="btn btn-primary" type="submit" onClick={handelSubmit} >Create</button>
     </div>
   </form>
   <ToastContainer></ToastContainer>

@@ -68,7 +68,7 @@ const Results = props => {
 
 
   const { className, customers,AllUserData, ...rest } = props;
-
+console.log(AllUserData);
   const dispatch = useDispatch();
 
   const handelview =(data)=>{
@@ -142,7 +142,7 @@ const Results = props => {
 <Modal show={showModl} onHide={handleCloseMODL}>
         <Modal.Header closeButton>
           <Modal.Title className='text-center justify-content-center d-flex align-items-center '> 
-          <div className=' titlemodel   text-center '>Alert</div>
+          <div className=' titlemodel   text-center '>Create Profile Worker</div>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className='d-flex justify-content-center align-items-center '>
@@ -241,38 +241,52 @@ const Results = props => {
                       </TableCell>
                       
                       <TableCell align="right">
+                        <Link to={{
+    pathname: `/ViewProfile/`,
+    state: customer?.worker?.id // your data array of objects
+  }} >
 
+                          {
+                            customer?.worker !== null ? (
                         <Button
                           color="primary"
-                          
+                          style={{width:"125px"}}
                           size="small"
                           onClick={()=> handelview(index)}
                           variant="outlined"
                         >
                           View
                         </Button>
+                            ):null
+                          }
+                        
+                        </Link>
+
+                       
 
 
-                         <Button
-                         className='ms-1'
+                        
+                        {
+                          customer.worker === null ? ( <Button
+                            color="primary"
+                            
+                            size="small"
+                            onClick={()=>{return(handleShowModl(index),setid(customer?.email))} }
+                            variant="outlined"
+                          >
+                            Create Profile
+                          </Button>):null
+                        }
+
+                        {/* <Button
                           color="primary"
                           
                           size="small"
-                          
-                          variant="outlined"
-                        >
-                          <i className="fa-sharp fa-solid fa-trash p-1"></i>
-                        </Button>
-
-                        <Button
-                          color="primary"
-                          
-                          size="small"
-                          onClick={()=>{return(handleShowModl(index),setid(customer?.id))} }
+                          onClick={()=>{return(handleShowModl(index),setid(customer?.email))} }
                           variant="outlined"
                         >
                           Create Profile
-                        </Button>
+                        </Button> */}
                       </TableCell>
                     </TableRow>
                   ))}

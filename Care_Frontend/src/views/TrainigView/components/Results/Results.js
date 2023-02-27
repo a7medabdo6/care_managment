@@ -32,6 +32,9 @@ import useRouter from 'utils/useRouter';
 import { useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import GreateProfileAdminWorker from 'views/GreateProfileAdminWorker';
+import AddTraining from '../../../AddTraining';
+import { CreateTrainingApi } from '../../../../Hook/Training/Create-Training-Hook';
+import { useGetOneTrainingApi, useGetTrainingApi } from '../../../../Hook/Training/Get-Training-Hook';
 
 
 const useStyles = makeStyles(theme => ({
@@ -67,7 +70,7 @@ const Results = props => {
   const router = useRouter();
 
 
-  const { className, customers,AllUserData, ...rest } = props;
+  const { className, customers,AllUserData,state, ...rest } = props;
 
   const dispatch = useDispatch();
 
@@ -132,7 +135,17 @@ const Results = props => {
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(event.target.value);
   };
+  const [show, setShow] = useState(false);
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true); 
+  const [idTOtraining,setidTOtraining] =useState()
+  const {data}=CreateTrainingApi(id)
+  const {data:getOneTraining}=useGetOneTrainingApi(state)
+
+  
+  const {OneTrainingData} =useSelector(state => state.GetOneTrainingeSlice)
+  console.log(OneTrainingData);
   return (
     <div
       {...rest}
@@ -152,6 +165,8 @@ const Results = props => {
              </Modal.Body>
       
       </Modal>
+
+      
 
       <Typography
         color="textSecondary"
@@ -195,7 +210,8 @@ const Results = props => {
               
              
               <TableBody>
-                  {AllUserData?.map((customer,index) => (
+                  {OneTrainingData?.map((customer,index) => (
+                    
                     <TableRow
                       hover
                       // key={customer.id}
@@ -262,6 +278,7 @@ const Results = props => {
         </CardActions>
       </Card>
       <TableEditBar selected={selectedCustomers} />
+     
     </div>
   );
 };

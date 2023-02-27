@@ -35,9 +35,9 @@ export const GreateProfileApi = FormData =>{
   
              notify("The Profile Edite has been created","success")    
   
-   setTimeout(() => {
-      router.history.push('/');
-   }, 2000);
+  //  setTimeout(() => {
+  //     router.history.push('/');
+  //  }, 2000);
     
         },
         onError: err => {

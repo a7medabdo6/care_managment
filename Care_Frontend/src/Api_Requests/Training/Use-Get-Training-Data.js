@@ -1,4 +1,4 @@
-import baseUrl from '../../Api/baseURL'
+import baseUrl from '.././../Api/baseURL'
 
 const useGetData = async (url, parmas) => {
     const res = await baseUrl.get(url, parmas);
@@ -7,12 +7,13 @@ const useGetData = async (url, parmas) => {
 
 
 
-const UseGetTrainingData = async (url, parmas) => {
+const UseGetOneTrainingData = async ({ queryKey })  => {
+    const [_, id] = queryKey
     const config = {
         headers: { token: localStorage.getItem("token") }
     }
-    const res = await baseUrl.get("training", config);
+    const res = await baseUrl.get(`training/${id}`, config);
     return res.data;
 }
 
-export { useGetData, UseGetTrainingData };
+export { useGetData, UseGetOneTrainingData };

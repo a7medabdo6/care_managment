@@ -8,20 +8,21 @@ import { useInsertDataSignUp } from "Api_Requests/useInsertDataSignUp";
 import SignUpSlice, { UserSignUp } from "Redux_Slices/auth/SignUpSlice";
 
 import notify from 'Hook/useNotifaction';
-import { UseGetTrainingData } from "Api_Requests/Training/Use-Get-Training-Data";
-import { GetTrainingSliceInfo } from "Redux_Slices/Training/Get-Training-Slice";
+
+import { UseGetOneTrainingData } from "../../Api_Requests/Training/Use-Get-Training-Data";
+import { GetOneTrainingSliceInfo } from "../../Redux_Slices/Training/Get-One-Training-Slice";
 
 
 
-export const useGetTrainingApi = formData => {
+export const useGetOneTrainingApi = id => {
     const dispatch = useDispatch();
     const router = useRouter();
 
-    return useQuery("GetAllGetTrainingSliceInfo",UseGetTrainingData, {
+    return useQuery(["GetAOneTraining",id],UseGetOneTrainingData, {
       onSuccess: res => {
         
         
-         dispatch(GetTrainingSliceInfo(res));
+         dispatch(GetOneTrainingSliceInfo(res));
         // localStorage.setItem('user', JSON.stringify(result.data));
         // localStorage.setItem('token', JSON.stringify(result.data.token));
         //  window.location.replace('/');
