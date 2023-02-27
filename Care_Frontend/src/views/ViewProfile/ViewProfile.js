@@ -117,7 +117,7 @@ return <div>looading</div>
                 <p class="mb-0">Full Name</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{ProfileDataView[0]?.username}</p>
+                <p class="text-muted mb-0">{ProfileDataView[0].username}</p>
               </div>
             </div>
             <hr/>
@@ -126,7 +126,7 @@ return <div>looading</div>
                 <p class="mb-0">Ni_Number</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{ProfileDataView[0]?.worker?.Ni_Number}</p>
+                <p class="text-muted mb-0">{data?.Ni_Number}</p>
               </div>
             </div>
             <hr/>
@@ -135,7 +135,7 @@ return <div>looading</div>
                 <p class="mb-0">Phone</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{ProfileDataView[0]?.worker?.phone}</p>
+                <p class="text-muted mb-0">{data?.phone}</p>
               </div>
             </div>
             <hr/>
@@ -144,7 +144,7 @@ return <div>looading</div>
                 <p class="mb-0">next_of_kin</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{ProfileDataView[0]?.worker?.next_of_kin}</p>
+                <p class="text-muted mb-0">{data?.next_of_kin}</p>
               </div>
             </div>
             <hr/>
@@ -154,7 +154,7 @@ return <div>looading</div>
                 <p class="mb-0">next_of_kin_Contact</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{ProfileDataView[0]?.worker?.next_of_kin_Contact}</p>
+                <p class="text-muted mb-0">{data?.next_of_kin_Contact}</p>
               </div>
             </div>
             <hr/>
@@ -163,7 +163,7 @@ return <div>looading</div>
                 <p class="mb-0">Address</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{ProfileDataView[0]?.worker?.Adress}</p>
+                <p class="text-muted mb-0">{data?.Adress}</p>
               </div>
             </div>
             <hr/>
@@ -175,6 +175,59 @@ return <div>looading</div>
                 <p class="text-muted mb-0">{ProfileDataView[0]?.worker?.sex}</p>
               </div>
             </div>
+          </div>
+        </div>
+       
+      </div>
+      <div class="col-lg-12">
+        <div class="card mb-4">
+          <div class="card-body">
+          <table  className="table table-striped border mt-3 table-responsive">
+              <thead >
+                <tr className="bg-info bg-gradient text-center">
+                  <th scope="col">Name</th>
+                  <th scope="col">Expiry Date</th>
+                  <th scope="col">Comment</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Proof Of Training</th>
+            
+                  <th scope="col">Actions</th>
+            
+                </tr>
+              </thead>
+              <tbody className='text-center'>
+              {data?.training?.map(((item,index)=>{
+              return    <tr key={index}>
+              <td>{item?.name}</td>
+              <td>{item?.expiry_date}</td>
+              <td>{item?.comment}</td>
+              <td>{item?.status}</td>
+              <td>{item?.proof_of_training}</td>
+    
+              <td >
+              <i className=" me-5 fa-regular fa-pen-to-square" ></i>
+              <i  className="fas fa-trash-alt"></i>
+              </td>
+              
+        
+            </tr>
+            
+            }))}
+
+               
+               
+               
+               
+            
+               
+            
+              </tbody>
+            </table>
+         
+        
+          
+            
+          
           </div>
         </div>
        
