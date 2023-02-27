@@ -94,11 +94,20 @@ const routes = [
         component: lazy(() => import('views/ViewProfile'))
       },
       {
+        path: '/training',
+        exact: true,
+        component: lazy(() => import('views/TrainigView'))
+      },
+      {
         path: '/viewplans',
         exact: true,
         component: lazy(() => import('views/AllCarePlan/View-Care-Plan'))
       },
-      
+      {
+        path: '/ProfilWorker',
+        exact: true,
+        component: lazy(() => import('views/GreateProfileAdminWorker'))
+      },
       {
         path: '/workers',
         exact: true,

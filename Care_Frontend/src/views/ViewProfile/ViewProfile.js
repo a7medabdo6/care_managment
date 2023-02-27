@@ -67,10 +67,9 @@ return <div>looading</div>
             <p class="text-muted mb-1">Full Stack Developer</p>
             <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
             <div class="d-flex justify-content-center mb-2">
-              {/* <button type="button" class="btn btn-primary">Follow</button>
-              <button type="button" class="btn btn-outline-primary ms-1">Message</button> */}
-              <div className="mt-2" style={{width: "8px",height : "8px",backgroundColor:"green",border:"1px,solid,green",borderRadius:"50%"}}></div>
-              <p>Active</p>
+            <Link to="/training">
+              <button type="button" class="btn btn-outline-primary ms-1">Add training</button>
+              </Link>              
             </div>
            
           </div>

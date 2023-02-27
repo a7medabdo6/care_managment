@@ -5,42 +5,34 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import useRouter from 'utils/useRouter';
 import { useInsertDataSignUp } from "Api_Requests/useInsertDataSignUp";
+import SignUpSlice, { UserSignUp } from "Redux_Slices/auth/SignUpSlice";
 
 import notify from 'Hook/useNotifaction';
-import { errors, WorkerUserSignUp } from "Redux_Slices/Worker/WorkerSignUpSlice";
+import { UseGetTrainingData } from "Api_Requests/Training/Use-Get-Training-Data";
+import { GetTrainingSliceInfo } from "Redux_Slices/Training/Get-Training-Slice";
 
-export const useSignUpWorkerApi = data => {
+
+
+export const useGetTrainingApi = formData => {
     const dispatch = useDispatch();
     const router = useRouter();
 
-    return useMutation(useInsertDataSignUp, {
+    return useQuery("GetAllGetTrainingSliceInfo",UseGetTrainingData, {
       onSuccess: res => {
-        const result = {
-          status: res.status + '-' + res.statusText,
-          headers: res.headers,
-          data: res.data
-        };
-        console.log(result,"result");
-         dispatch(WorkerUserSignUp(result.data));
+        
+        
+         dispatch(GetTrainingSliceInfo(res));
         // localStorage.setItem('user', JSON.stringify(result.data));
         // localStorage.setItem('token', JSON.stringify(result.data.token));
         //  window.location.replace('/');
-        // router.history.push('/ProfilWorker');
+        // router.history.push('/');
 
-           notify("The account has been created","success")    
 
 
   
       },
       onError: err => {
-        const result = {
-          status: err.status + '-' + err.statusText,
-          headers: err.headers,
-          data: err?.response?.data?.message
-        };
-        dispatch(errors(result.data));
-
-        console.log(err.response.data.message);
+        // console.log(err.response.data.message);
         //   dispatch(errorAtLogin(err.response.data.detail));
         //  return err;
         notify(err?.response?.data?.message,"error")       

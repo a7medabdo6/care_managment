@@ -163,8 +163,7 @@ const Results = props => {
       </Typography>
       <Card>
         <CardHeader
-          action={<GenericMoreButton />}
-          title="All customers"
+          title="Training"
         />
         <Divider />
         <CardContent className={classes.content}>
@@ -184,11 +183,10 @@ const Results = props => {
                         onChange={handleSelectAll}
                       />
                     </TableCell> */}
-                    <TableCell>Number</TableCell>
                     <TableCell>Name</TableCell>
-                    <TableCell>Email</TableCell>
-                    <TableCell>Phone</TableCell>
-                    <TableCell>Sex</TableCell>
+                    <TableCell>expiry date</TableCell>
+                    <TableCell>status</TableCell>
+                    <TableCell>Cooment</TableCell>
                     
                     <TableCell align="right">Actions</TableCell>
                   </TableRow>
@@ -203,54 +201,23 @@ const Results = props => {
                       // key={customer.id}
                       // selected={selectedCustomers.indexOf(customer.id) !== -1}
                     >
-                   <TableCell>{index + 1}</TableCell>
 
-                       <Link to="/service/user">
-                      <TableCell>
-                        <div className={classes.nameCell}>
-                  
-                          <div>
-                            <Link
-                              color="inherit"
-                              component={RouterLink}
-                              to="/management/customers/1"
-                              variant="h6"
-                            >
-                              {customer.username}
-                              {/* {customer.name} */}
-                            </Link>
-                            {/* <div>{"customer.email"}</div> */}
-                          </div>
-                        </div>
-                      </TableCell>
-                      </Link>
-                      <TableCell>{customer.email}</TableCell>
-                      <TableCell>
-                        {
-                          customer.worker !== null ? (
-                            customer.worker.phone
-                          ) : ""
-                        }
-                      </TableCell>
-                      <TableCell>
-                      {
-                          customer.worker !== null ? (
-                            customer.worker.sex
-                          ) : ""
-                        }
-                      </TableCell>
                       
+                      <TableCell>{customer.name}</TableCell>
+                      <TableCell>
+                      {customer.expiry_date}
+                      </TableCell>
+                      <TableCell>
+                      {customer.status}
+
+                      </TableCell>
+                      <TableCell>
+                      {customer.comment}
+
+                      </TableCell>
                       <TableCell align="right">
 
-                        <Button
-                          color="primary"
-                          
-                          size="small"
-                          onClick={()=> handelview(index)}
-                          variant="outlined"
-                        >
-                          View
-                        </Button>
+                       
 
 
                          <Button
@@ -268,10 +235,9 @@ const Results = props => {
                           color="primary"
                           
                           size="small"
-                          onClick={()=>{return(handleShowModl(index),setid(customer?.id))} }
                           variant="outlined"
                         >
-                          Create Profile
+                          Edite
                         </Button>
                       </TableCell>
                     </TableRow>

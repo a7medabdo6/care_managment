@@ -17,6 +17,8 @@ import { ToastContainer } from 'react-toastify'
 import "./View-Care-Plan.css"
 import AddNote from '../Add-Note'
 import { useGetOneNoteApi } from 'Hook/Note/Get-One-Note-Hook'
+import ReactDOM from "react-dom";
+import Pdf from "react-to-pdf";
 const ViewCarePlan = ({location}) => {
   const {mutate:SubmitCreateNote} =  CreateNotegtApi()
   const {CreateNotegtrData,errors} = useSelector(state => state.CreateNotegtSlice)
@@ -85,6 +87,9 @@ const [show, setShow] = useState(false);
 
 const handleClose = () => setShow(false);
 const handleShow = () => setShow(true);
+const ref = React.createRef();
+const ref2 = React.createRef();
+
   return (
     <div className='container' >
 
@@ -120,12 +125,12 @@ const handleShow = () => setShow(true);
         </Modal.Footer>
       </Modal>
      
-    <div className='box ' style={{marginRight:"150px",marginLeft:"150px"}}>
+    <div  className='box ' style={{marginRight:"150px",marginLeft:"150px"}}>
         <div className=' title mt-5 d-flex justify-content-start text-center m-2 '>
             <h5 className='p-2 mt-2'>basics</h5>
         </div>
     
-    <div className='d-flex justify-content-center align-items-center flex-column'>
+    <div ref={ref} className='d-flex justify-content-center align-items-center flex-column'>
     <div className='itembox  ' >
     
     <div class="input-group m-2">
@@ -293,7 +298,7 @@ const handleShow = () => setShow(true);
        
     
     
-    <div className='d-flex justify-content-center align-items-center flex-column'>
+    <div   className='d-flex justify-content-center align-items-center flex-column'>
 
 
 
@@ -743,6 +748,9 @@ const handleShow = () => setShow(true);
     
    
     
+    <Pdf targetRef={ref}  filename="code-example.pdf"  >
+        {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
+      </Pdf>
     
     
     {/* <div className='d-flex justify-content-end p-3'>

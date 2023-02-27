@@ -48,6 +48,10 @@ import EditeNotegDataSlice from "./Redux_Slices/Note/Edite-Note-Slice"
 import DeletNotegSlice from "./Redux_Slices/Note/Delet-Note-Slice"
 import CreateNotegtSlice from "./Redux_Slices/Note/Create-Note-Slice"
 import GetOneNoteeSlice from "./Redux_Slices/Note/Get-One-Note-Slice"
+import CreateTrainingSlice from "./Redux_Slices/Training/Create-Training-Slice"
+import DeletTrainingSlice from "./Redux_Slices/Training/Delete-Training-Slice"
+import EditeTrainingDataSlice from "./Redux_Slices/Training/Edite-Training-Slice"
+import GetAllTrainingeSlice from "./Redux_Slices/Training/Get-Training-Slice"
 export const store = configureStore({
   reducer: {
     UserInfo: userSlice,
@@ -98,6 +102,10 @@ export const store = configureStore({
     EditeNotegDataSlice:EditeNotegDataSlice,
     DeletNotegSlice:DeletNotegSlice,
     CreateNotegtSlice:CreateNotegtSlice,
-    GetOneNoteeSlice:GetOneNoteeSlice
+    GetOneNoteeSlice:GetOneNoteeSlice,
+    CreateTrainingSlice:CreateTrainingSlice,
+    DeletTrainingSlice:DeletTrainingSlice,
+    EditeTrainingDataSlice:EditeTrainingDataSlice,
+    GetAllTrainingeSlice:GetAllTrainingeSlice
    }
 })

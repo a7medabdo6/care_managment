@@ -9,7 +9,12 @@ import { useEffect } from 'react'
 import notify from 'Hook/useNotifaction'
 import { ToastContainer } from 'react-toastify'
 
+import GreateProfileAdminWorker from 'views/GreateProfileAdminWorker'
+import { DataUsageOutlined } from '@material-ui/icons'
 const AddWorker = ({handleClose}) => {
+    
+ 
+
     const[email,setemail]=useState()
     const[password,setpassword]=useState("")
     const[username,setusername]=useState("")
@@ -48,7 +53,7 @@ console.log(email);
       
     }
     
-    const {isLoading,mutate:SubmitSignUp,isError,error,refetch} =  useSignUpWorkerApi()
+    const {isLoading,mutate:SubmitSignUp,data,error,refetch} =  useSignUpWorkerApi()
     
     
     const {WorkerUserSignUpData,errors} = useSelector(state => state.WorkerSignUpSlice)
@@ -72,13 +77,13 @@ console.log(errors);
 
 
       useEffect(()=>{
-        if(WorkerUserSignUpData){
+        if(data){
             handleClose()
-            notify("The account has been created","success")   
+            notify("The account has been created","success") 
 
         }
 
-      },[WorkerUserSignUpData])
+      },[data])
 
 
       useEffect(()=>{
@@ -96,6 +101,8 @@ console.log(errors);
   return (
     <div>
  
+ 
+
 <div class="input-group m-2">
 <span className="input-group-text spantxt" id="basic-addon1" style={{width:"200px"}}>UserName</span>
 
