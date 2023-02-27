@@ -1,5 +1,6 @@
 import { Plan } from 'src/plan/entities/plan.entity';
 import { Report } from 'src/reports/entities/report.entity';
+import { Training } from 'src/training/entities/training.entity';
 import { Worker } from 'src/worker/entities/worker.entity';
 import {
   Column,
@@ -39,6 +40,10 @@ export class User {
 
   @OneToMany(() => Plan, (plan) => plan.user)
   plans: Plan[];
+
+  // @OneToMany(() => Training, (training) => training.user) // specify inverse side as a second parameter
+  // @JoinColumn()
+  // training: Training;
 
   @CreateDateColumn({
     type: 'timestamp',

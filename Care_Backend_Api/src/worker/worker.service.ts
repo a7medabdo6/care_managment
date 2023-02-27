@@ -14,11 +14,11 @@ export class WorkerService {
     const Worker = await this.repo.create(createWorkerDto);
 
     const profile = await this.repo.save(Worker);
- return profile
+    return profile;
   }
-  async create(createWorkerDto: CreateWorkerDto,User:User) {
+  async create(createWorkerDto: CreateWorkerDto, User: User) {
     const Worker = await this.repo.create(createWorkerDto);
-    Worker.user=User
+    Worker.user = User;
     return this.repo.save(Worker);
   }
 
@@ -29,6 +29,9 @@ export class WorkerService {
   async findOne(id: number) {
     const Worker = await this.repo.findOne({
       where: { id },
+      relations: {
+        training: true,
+      },
     });
     return Worker;
   }

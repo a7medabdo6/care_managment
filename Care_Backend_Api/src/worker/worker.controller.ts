@@ -33,47 +33,39 @@ import { CurrentUser } from 'src/decorators/current-user.decorator';
 @Controller('worker')
 @UseInterceptors(CurrentUserInterceptor)
 @UseGuards(AuthGuard)
-@Serialize(WorkerDto)
+// @Serialize(WorkerDto)
 export class WorkerController {
   constructor(
     private readonly workerService: WorkerService,
     private readonly usersService: UsersService,
   ) {}
 
-  
   @Post('create')
   @UseInterceptors(
-    FileFieldsInterceptor(
-      [
-        { name: 'training', maxCount: 1 },
-        { name: 'Application', maxCount: 1 },
-      ],
-      {
-        fileFilter: FileFilter,
-        storage: diskStorage({
-          destination: './uploads',
-          filename: (req, file, callback) => {
-            const uniqueSuffix =
-              Date.now() + '-' + Math.round(Math.random() * 1e9);
-            const ext = extname(file.originalname);
-            const filename = `${uniqueSuffix}${ext}`;
-            callback(null, filename);
-          },
-        }),
-      },
-    ),
+    FileFieldsInterceptor([{ name: 'Application', maxCount: 1 }], {
+      fileFilter: FileFilter,
+      storage: diskStorage({
+        destination: './uploads',
+        filename: (req, file, callback) => {
+          const uniqueSuffix =
+            Date.now() + '-' + Math.round(Math.random() * 1e9);
+          const ext = extname(file.originalname);
+          const filename = `${uniqueSuffix}${ext}`;
+          callback(null, filename);
+        },
+      }),
+    }),
   )
   async uploadFile(
     @Body() body: CreateWorkerDto,
 
     @UploadedFiles()
     files: {
-      training?: Express.Multer.File[];
       Application?: Express.Multer.File[];
     },
     @Req() req: any,
-    @CurrentUser() user: any
-  ) {  
+    @CurrentUser() user: any,
+  ) {
     const isEmpty = Object.keys(files).length === 0;
     if (isEmpty || !files || req.fileValidationError) {
       throw new BadRequestException(req.fileValidationError);
@@ -82,7 +74,6 @@ export class WorkerController {
     const product = await this.workerService.create(
       {
         ...body,
-        training: files?.training?.[0]?.filename,
         Application: files?.Application?.[0]?.filename,
       },
       User,

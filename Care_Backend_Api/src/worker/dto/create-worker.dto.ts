@@ -7,6 +7,7 @@ import {
   Max,
   Min,
 } from 'class-validator';
+import { Training } from 'src/training/entities/training.entity';
 import { User } from 'src/users/entities/user.entity';
 
 export class CreateWorkerDto {
@@ -31,14 +32,15 @@ export class CreateWorkerDto {
   @IsString()
   next_of_kin_Contact: string;
 
-  @IsString()
-  @IsOptional()
-  training: string;
+  // @IsString()
+  // @IsOptional()
+  // training: string;
 
   @IsString()
   @IsOptional()
   Application: string;
 
-  // @IsString()
-  // user: User;
+  @IsNumber()
+  @IsOptional()
+  training: Training;
 }

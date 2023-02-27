@@ -22,7 +22,7 @@ export class UserDto {
 
   @Transform(({ obj }) => obj.worker)
   @Expose()
-  worker: Worker;
+  worker: any;
   @Transform(({ obj }) => obj.plans)
   @Expose()
   plans: Plan;

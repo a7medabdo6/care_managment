@@ -8,9 +8,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersService } from 'src/users/users.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Worker]), UsersModule,],
+  imports: [TypeOrmModule.forFeature([Worker]), UsersModule],
 
   controllers: [WorkerController],
   providers: [WorkerService, CurrentUserInterceptor],
+  exports: [WorkerService],
 })
 export class WorkerModule {}
