@@ -70,7 +70,7 @@ export class WorkerController {
     if (isEmpty || !files || req.fileValidationError) {
       throw new BadRequestException(req.fileValidationError);
     }
-    const User = await this.usersService.findOneByEmail(user.email);
+    const User = await this.usersService.findOneByEmail(body.user_email);
     const product = await this.workerService.create(
       {
         ...body,

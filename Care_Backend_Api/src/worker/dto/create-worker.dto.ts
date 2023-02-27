@@ -35,6 +35,9 @@ export class CreateWorkerDto {
   // @IsString()
   // @IsOptional()
   // training: string;
+  
+  @IsString()
+  user_email:string
 
   @IsString()
   @IsOptional()
