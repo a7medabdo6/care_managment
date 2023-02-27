@@ -37,6 +37,17 @@ import EditePersonalCareDataSlice from "./Redux_Slices/Personal_Care/Edite-Perso
 import GetOneServiceUserSlice  from "./Redux_Slices/Service-User/Get-One-Service-User-Slice"
 import GetAllPersonalCareeSlice from "./Redux_Slices/Personal_Care/Get-Personale-Care-Slice"
 import WorkerSignUpSlice from "./Redux_Slices/Worker/WorkerSignUpSlice"
+import GetWorkerPlanseSlice from "./Redux_Slices/Worker/Get-Worker-Plans-Slice"
+import GetOneplaneSlice from  "./Redux_Slices/CarePlan/Get-One-Plan-Slice"
+import DeletDoctorsgSlice from "./Redux_Slices/Doctor/Delet-Doctor-Slice"
+import EditeDoctorsgDataSlice from "./Redux_Slices/Doctor/Edite-Doctor-Slice"
+import GetAllDoctorsSlice from "./Redux_Slices/Doctor/Get-Doctor-Slice"
+import CreateDoctorsgtSlice from "./Redux_Slices/Doctor/Create-Doctor-Slice"
+import GetAllNoteSlice from "./Redux_Slices/Note/Get-Note-Slice"
+import EditeNotegDataSlice from "./Redux_Slices/Note/Edite-Note-Slice"
+import DeletNotegSlice from "./Redux_Slices/Note/Delet-Note-Slice"
+import CreateNotegtSlice from "./Redux_Slices/Note/Create-Note-Slice"
+import GetOneNoteeSlice from "./Redux_Slices/Note/Get-One-Note-Slice"
 export const store = configureStore({
   reducer: {
     UserInfo: userSlice,
@@ -77,5 +88,16 @@ export const store = configureStore({
     GetAllPersonalCareeSlice:GetAllPersonalCareeSlice,
     GetOneServiceUserSlice:GetOneServiceUserSlice,
     WorkerSignUpSlice:WorkerSignUpSlice,
+    GetWorkerPlanseSlice:GetWorkerPlanseSlice,
+    GetOneplaneSlice:GetOneplaneSlice,
+    DeletDoctorsgSlice:DeletDoctorsgSlice,
+    EditeDoctorsgDataSlice:EditeDoctorsgDataSlice,
+    GetAllDoctorsSlice:GetAllDoctorsSlice,
+    CreateDoctorsgtSlice:CreateDoctorsgtSlice,
+    GetAllNoteSlice:GetAllNoteSlice,
+    EditeNotegDataSlice:EditeNotegDataSlice,
+    DeletNotegSlice:DeletNotegSlice,
+    CreateNotegtSlice:CreateNotegtSlice,
+    GetOneNoteeSlice:GetOneNoteeSlice
    }
 })

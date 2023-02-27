@@ -615,6 +615,22 @@ AllUserData?.map((item,index)=>{return (
 </div>
 
 
+
+<div class="input-group m-2">
+<span className="input-group-text spantxt" id="basic-addon1" style={{width:"200px"}}>medication managment</span>
+<input type="text" name="dateofbirth" className="form-control inputshadowGender" onChange={handel_medication_managment} placeholder="medication managment " id="dateofbirth"/>
+
+
+</div>
+
+
+<div class="input-group m-2">
+<span className="input-group-text spantxt" id="basic-addon1" style={{width:"200px"}}>continence Care</span>
+<input type="text" name="dateofbirth" className="form-control inputshadowGender" onChange={handel_continence_care} placeholder="continence Care " id="dateofbirth"/>
+
+
+</div>
+
 <div class="input-group m-2">
 <span className="input-group-text spantxt" id="basic-addon1" style={{width:"200px"}}>emotional support</span>
 <input type="text" name="dateofbirth" className="form-control inputshadowGender" onChange={handel_emotional_support} placeholder="emotional support" id="dateofbirth"/>
@@ -631,9 +647,25 @@ AllUserData?.map((item,index)=>{return (
 
 
 
+<div class="input-group m-2 ">
+<span className="input-group-text spantxt" id="basic-addon1" style={{width:"200px"}}>Skin Care</span>
+
+<input type="text" className="form-control inputshadowGender" onChange={handel_skin_care}  placeholder="Skin Care" aria-label="First Name" aria-describedby="basic-addon1"/>
+</div>
+
+<div class="input-group m-2 ">
+<span className="input-group-text spantxt" id="basic-addon1" style={{width:"200px"}}>Health Care</span>
+
+<input type="text" className="form-control inputshadowGender" onChange={handel_health_care}  placeholder="Health Care" aria-label="First Name" aria-describedby="basic-addon1"/>
+</div>
 
 
 
+<div class="input-group m-2 ">
+<span className="input-group-text spantxt" id="basic-addon1" style={{width:"200px"}}>nutrition and hydration</span>
+
+<input type="text" className="form-control inputshadowGender" onChange={handel_nutrition_and_hydration}  placeholder="nutrition and hydration" aria-label="First Name" aria-describedby="basic-addon1"/>
+</div>
 
 <div class="input-group m-2">
 <span className="input-group-text spantxt" id="basic-addon1" style={{width:"200px"}}>breathing</span>
@@ -728,7 +760,7 @@ AllUserData?.map((item,index)=>{return (
 
     <tr>
       <div className='checkboxstyle  checkshadow d-flex justify-content-start align-items-center' style={{}}>
-      <input className='ms-1 me-1' onChange={(e)=>{return(handel_oral_care(e))}} type="checkbox" id="vehicle1s" name="vehicle1s" value={item?.name}/>
+      <input className='ms-1 me-1' onChange={(e)=>{return(handel_oral_care(e))}} type="checkbox" id="vehicle1s" name="vehicle1s" value={item?.id}/>
     <td style={{fontSize:"11px",fontWeight:"BOLD"}}>{item?.name}</td>
       </div>
      
@@ -799,7 +831,7 @@ AllUserData?.map((item,index)=>{return (
 
     <tr>
       <div className='checkboxstyle  checkshadow d-flex justify-content-start align-items-center' style={{}}>
-      <input className='ms-1 me-1' onChange={handel_personal_care} type="checkbox" id="vehicle1s" name="vehicle1s" value={item?.name}/>
+      <input className='ms-1 me-1' onChange={handel_personal_care} type="checkbox" id="vehicle1s" name="vehicle1s" value={item?.id}/>
     <td style={{fontSize:"11px",fontWeight:"BOLD"}}>{item?.name}</td>
       </div>
      
@@ -841,124 +873,10 @@ AllUserData?.map((item,index)=>{return (
 </div>
 
 
-<div className='itembox mt-3'>
-
-<div className='d-flex justify-content-between align-items-center'>
-<div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
-<h5 className='p-2'>skin care</h5>
-</div>
-<div class="p-3"><button type="button" onClick={handleShowSkinCare} class="btn btn-secondary "><i class="fas fa-plus"></i></button></div>
-</div>
-<div class="input-group ms-2 mb-3   ">
-{/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
-<form className='containerBox p-1' style={{width:"100%"}}>
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input onChange={handel_skin_care}  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-
-</form>
-{/* <Multiselect
-                className=" "
-                placeholder=" Select"
-                options={options}
-                onSelect={onSelect}
-                onRemove={onRemove}
-                showCheckbox = {true}
-                displayValue="name"
-                style={{ color: "red"  }}
-            /> */}
-            
-            </div>
 
 
 
 
-
-</div>
-
-
-<div className='itembox mt-3'>
-
-<div className='d-flex justify-content-between align-items-center'>
-<div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
-<h5 className='p-2'>health care</h5>
-</div>
-<div class="p-3"><button type="button" onClick={handleShowHealthCare} class="btn btn-secondary "><i class="fas fa-plus"></i></button></div>
-</div>
-<div class="input-group ms-2 mb-3   ">
-{/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
-<form className='containerBox p-1' style={{width:"100%"}}>
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input onChange={handel_health_care} type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-
-</form>
-{/* <Multiselect
-                className=" "
-                placeholder=" Select"
-                options={options}
-                onSelect={onSelect}
-                onRemove={onRemove}
-                showCheckbox = {true}
-                displayValue="name"
-                style={{ color: "red"  }}
-            /> */}
-            
-            </div>
-
-
-
-
-
-</div>
 
 
 
@@ -989,7 +907,7 @@ AllUserData?.map((item,index)=>{return (
 
     <tr>
       <div className='checkboxstyle  checkshadow d-flex justify-content-start align-items-center' style={{}}>
-      <input className='ms-1 me-1' onChange={handel_social_intersts} type="checkbox" id="vehicle1s" name="vehicle1s" value={item?.name}/>
+      <input className='ms-1 me-1' onChange={handel_social_intersts} type="checkbox" id="vehicle1s" name="vehicle1s" value={item?.id}/>
     <td style={{fontSize:"11px",fontWeight:"BOLD"}}>{item?.name}</td>
       </div>
      
@@ -1059,7 +977,7 @@ AllUserData?.map((item,index)=>{return (
 
     <tr>
       <div className='checkboxstyle  checkshadow d-flex justify-content-start align-items-center' style={{}}>
-      <input className='ms-1 me-1' onChange={handel_house_keeping} type="checkbox" id="vehicle1s" name="vehicle1s" value={item?.name}/>
+      <input className='ms-1 me-1' onChange={handel_house_keeping} type="checkbox" id="vehicle1s" name="vehicle1s" value={item?.id}/>
     <td style={{fontSize:"11px",fontWeight:"BOLD"}}>{item?.name}</td>
       </div>
      
@@ -1100,129 +1018,11 @@ AllUserData?.map((item,index)=>{return (
 
 
 
-<div className='itembox mt-3'>
-
-<div className='d-flex justify-content-between align-items-center'>
-<div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
-<h5 className='p-2'>continence care</h5>
-</div>
-<div class="p-3"><button type="button" onClick={handleShowcontinenceCare} class="btn btn-secondary "><i class="fas fa-plus"></i></button></div>
-</div>
-
-
-<div class="input-group ms-2 mb-3   ">
-{/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
-<form className='containerBox p-1' style={{width:"100%"}}>
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input onChange={handel_continence_care}  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-
-</form>
-{/* <Multiselect
-                className=" "
-                placeholder=" Select"
-                options={options}
-                onSelect={onSelect}
-                onRemove={onRemove}
-                showCheckbox = {true}
-                displayValue="name"
-                style={{ color: "red"  }}
-            /> */}
-            
-            </div>
 
 
 
 
 
-</div>
-
-
-
-<div className='itembox mt-3'>
-<div className='d-flex justify-content-between align-items-center'>
-<div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
-<h5 className='p-2'>nutrition and hydration</h5>
-</div>
-<div class="p-3"><button type="button" onClick={handleShownutrition} class="btn btn-secondary "><i class="fas fa-plus"></i></button></div>
-</div>
-
-
-
-<div class="input-group ms-2 mb-3   ">
-{/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
-<form className='containerBox p-1' style={{width:"100%"}}>
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input onChange={handel_nutrition_and_hydration}  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-
-</form>
-{/* <Multiselect
-                className=" "
-                placeholder=" Select"
-                options={options}
-                onSelect={onSelect}
-                onRemove={onRemove}
-                showCheckbox = {true}
-                displayValue="name"
-                style={{ color: "red"  }}
-            /> */}
-            
-            </div>
-
-
-
-
-
-</div>
 
 
 <div className='itembox mt-3'>
@@ -1252,7 +1052,7 @@ AllUserData?.map((item,index)=>{return (
 
     <tr>
       <div className='checkboxstyle  checkshadow d-flex justify-content-start align-items-center' style={{}}>
-      <input className='ms-1 me-1' onChange={handel_risks} type="checkbox" id="vehicle1s" name="vehicle1s" value={item?.name}/>
+      <input className='ms-1 me-1' onChange={handel_risks} type="checkbox" id="vehicle1s" name="vehicle1s" value={item?.id}/>
     <td style={{fontSize:"11px",fontWeight:"BOLD"}}>{item?.name}</td>
       </div>
      
@@ -1300,64 +1100,7 @@ AllUserData?.map((item,index)=>{return (
 
 
 
-<div className='itembox mt-3'>
 
-<div className='d-flex justify-content-between align-items-center'>
-<div className=' title d-flex justify-content-start text-center ms-2 mt-2 '>
-<h5 className='p-2'>medication managment</h5>
-</div>
-<div class="p-3"><button type="button" onClick={handleShowmedication} class="btn btn-secondary "><i class="fas fa-plus"></i></button></div>
-</div>
-<div class="input-group ms-2 mb-3   ">
-{/* <span className="input-group-text spantxtMultiSelect" id="basic-addon1">risks</span> */}
-<form className='containerBox p-1' style={{width:"100%"}}>
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input onChange={handel_medication_managment} type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-<div className='checkboxstyle  checkshadow' style={{}}>
-<input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-<label className='ms-1' for="vehicle1 "> I have a bike</label><br/>
-</div>
-
-
-</form>
-{/* <Multiselect
-                className=" "
-                placeholder=" Select"
-                options={options}
-                onSelect={onSelect}
-                onRemove={onRemove}
-                showCheckbox = {true}
-                displayValue="name"
-                style={{ color: "red"  }}
-            /> */}
-            
-            </div>
-
-
-
-
-
-</div>
 
 
 </div>

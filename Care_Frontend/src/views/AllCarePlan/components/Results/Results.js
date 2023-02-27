@@ -295,7 +295,20 @@ const [custmerData,setcustmerData]=useState()
                       </TableCell>
                       
                       <TableCell align="right">
-
+                      <Link 
+                     to={{
+                      pathname: "/viewplans",
+                      state: customer // your data array of objects
+                    }} >
+                      <Button
+                      
+                          color="primary"
+                          size="small"
+                          variant="outlined"
+                        >
+                          View
+                        </Button>
+                      </Link>
                       
                       <Button
                           color="primary"

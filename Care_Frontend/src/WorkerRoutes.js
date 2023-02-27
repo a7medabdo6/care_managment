@@ -7,7 +7,9 @@ import AuthLayout from './layouts/Auth';
 import ErrorLayout from './layouts/Error';
 import DashboardLayout from './layouts/Dashboard';
 import DashboardAnalyticsView from './views/DashboardAnalytics';
-import WorkerCarePlan from './views/CarePlan';
+import WorkerCarePlan from './views/WorcerCarePlans';
+import VieWorkerCarePlan from './views/WorcerCarePlans/View-Care-Plan';
+
 import OverviewView from './views/Overview';
 import PresentationView from './views/Presentation';
 
@@ -30,6 +32,10 @@ const routes = [
     exact: true,
     component: () => <Redirect to="/worker/careplans" />
   },
+
+
+ 
+
   
   {
     path: '/errors',
@@ -72,7 +78,12 @@ const routes = [
 
       
       /******************************************************************************* */
-
+      {
+        path: "/worker/viewplans",
+        exact: true,
+        component: VieWorkerCarePlan
+      },
+   
 
       {
         path: "/worker/careplans",
