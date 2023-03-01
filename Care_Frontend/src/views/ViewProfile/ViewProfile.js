@@ -19,12 +19,15 @@ import {
   ListItemText,
   ClickAwayListener
 } from '@material-ui/core';
-import { Link, Link as RouterLink } from 'react-router-dom';
+import { Link, Link as RouterLink, useLocation } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 
 import avatar from "../../images/avatar.png"
 import AddTraining from "../AddTraining";
 import { useGetOneworkerApi } from "../../Hook/Get-WorkerHook";
+import { ToastContainer } from "react-toastify";
+import { DelettrainingApi } from "Hook/Training/Delete-Training-Hook";
+import EditeTraining from "views/EditeTraining";
 const ViewProfile =({location})=>{
   const state = location.state
   console.log(state);
@@ -32,26 +35,73 @@ const ViewProfile =({location})=>{
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true); 
+
+
+  const [showEdite, setshowEdite] = useState(false);
+
+  const handleCloseshowEdite = () => setshowEdite(false);
+  const handlewShoshowEdite = () => setshowEdite(true); 
+
+  const [showDelet, setshowDelet] = useState(false);
+
+  const handleCloseDelet = () => setshowDelet(false);
+  const handleShowDelet = () => setshowDelet(true); 
   // const [idTOtraining,setidTOtraining] =useState()
 
- 
-
+  const {isLoading,mutate:SubmitDelet,data:deletdata,error,refetch} =  DelettrainingApi()
+  const {DelettrainingData} = useSelector(state => state.DeletTrainingSlice)
+  useEffect(()=>{
+    if(deletdata){
+      handleCloseDelet()
+    }
+  },[deletdata])
+  console.log(DelettrainingData);
+  const [id,setid]=useState()
+console.log(id);
   const {ProfileDataView} =useSelector(state => state.ViewProfileSlice)
   console.log(ProfileDataView);
-const idTOtraining =ProfileDataView[0]?.id
+const idTOtraining =ProfileDataView[0]?.worker?.id
 
 
-const {data}=useGetOneworkerApi(1)
+const {data}=useGetOneworkerApi(state?.worker?.id)
 
 const {OneworkerData} =useSelector(state => state.GetOneworkereSlice)
   console.log(OneworkerData);
   if(!ProfileDataView){
 return <div>looading</div>
   }
+ const handelDelet =(id)=>{
+
+  SubmitDelet(id)
+ }
 
  
+const handelSetId=(id)=>{
+  setid(id)
+}
+
+
   return (
     <div>
+
+
+<Modal show={showEdite} onHide={handleCloseshowEdite}>
+        <Modal.Header closeButton>
+          <Modal.Title className='text-center '> 
+          <div className=''>   Edite Training</div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <EditeTraining handleCloseshowEdite={handleCloseshowEdite} idTOtraining={state?.worker?.id}/>
+             </Modal.Body>
+        <Modal.Footer>
+       
+
+         
+        </Modal.Footer>
+      </Modal>
+
+
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title className='text-center '> 
@@ -59,10 +109,31 @@ return <div>looading</div>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <AddTraining handleClose={handleClose} idTOtraining={idTOtraining}/>
+          <AddTraining handleClose={handleClose} idTOtraining={state?.worker?.id}/>
              </Modal.Body>
         <Modal.Footer>
+       
+
          
+        </Modal.Footer>
+      </Modal>
+
+
+
+
+
+      <Modal show={showDelet} onHide={handleCloseDelet}>
+        <Modal.Header closeButton>
+          <Modal.Title className='text-center '> 
+          <div className=''>  Alert </div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <h3>Are You Sure ?</h3>
+             </Modal.Body>
+        <Modal.Footer>
+        <button onClick={()=>{return(handleCloseDelet())}} type="button" className="btn btn-primary">Cancel</button>
+        <button onClick={()=>{return(handelDelet(id))}} type="button" className="btn btn-danger">delet</button>
         </Modal.Footer>
       </Modal>
       <section style={{backgroundColor: "#eee"}}>
@@ -92,15 +163,15 @@ return <div>looading</div>
             <p class="text-muted mb-1">Full Stack Developer</p>
             <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
             <div class="d-flex justify-content-center mb-2">
-            <Link to={{
+            {/* <Link to={{
     pathname: `/training/`,
     state: idTOtraining // your data array of objects
   }} >
               <button type="button" class="btn btn-outline-primary ms-1">training</button>
 
-              </Link>   
+              </Link>    */}
               
-              <button onClick={()=>{return(handleShow())}} type="button" class="btn btn-outline-primary ms-1">Add training</button>
+              <button onClick={handleShow} type="button" class="btn btn-outline-primary ms-1">Add training</button>
 
       
             </div>
@@ -117,7 +188,7 @@ return <div>looading</div>
                 <p class="mb-0">Full Name</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{ProfileDataView[0].username}</p>
+                <p class="text-muted mb-0">{state?.username}</p>
               </div>
             </div>
             <hr/>
@@ -126,7 +197,7 @@ return <div>looading</div>
                 <p class="mb-0">Ni_Number</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{data?.Ni_Number}</p>
+                <p class="text-muted mb-0">{state?.worker?.Ni_Number}</p>
               </div>
             </div>
             <hr/>
@@ -135,7 +206,7 @@ return <div>looading</div>
                 <p class="mb-0">Phone</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{data?.phone}</p>
+                <p class="text-muted mb-0">{state?.worker?.phone}</p>
               </div>
             </div>
             <hr/>
@@ -144,7 +215,7 @@ return <div>looading</div>
                 <p class="mb-0">next_of_kin</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{data?.next_of_kin}</p>
+                <p class="text-muted mb-0">{state?.worker?.next_of_kin}</p>
               </div>
             </div>
             <hr/>
@@ -154,7 +225,7 @@ return <div>looading</div>
                 <p class="mb-0">next_of_kin_Contact</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{data?.next_of_kin_Contact}</p>
+                <p class="text-muted mb-0">{state?.worker?.next_of_kin_Contact}</p>
               </div>
             </div>
             <hr/>
@@ -163,7 +234,7 @@ return <div>looading</div>
                 <p class="mb-0">Address</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{data?.Adress}</p>
+                <p class="text-muted mb-0">{state?.worker?.Adress}</p>
               </div>
             </div>
             <hr/>
@@ -172,7 +243,7 @@ return <div>looading</div>
                 <p class="mb-0">Sex</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{ProfileDataView[0]?.worker?.sex}</p>
+                <p class="text-muted mb-0">{state?.worker?.sex}</p>
               </div>
             </div>
           </div>
@@ -206,7 +277,7 @@ return <div>looading</div>
     
               <td >
               <i className=" me-5 fa-regular fa-pen-to-square" ></i>
-              <i  className="fas fa-trash-alt"></i>
+              <i onClick={()=>{return(handleShowDelet(),handelSetId(item?.id))}} className="fas fa-trash-alt"></i>
               </td>
               
         
@@ -235,6 +306,8 @@ return <div>looading</div>
     </div>
   </div>
 </section>
+<ToastContainer></ToastContainer>
+
     </div>
   )
 }

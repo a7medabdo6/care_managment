@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link, Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -13,7 +13,6 @@ import {
   Checkbox,
   Divider,
   Button,
-  Link,
   Table,
   TableBody,
   TableCell,
@@ -81,7 +80,7 @@ console.log(AllUserData);
     console.log(res);
     dispatch(GetProfileViewSliceInfo(res));
     
-      router.history.push('/ViewProfile');
+      // router.history.push("/ViewProfile");
  
     // window.location.replace('/ViewProfile');
 
@@ -147,7 +146,7 @@ console.log(AllUserData);
         </Modal.Header>
         <Modal.Body className='d-flex justify-content-center align-items-center '>
            
-           <GreateProfileAdminWorker id={id}/>
+           <GreateProfileAdminWorker handleCloseMODL={handleCloseMODL} id={id}/>
           
              </Modal.Body>
       
@@ -241,26 +240,28 @@ console.log(AllUserData);
                       </TableCell>
                       
                       <TableCell align="right">
-                        <Link to={{
-    pathname: `/ViewProfile/`,
-    state: customer?.worker?.id // your data array of objects
-  }} >
+   
 
                           {
                             customer?.worker !== null ? (
+                              <Link to={{
+                                pathname: "/ViewProfile",
+                                state: customer // your data array of objects
+                              }} >
                         <Button
                           color="primary"
-                          style={{width:"125px"}}
+                          style={{width:"125px",cursor:"pointer"}}
                           size="small"
-                          onClick={()=> handelview(index)}
+                          onClick={()=> {return(handelview(index),setid(customer?.worker?.id))}}
                           variant="outlined"
                         >
                           View
                         </Button>
+                        </Link>
+
                             ):null
                           }
                         
-                        </Link>
 
                        
 

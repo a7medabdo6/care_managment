@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
 import { CreateTrainingApi } from '../../Hook/Training/Create-Training-Hook'
 
-const AddTraining = ({idTOtraining}) => {
+const AddTraining = ({idTOtraining,handleClose}) => {
     const[name,setname]=useState()
     const[proof_of_training,setproof_of_training]=useState()
     const[expiry_date,setexpiry_date]=useState()
@@ -41,7 +41,7 @@ const AddTraining = ({idTOtraining}) => {
  const handelworkerId=(e)=>{
     setworkerId(e.target.value)
  }
- const {isLoading,mutate:SubmitCreateTRaining,isError,error:handelerror,refetch} =  CreateTrainingApi()
+ const {data,mutate:SubmitCreateTRaining,isError,error:handelerror,refetch} =  CreateTrainingApi()
  const {CreateTrainingrData,error} = useSelector(state => state.CreateTrainingSlice)
 const handelsave=()=>{
     const formData = new FormData();
@@ -58,7 +58,11 @@ const handelsave=()=>{
 }
 
 
-
+useEffect(()=>{
+  if(data){
+    handleClose()
+  }
+},[data])
   return (
     <div>
 <div class="mb-3 row">

@@ -14,7 +14,7 @@ export const useGetAllUserApi = formData => {
     const dispatch = useDispatch();
     const router = useRouter();
 
-    return useQuery("getprofile",UseGetAllUserData, {
+    return useQuery("getworker",UseGetAllUserData, {
       onSuccess: res => {
         
         

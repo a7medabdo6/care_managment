@@ -9,7 +9,7 @@ import DashboardLayout from './layouts/Dashboard';
 import DashboardAnalyticsView from './views/DashboardAnalytics';
 import WorkerCarePlan from './views/WorcerCarePlans';
 import VieWorkerCarePlan from './views/WorcerCarePlans/View-Care-Plan';
-
+import Rota from "./views/Rota"
 import OverviewView from './views/Overview';
 import PresentationView from './views/Presentation';
 
@@ -92,7 +92,12 @@ const routes = [
       },
    
 
-
+      {
+        path: "/Rota",
+        exact: true,
+        component: Rota
+      },
+   
   
    
  

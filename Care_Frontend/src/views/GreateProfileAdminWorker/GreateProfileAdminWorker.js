@@ -7,8 +7,9 @@ import { useSelector } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
 import useRouter from 'utils/useRouter'
 import { useGetAllUserApi } from 'Hook/AllUser/Get-All-user-Hook'
+import { useEffect } from 'react'
 
-const GreateProfileAdminWorker = ({id}) => {
+const GreateProfileAdminWorker = ({id,handleCloseMODL}) => {
   console.log(id);
 const [bod,setbod] = useState("")
 const [NI_Number,setNI_Number] = useState("")
@@ -93,7 +94,7 @@ let data ={}
     const {data:dataallworker}=useGetAllUserApi()
 
     const {AllUserData} =useSelector(state => state.GetAllUserSlice)
-const {isLoading,mutate:SubmitEditeProfile,isError,error,refetch} =  GreateProfileApi()
+const {data:CraetProfileData,mutate:SubmitEditeProfile,isError,error,refetch} =  GreateProfileApi()
 const {GreateProfileData} = useSelector(state => state.GreateProfileSlice)
 
 const handelSubmit = (e) => {
@@ -128,6 +129,11 @@ const userId=AllUserData?.filter((item)=>item)
 
 
 console.log(GreateProfileData);
+useEffect(()=>{
+  if(CraetProfileData){
+    handleCloseMODL()
+  }
+},[CraetProfileData])
   return (
     <div className='text-center'>
       <div className='m-5'>
@@ -142,7 +148,7 @@ console.log(GreateProfileData);
       </div>
     </div>
     <div className="col-md-6">
-      <label for="validationCustom02" className="form-label fw-bold">NI_Number</label>
+      <label for="validationCustom02" className="form-label fw-bold">NI Number</label>
       <input type="number" onChange={onchangeNI_Number} className="form-control" id="validationCustom02"  required/>
       <div className="valid-feedback">
         Looks good!
@@ -163,7 +169,7 @@ console.log(GreateProfileData);
       </div>
     </div>
     <div className="col-md-6">
-    <label for="validationCustom01" className="form-label fw-bold">NEXT_OF_KIN</label>
+    <label for="validationCustom01" className="form-label fw-bold">NEXT OF KIN</label>
       <input type="text" onChange={onchangeNEXT_OF_KIN} className="form-control" id="validationCustom01"  required/>
       <div className="valid-feedback">
         Looks good!
@@ -178,7 +184,7 @@ console.log(GreateProfileData);
     </div>
 
     <div className="col-md-6">
-    <label for="validationCustom01" className="form-label fw-bold">NEXT_OF_KIN_CONTACT</label>
+    <label for="validationCustom01" className="form-label fw-bold">NEXT OF KIN CONTACT</label>
       <input type="text" onChange={onchangeNEXT_OF_KIN_CONTACT} className="form-control" id="validationCustom01"  required/>
       <div className="valid-feedback">
         Looks good!

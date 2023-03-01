@@ -1,21 +1,25 @@
+
+
+
+
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-   DeletTrainingData: null,
+   DelettrainingData: null,
   errors:[]
 };
 
 export const DeletTrainingSlice = createSlice({
-    name: 'DeletTrainingSlice',
+    name: 'DelettrainingSlice',
     initialState,
     reducers: {
-        DeletTrainingSliceInfo: (state, action) => {
+        DelettrainingSliceInfo: (state, action) => {
         // Redux Toolkit allows us to write "mutating" logic in reducers. It
         // doesn't actually mutate the state because it uses the Immer library,
         // which detects changes to a "draft state" and produces a brand new
         // immutable state based off those changes
-        state.DeletTrainingData = action.payload;
-        console.log(state.DeletTrainingData);
+        state.DelettrainingData = action.payload;
+        console.log(state.DelettrainingData);
       },
       errors: (state, action) => {
           // Redux Toolkit allows us to write "mutating" logic in reducers. It
@@ -29,6 +33,6 @@ export const DeletTrainingSlice = createSlice({
   });
 
   // Action creators are generated for each case reducer function
-export const { DeletTrainingSliceInfo ,errors} = DeletTrainingSlice.actions;
+export const { DelettrainingSliceInfo ,errors} = DeletTrainingSlice.actions;
 
 export default DeletTrainingSlice.reducer;

@@ -97,20 +97,20 @@ const handelSubmit = (e) => {
  
      
 
-      if(bod === "" || Application === "" || NI_Number === "" || SEX === "" || Adress === "" || NEXT_OF_KIN_CONTACT === "" ||  NEXT_OF_KIN === "" || Phone === "" || training === "" ){
+      if(bod === "" || Application === "" || NI_Number === "" || SEX === "" || Adress === "" || NEXT_OF_KIN_CONTACT === "" ||  NEXT_OF_KIN === "" || Phone === ""  ){
         notify("Please complete the fields","warn")    
 
       }else{
         const formData = new FormData();
         formData.append("Ni_Number" , NI_Number)
         formData.append("BOD" , bod)
-        formData.append("user" , data.id)
+        // formData.append("user" , 24)
         formData.append("sex" , SEX)
         formData.append("Adress" , Adress)
         formData.append("next_of_kin_Contact" , NEXT_OF_KIN_CONTACT)
         formData.append("next_of_kin" , NEXT_OF_KIN)
         formData.append("phone" , Phone)
-        formData.append("training" , training)
+         formData.append("user_email" , data?.email)
         formData.append("Application" , Application)
   
         
@@ -132,13 +132,13 @@ console.log(GreateProfileData);
       <form className="row g-3 bg-white needs-validation m-5" novalidate>
     <div className="col-md-6">
       <label for="validationCustom01" className="form-label fw-bold">BOD</label>
-      <input type="text" onChange={onchangebod} className="form-control" id="validationCustom01"  required/>
+      <input type="date" onChange={onchangebod} className="form-control" id="validationCustom01"  required/>
       <div className="valid-feedback">
         Looks good!
       </div>
     </div>
     <div className="col-md-6">
-      <label for="validationCustom02" className="form-label fw-bold">NI_Number</label>
+      <label for="validationCustom02" className="form-label fw-bold">NI Number</label>
       <input type="number" onChange={onchangeNI_Number} className="form-control" id="validationCustom02"  required/>
       <div className="valid-feedback">
         Looks good!
@@ -192,7 +192,7 @@ console.log(GreateProfileData);
       </div>
     </div>
 
-    <div className="col-md-12">
+    {/* <div className="col-md-12">
     <label for="validationCustom01" className="form-label fw-bold">training</label>
     <input className="form-control" onChange={onchangetraining} type="file" id="validationCustom01"  required/>
 
@@ -200,7 +200,7 @@ console.log(GreateProfileData);
       <div className="valid-feedback">
         Looks good!
       </div>
-    </div>
+    </div> */}
     
     <div className="col-12">
       <button className="btn btn-primary" type="submit" onClick={handelSubmit} >Create</button>

@@ -89,7 +89,7 @@ let data ={}
      console.log(data.id);
     }
 
-const {isLoading,mutate:SubmitEditeProfile,data;craeteData,error,refetch} =  GreateProfileApi()
+const {isLoading,mutate:SubmitEditeProfile,data:craeteData,error,refetch} =  GreateProfileApi()
 const {GreateProfileData} = useSelector(state => state.GreateProfileSlice)
 
 const handelSubmit = (e) => {

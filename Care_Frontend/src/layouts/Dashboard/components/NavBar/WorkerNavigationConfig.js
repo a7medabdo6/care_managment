@@ -97,11 +97,17 @@ export default [
 
             {
               title: 'Care Plan',
-              href: '/CarePlan',
+              href: '/worker/careplans',
               icon: CropLandscapeIcon,
              
             },
       
+            {
+              title: 'Rota',
+              href: '/Rota',
+              icon: CropLandscapeIcon,
+             
+            },
             // {
             //   title: 'DashBoard',
             //   href: '/Profile/user',

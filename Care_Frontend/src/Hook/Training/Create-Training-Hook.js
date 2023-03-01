@@ -33,7 +33,7 @@ export const CreateTrainingApi = data =>{
           // localStorage.setItem('token', JSON.stringify(result.data.token));
           //  window.location.replace('/');
           // router.history.push('/');
-          QueryClient.invalidateQueries('GetAllsocial_interests');
+          QueryClient.invalidateQueries('GetAOneworker');
 
              notify("The Training  has been created","success")    
   

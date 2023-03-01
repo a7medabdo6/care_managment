@@ -7,7 +7,7 @@ const useGetData = async (url, parmas) => {
 
 
 
-const UseDeletTrainingData = async (id, parmas) => {
+const UseDeletTrainingData = async (id) => {
     const config = {
         headers: { token: localStorage.getItem("token") }
     }

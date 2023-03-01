@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from "axios"
-import { useMutation, useQuery } from "react-query"
+import { useMutation, useQuery, useQueryClient } from "react-query"
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -18,6 +18,7 @@ import { GreateProfileSliceInfo } from 'Redux_Slices/Profile/GreateProfileSlice'
 export const GreateProfileApi = FormData =>{
     const dispatch = useDispatch();
     const router = useRouter();
+    const QueryClient = useQueryClient();
 
     return(useMutation(UseGreateProfileData,{
         onSuccess: res => {
@@ -32,7 +33,8 @@ export const GreateProfileApi = FormData =>{
           // localStorage.setItem('token', JSON.stringify(result.data.token));
           //  window.location.replace('/');
           // router.history.push('/');
-  
+          QueryClient.invalidateQueries('getworker');
+
              notify("The Profile Edite has been created","success")    
   
   //  setTimeout(() => {

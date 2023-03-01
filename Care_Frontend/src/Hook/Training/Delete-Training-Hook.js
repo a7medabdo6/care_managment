@@ -1,21 +1,17 @@
 import React from 'react'
 
 import { useMutation, useQuery, useQueryClient } from "react-query"
-
 import { useSelector, useDispatch } from 'react-redux';
-
 import useRouter from 'utils/useRouter';
-
-
-
 import notify from 'Hook/useNotifaction';
-import { DeletTrainingSliceInfo } from 'Redux_Slices/Training/Delete-Training-Slice';
 import { UseDeletTrainingData } from 'Api_Requests/Training/Use-Delete-Training-Data';
+import { DelettrainingSliceInfo } from 'Redux_Slices/Training/Delete-Training-Slice';
 
 
 
 
-export const DeletTrainingApi = (id) =>{
+
+export const DelettrainingApi = (id) =>{
     const dispatch = useDispatch();
     const router = useRouter();
     const QueryClient = useQueryClient();
@@ -28,12 +24,12 @@ export const DeletTrainingApi = (id) =>{
             data: res.data
           };
           console.log(result,"result");
-           dispatch(DeletTrainingSliceInfo(result.data));
+           dispatch(DelettrainingSliceInfo(result.data));
           // localStorage.setItem('user', JSON.stringify(result.data));
           // localStorage.setItem('token', JSON.stringify(result.data.token));
           //  window.location.replace('/');
           // router.history.push('/');
-          QueryClient.invalidateQueries('GetAllTraining');
+          QueryClient.invalidateQueries('GetAOneTraining');
 
              notify("The Training  has been Deleted","success")    
   
